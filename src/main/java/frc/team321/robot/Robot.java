@@ -3,8 +3,13 @@ package frc.team321.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
+
+    public OI oi;
+
     @Override
-    public void robotInit() { }
+    public void robotInit() {
+        oi = new OI();
+    }
 
     @Override
     public void disabledInit() { }
