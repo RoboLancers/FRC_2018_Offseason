@@ -24,6 +24,12 @@ public class OI {
         chooser = new SendableChooser<>();
     }
 
+    /**
+     * Updates the SmartDashboard
+     */
+    public void updateDashboardValues(){
+
+    }
 
     /**
      * Puts autonomous modes in SmartDashboard
