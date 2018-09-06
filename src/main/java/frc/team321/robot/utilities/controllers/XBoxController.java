@@ -128,7 +128,7 @@ public class XBoxController extends BaseController {
     }
 
     public void setRumble(double rumblePower) {
-        this.joystick.setRumble(RumbleType.kRightRumble, rumblePower);
-        this.joystick.setRumble(RumbleType.kLeftRumble, rumblePower);
+        this.joystick.setRumble(RumbleType.kRightRumble, Math.abs(rumblePower));
+        this.joystick.setRumble(RumbleType.kLeftRumble, Math.abs(rumblePower));
     }
 }
