@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
+import frc.team321.robot.utilities.controllers.FlightController;
 import frc.team321.robot.utilities.controllers.XBoxController;
 
 import java.util.Arrays;
@@ -11,15 +12,17 @@ import java.util.Arrays;
 public class OI {
 
     public XBoxController xBoxController;
+    public FlightController flightController;
 
     private SendableChooser<String> chooser;
 
-    private static String[] autonomousModes = {
+    private static final String[] autonomousModes = {
 
     };
 
-    public OI(){
+    OI(){
         xBoxController = new XBoxController(0);
+        flightController = new FlightController(1);
 
         chooser = new SendableChooser<>();
     }
@@ -27,14 +30,14 @@ public class OI {
     /**
      * Updates the SmartDashboard
      */
-    public void updateDashboardValues(){
+    void updateDashboardValues(){
 
     }
 
     /**
      * Puts autonomous modes in SmartDashboard
      */
-    public void putAutoModes(){
+    void putAutoModes(){
         Arrays.stream(autonomousModes).forEach(mode -> chooser.addObject(mode, mode));
         SmartDashboard.putData("Autonomous Mode", chooser);
     }
@@ -43,7 +46,7 @@ public class OI {
      * Gets the selected autonomous mode
      * @return Returns the selected autonomous mode as a String
      */
-    public String getAutoMode(){
+    String getAutoMode(){
         return chooser.getSelected();
     }
 
@@ -53,7 +56,7 @@ public class OI {
      * @param mode The autonomous mode to get
      * @return Returns the Command associated with the Autonomous
      */
-    public Command getAutoCommand(String mode){
+    Command getAutoCommand(String mode){
         switch(mode){
             default:
                 return new DoNothingAndReset();
