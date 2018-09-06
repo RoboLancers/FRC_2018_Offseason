@@ -19,7 +19,7 @@ public class Constants {
     // Compressor
     public static final int COMPRESSOR = 0;
 
-    // Pneumatics
+    // Pneumatic
     public static final int GEARSHIFTER_FORWARD = 0;
     public static final int GEARSHIFTER_REVERSE = 1;
 
