@@ -17,3 +17,6 @@ Team 321's Java code for 2018 Offseason.
 ### Building/Deploying to the Robot
 - Run `./gradlew build` to build the code. Use the `--info` flag for more details
 - Run `./gradlew deploy` to deploy to the robot in Terminal (Mac) or Powershell (Windows)
+
+### Acknowledgement
+Thanks to Team Mercury 1089 and Endoman123 for their motion profiling code

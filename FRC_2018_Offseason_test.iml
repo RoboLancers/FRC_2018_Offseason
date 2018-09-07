@@ -15,6 +15,7 @@
     <orderEntry type="library" name="Gradle: openrio.mirror.third.ctre:CTRE-phoenix-java:5.2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: openrio.mirror.third.kauailabs:navx-java:3.0.346" level="project" />
     <orderEntry type="library" name="Gradle: openrio.powerup:MatchData:2018.01.07" level="project" />
+    <orderEntry type="library" name="Gradle: jaci.pathfinder:Pathfinder-Java:1.8" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="FRC_2018_Offseason_main" />
 </module>
