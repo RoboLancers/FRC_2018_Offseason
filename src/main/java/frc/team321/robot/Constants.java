@@ -38,12 +38,12 @@ public class Constants {
     public static final int DRIVETRAIN_PID_SLOT_INDEX = 0;
     public static final int DRIVETRAIN_PRIMARY_PID_LOOP = 0;
 
-    public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 4096;
+    public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 1024;
     public static final double DRIVETRAIN_MAX_RPM = 700.63;
 
     public static final double DRIVETRAIN_MOTION_PROFILE_P = 0.6;
     public static final double DRIVETRAIN_MOTION_PROFILE_I = 0;
     public static final double DRIVETRAIN_MOTION_PROFILE_D = 0;
 
-    public static final double DRIVETRAIN_WHEEL_DIAMETER_INCHES = 5;
+    public static final double DRIVETRAIN_WHEEL_DIAMETER_INCHES = 7.2;
 }
