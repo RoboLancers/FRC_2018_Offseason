@@ -4,10 +4,11 @@ import static frc.team321.robot.Constants.*;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
 
-public class Drivetrain extends Subsystem {
+public class Drivetrain extends Subsystem implements PIDOutput {
 
     private Transmission leftTransmission, rightTransmission;
     private GearShifter gearShifter;
@@ -78,5 +79,17 @@ public class Drivetrain extends Subsystem {
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new UseArcadeDrive());
+    }
+
+    @Override
+    public void pidWrite(double output){
+        leftTransmission.setPower(output);
+        rightTransmission.setPower(output);
+    }
+
+    public double getFeedForward(){
+        final double MAX_MOTOR_OUTPUT = 1023;
+        final double NATIVE_UNITS_PER_100 = DRIVETRAIN_MAX_RPM / 600 * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
+        return MAX_MOTOR_OUTPUT/NATIVE_UNITS_PER_100;
     }
 }

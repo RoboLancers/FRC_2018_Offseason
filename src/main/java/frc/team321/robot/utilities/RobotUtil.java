@@ -1,5 +1,8 @@
 package frc.team321.robot.utilities;
 
+import static frc.team321.robot.Constants.*;
+import frc.team321.robot.Robot;
+
 public class RobotUtil {
     /**
      * Limits value to a specified minimum and maximum
@@ -64,4 +67,42 @@ public class RobotUtil {
     public static double sqrtKeepSign(double num) {
         return num < 0 ? -(Math.sqrt(-num)) : Math.sqrt(num);
     }
+
+    public static double feetsToEncoderTicks(double feet){
+        return inchesToEncoderTicks(feet * 12);
+    }
+
+    public static double inchesToEncoderTicks(double inches){
+        return inches / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
+    }
+
+    public static double encoderTicksToInches(double ticks){
+        return ticks / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
+    }
+
+    public static double ticksPerTenthToRevsPerMinute(double ticksPerTenthSecond) {
+        return ticksPerTenthSecond / DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION * 600;
+    }
+
+
+    public static double revsPerMinuteToTicksPerTenth(double revsPerMinute) {
+        return revsPerMinute * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION / 600;
+    }
+
+    public static double revsPerMinuteToMetersPerSecond(double revsPerMinute) {
+        return revsPerMinute * feetToMeters(DRIVETRAIN_WHEEL_DIAMETER_INCHES * Math.PI / 12) / 60;
+    }
+
+    public static double ticksPerTenthToMetersPerSecond(double ticksPerTenth) {
+        return revsPerMinuteToMetersPerSecond(ticksPerTenthToRevsPerMinute(ticksPerTenth));
+    }
+
+    public static double feetToMeters(double val) {
+        return 100 * inchesToCentimeters(val / 12);
+    }
+
+    public static double inchesToCentimeters(double val) {
+        return val * 0.393700787;
+    }
+
 }

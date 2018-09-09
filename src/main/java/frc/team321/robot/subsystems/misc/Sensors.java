@@ -21,7 +21,7 @@ public class Sensors {
 
     static {
         navX = new AHRS(SerialPort.Port.kMXP);
-        ultrasonic = new Ultrasonic(UlTRASONIC_TRIG, UlTRASONIC_ECHO);
+        ultrasonic = new Ultrasonic(ULTRASONIC_TRIG, ULTRASONIC_ECHO);
         topTouchSensor = new DigitalInput(TOP_TOUCH_SENSOR);
         bottomTouchSensor = new DigitalInput(BOTTOM_TOUCH_SENSOR);
 

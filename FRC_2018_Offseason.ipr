@@ -185,6 +185,14 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="brian">
+      <words>
+        <w>drivetrain</w>
+        <w>gearshifter</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FRC_2018_Offseason.iml" filepath="$PROJECT_DIR$/FRC_2018_Offseason.iml" />

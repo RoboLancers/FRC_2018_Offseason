@@ -3,7 +3,7 @@ package frc.team321.robot.commands.subsystems.manipulator;
 import frc.team321.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team321.robot.subsystems.manipulator.IntakePower;
+import frc.team321.robot.utilities.enums.IntakePower;
 
 public class UseIntake extends Command {
 

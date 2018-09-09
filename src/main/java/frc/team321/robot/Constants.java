@@ -27,9 +27,23 @@ public class Constants {
     public static final int INTAKE_PIVOT_REVERSE = 5;
 
     // Sensors
-    public static final int UlTRASONIC_TRIG = 0;
-    public static final int UlTRASONIC_ECHO = 1;
+    public static final int ULTRASONIC_TRIG = 0;
+    public static final int ULTRASONIC_ECHO = 1;
 
     public static final int TOP_TOUCH_SENSOR = 8;
     public static final int BOTTOM_TOUCH_SENSOR = 9;
+
+    // Drivetrain Constants
+    public static final int DRIVETRAIN_TIMEOUT_MS = 10;
+    public static final int DRIVETRAIN_PID_SLOT_INDEX = 0;
+    public static final int DRIVETRAIN_PRIMARY_PID_LOOP = 0;
+
+    public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 4096;
+    public static final double DRIVETRAIN_MAX_RPM = 700.63;
+
+    public static final double DRIVETRAIN_MOTION_PROFILE_P = 0.6;
+    public static final double DRIVETRAIN_MOTION_PROFILE_I = 0;
+    public static final double DRIVETRAIN_MOTION_PROFILE_D = 0;
+
+    public static final double DRIVETRAIN_WHEEL_DIAMETER_INCHES = 5;
 }

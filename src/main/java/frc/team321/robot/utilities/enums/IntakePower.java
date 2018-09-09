@@ -1,4 +1,4 @@
-package frc.team321.robot.subsystems.manipulator;
+package frc.team321.robot.utilities.enums;
 
 public enum IntakePower {
     INTAKE(0.87), OUTAKE(-0.7), STOP(0);

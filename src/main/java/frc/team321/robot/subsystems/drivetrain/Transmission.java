@@ -22,7 +22,7 @@ public class Transmission {
      * @param isRight Is it the right side?
      * @param ports   The ports of that side of the drivetrain
      */
-    public Transmission(boolean isRight, int... ports) {
+    Transmission(boolean isRight, int... ports) {
         master = new TalonSRX(ports[0]);
         slave1 = new TalonSRX(ports[1]);
         slave2 = new TalonSRX(ports[2]);
@@ -94,5 +94,13 @@ public class Transmission {
         master.configOpenloopRamp(rampRate, 0);
         slave1.configOpenloopRamp(rampRate, 0);
         slave2.configOpenloopRamp(rampRate, 0);
+    }
+
+    /**
+     * Returns the master Talon
+     * @return Returns the master Talon
+     */
+    public TalonSRX getMaster(){
+        return master;
     }
 }
