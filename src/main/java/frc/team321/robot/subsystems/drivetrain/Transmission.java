@@ -1,5 +1,6 @@
 package frc.team321.robot.subsystems.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.team321.robot.utilities.RobotUtil;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -14,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  */
 public class Transmission {
 
-    private TalonSRX master, slave1, slave2;
+    private WPI_TalonSRX master, slave1, slave2;
 
     /**
      * Initializes all the motors
@@ -23,9 +24,9 @@ public class Transmission {
      * @param ports   The ports of that side of the drivetrain
      */
     Transmission(boolean isRight, int... ports) {
-        master = new TalonSRX(ports[0]);
-        slave1 = new TalonSRX(ports[1]);
-        slave2 = new TalonSRX(ports[2]);
+        master = new WPI_TalonSRX(ports[0]);
+        slave1 = new WPI_TalonSRX(ports[1]);
+        slave2 = new WPI_TalonSRX(ports[2]);
 
         slave1.follow(master);
         slave2.follow(master);
