@@ -49,15 +49,9 @@ public class Transmission {
      * @param mode Mode to set the motors to
      */
     public void setMode(NeutralMode mode) {
-        if (mode == NeutralMode.Brake) {
-            master.setNeutralMode(mode);
-            slave1.setNeutralMode(mode);
-            slave2.setNeutralMode(mode);
-        } else {
-            master.setNeutralMode(mode);
-            slave1.setNeutralMode(mode);
-            slave2.setNeutralMode(mode);
-        }
+        master.setNeutralMode(mode);
+        slave1.setNeutralMode(mode);
+        slave2.setNeutralMode(mode);
     }
 
     /**
