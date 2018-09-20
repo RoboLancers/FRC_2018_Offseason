@@ -4,6 +4,7 @@ import static frc.team321.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifter;
 
 public class GearShifter extends Subsystem {
 
@@ -25,6 +26,6 @@ public class GearShifter extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new UseGearShifter());
     }
 }
