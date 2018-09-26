@@ -45,8 +45,8 @@ public class Sensors {
         return ultrasonic.getRangeMM() / 1000;
     }
 
-    public static double getPitch(){
-        return navX.getPitch();
+    public static double getHeading(){
+        return navX.getFusedHeading();
     }
 
     public static double getAverageDistanceInMeters() {

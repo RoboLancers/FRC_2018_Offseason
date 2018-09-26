@@ -4,8 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
+import frc.team321.robot.commands.autonomous.subroutine.MoveOnPath;
+import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.controllers.FlightController;
 import frc.team321.robot.utilities.controllers.XBoxController;
+import frc.team321.robot.utilities.enums.MotionProfileDirection;
 
 import java.util.Arrays;
 
@@ -17,7 +20,7 @@ public class OI {
     private SendableChooser<String> chooser;
 
     private static final String[] autonomousModes = {
-
+        "Test Pathfinder"
     };
 
     OI(){
@@ -31,7 +34,9 @@ public class OI {
      * Updates the SmartDashboard
      */
     void updateDashboardValues(){
-
+        SmartDashboard.putNumber("NavX Gyro", Sensors.getHeading());
+        SmartDashboard.putBoolean("Top Touch Sensor", Sensors.isLinearSlideFullyExtended());
+        SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.isLinearSlideAtGround());
     }
 
     /**
@@ -58,6 +63,8 @@ public class OI {
      */
     Command getAutoCommand(String mode){
         switch(mode){
+            case "Test Pathfinder":
+                return new MoveOnPath("Test", MotionProfileDirection.FORWARD);
             default:
                 return new DoNothingAndReset();
         }
