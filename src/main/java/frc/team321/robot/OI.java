@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
 import frc.team321.robot.commands.autonomous.subroutine.MoveOnPath;
+import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.controllers.FlightController;
 import frc.team321.robot.utilities.controllers.XBoxController;
@@ -20,7 +21,7 @@ public class OI {
     private SendableChooser<String> chooser;
 
     private static final String[] autonomousModes = {
-        "Test Pathfinder"
+        "Test Pathfinder wtih CTRE", "Test Pathfinder with Jaci"
     };
 
     OI(){
@@ -63,8 +64,10 @@ public class OI {
      */
     Command getAutoCommand(String mode){
         switch(mode){
-            case "Test Pathfinder":
+            case "Test Pathfinder with CTRE":
                 return new MoveOnPath("Test", MotionProfileDirection.FORWARD);
+            case "Test Pathfinder with Jaci":
+                return new PathFollower("Test");
             default:
                 return new DoNothingAndReset();
         }
