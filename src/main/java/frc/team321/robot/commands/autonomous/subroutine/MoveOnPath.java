@@ -131,8 +131,8 @@ public class MoveOnPath extends Command {
             trajectoryPointLeft.profileSlotSelect0 = DRIVETRAIN_PID_SLOT_INDEX;
             trajectoryPointRight.profileSlotSelect0 = DRIVETRAIN_PID_SLOT_INDEX;
 
-            trajectoryPointLeft.timeDur = TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_20ms;
-            trajectoryPointRight.timeDur = TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_20ms;
+            trajectoryPointLeft.timeDur = TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_0ms;
+            trajectoryPointRight.timeDur = TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_0ms;
 
             trajectoryPointLeft.zeroPos = isFirst;
             trajectoryPointRight.zeroPos = isFirst;
