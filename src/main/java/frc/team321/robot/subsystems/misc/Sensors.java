@@ -49,6 +49,10 @@ public class Sensors {
         return navX.getFusedHeading();
     }
 
+    public static double getAngle(){
+        return navX.getAngle();
+    }
+
     public static double getAverageDistanceInMeters() {
         for(int i = 0; i < ultrasonicBuffer.length; i++) {
             ultrasonicBuffer[i] = getDistanceInMeters();
