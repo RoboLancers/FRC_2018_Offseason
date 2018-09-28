@@ -35,7 +35,7 @@ public class OI {
      * Updates the SmartDashboard
      */
     void updateDashboardValues(){
-        SmartDashboard.putNumber("NavX Gyro", Sensors.getHeading());
+        SmartDashboard.putNumber("NavX Gyro", Sensors.getAngle());
         SmartDashboard.putBoolean("Top Touch Sensor", Sensors.isLinearSlideFullyExtended());
         SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.isLinearSlideAtGround());
     }

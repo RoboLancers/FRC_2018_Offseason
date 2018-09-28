@@ -39,7 +39,7 @@ public class Constants {
     public static final int DRIVETRAIN_PRIMARY_PID_LOOP = 0;
 
     public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 1024;
-    public static final double DRIVETRAIN_MAX_RPM = 500.63;
+    public static final double DRIVETRAIN_MAX_RPM = 571.3;
 
     public static final double DRIVETRAIN_MOTION_PROFILE_P = 0.6;
     public static final double DRIVETRAIN_MOTION_PROFILE_I = 0;
