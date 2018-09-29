@@ -11,14 +11,26 @@ public class Manipulator {
         intakePivot = new IntakePivot();
     }
 
+    /**
+     * Returns the linear slide
+     * @return the linear slide
+     */
     public LinearSlide getLinearSlide() {
         return linearSlide;
     }
 
+    /**
+     * Returns the intake
+     * @return The intake
+     */
     public Intake getIntake() {
         return intake;
     }
 
+    /**
+     * Returns the intake pivot
+     * @return the intake pivot
+     */
     public IntakePivot getIntakePivot() {
         return intakePivot;
     }

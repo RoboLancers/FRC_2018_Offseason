@@ -84,7 +84,13 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void robotPeriodic(){
+    public void autonomousPeriodic(){
+        Scheduler.getInstance().run();
+        oi.updateDashboardValues();
+    }
+
+    @Override
+    public void teleopPeriodic(){
         Scheduler.getInstance().run();
         oi.updateDashboardValues();
     }

@@ -33,31 +33,58 @@ public class Sensors {
         ultrasonic.setDistanceUnits(Ultrasonic.Unit.kMillimeters);
     }
 
+    /**
+     * Checks if the linear slide is at top
+     * @return if the linear slide is at top
+     */
     public static boolean isLinearSlideFullyExtended() {
         return !topTouchSensor.get();
     }
 
+    /**
+     * Checks if the linear slide is at bottom
+     * @return if the linear slide is at bottom
+     */
     public static boolean isLinearSlideAtGround() {
         return !bottomTouchSensor.get();
     }
 
+    /**
+     * Gets the distance from ultrasonic sensor in meters
+     * @return the meter from ultrasonic sensor
+     */
     public static double getDistanceInMeters() {
         return ultrasonic.getRangeMM() / 1000;
     }
 
+    /**
+     * Gets the heading from NavX
+     * @return the heading from NavX
+     */
     public static double getHeading(){
         return navX.getFusedHeading();
     }
 
+    /**
+     * Resets the NavX
+     */
     public static void resetNavX(){
         navX.reset();
         navX.zeroYaw();
     }
 
+    /**
+     * Gets angle from NavX
+     * @return the angle from NavX
+     */
     public static double getAngle(){
         return navX.getAngle();
     }
 
+    /**
+     * Gets the average distance from ultrasonic
+     * @return the average distance
+     */
     public static double getAverageDistanceInMeters() {
         for(int i = 0; i < ultrasonicBuffer.length; i++) {
             ultrasonicBuffer[i] = getDistanceInMeters();

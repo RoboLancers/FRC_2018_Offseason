@@ -15,14 +15,24 @@ public class IntakePivot extends Subsystem{
         intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
 
+    /**
+     * Sets intake up
+     */
     public void setUp() {
         intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
 
+    /**
+     * Sets intake down
+     */
     public void setDown() {
         intakePivot.set(DoubleSolenoid.Value.kForward);
     }
 
+    /**
+     * Checks if intake is up
+     * @return if the intake is up
+     */
     public boolean isIntakeUp() {
         return intakePivot.get() == DoubleSolenoid.Value.kReverse;
     }

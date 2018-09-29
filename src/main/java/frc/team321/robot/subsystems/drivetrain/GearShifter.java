@@ -8,18 +8,23 @@ import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifter;
 
 public class GearShifter extends Subsystem {
 
-    //allows for change of gears
-    public static DoubleSolenoid gearShifter;
+    private static DoubleSolenoid gearShifter;
 
-    public GearShifter(){
+    GearShifter(){
         gearShifter = new DoubleSolenoid(GEARSHIFTER_FORWARD, GEARSHIFTER_REVERSE);
         gearShifter.set(DoubleSolenoid.Value.kForward);
     }
 
+    /**
+     * Sets the drivetrain into high gear
+     */
     public void setHighGear() {
         gearShifter.set(DoubleSolenoid.Value.kReverse);
     }
 
+    /**
+     * Sets the drivetrain low gear
+     */
     public void setLowGear() {
         gearShifter.set(DoubleSolenoid.Value.kForward);
     }

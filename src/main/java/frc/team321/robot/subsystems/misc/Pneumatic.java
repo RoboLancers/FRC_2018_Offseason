@@ -19,6 +19,9 @@ public class Pneumatic extends Subsystem {
         setDefaultCommand(new RegulateCompressor());
     }
 
+    /**
+     * Regulates the compressor
+     */
     public void regulateCompressor(){
         if(!compressor.getPressureSwitchValue() && !compressor.enabled()
                 && isCompressorSafeToUse()){
@@ -29,6 +32,10 @@ public class Pneumatic extends Subsystem {
         }
     }
 
+    /**
+     * Checks if compressor is safe to use
+     * @return whether or not the compressor is safe to use
+     */
     private boolean isCompressorSafeToUse(){
         return !((compressor.getCompressorCurrentTooHighFault() && !compressor.getCompressorCurrentTooHighStickyFault()) ||
                 (compressor.getCompressorNotConnectedFault() && !compressor.getCompressorNotConnectedStickyFault()) ||

@@ -40,10 +40,17 @@ public class LinearSlide extends Subsystem {
         slave.setInverted(true);
     }
 
+    /**
+     * Helper method to stop the linear slides
+     */
     public void stop() {
         move(0);
     }
 
+    /**
+     * Sets power to the linear slide
+     * @param power The power to set the linear slide at
+     */
     public void move(double power) {
         if(power == 0) {
             master.set(ControlMode.PercentOutput, -0.05);
@@ -52,6 +59,10 @@ public class LinearSlide extends Subsystem {
         }
     }
 
+    /**
+     * Gets the linear slide encoder's count
+     * @return The linear slide encoder count
+     */
     public double getEncoder() {
         if (Sensors.isLinearSlideAtGround()) {
             this.resetEncoder();
@@ -59,10 +70,18 @@ public class LinearSlide extends Subsystem {
         return master.getSelectedSensorPosition(0);
     }
 
+    /**
+     * Resets linear slide's encoder
+     */
     public void resetEncoder() {
         master.setSelectedSensorPosition(0, 0, 0);
     }
 
+    /**
+     * Checks power against safe conditions to move
+     * @param power Power to move at
+     * @return whether or not it's safe to move
+     */
     public boolean isSafeToMove(double power) {
         return (Sensors.isLinearSlideFullyExtended() && power > 0)
                 || (Sensors.isLinearSlideAtGround() && power < 0);
