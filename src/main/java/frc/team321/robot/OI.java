@@ -21,7 +21,7 @@ public class OI {
     private SendableChooser<String> chooser;
 
     private static final String[] autonomousModes = {
-        "Test Pathfinder wtih CTRE", "Test Pathfinder with Jaci"
+        "Test Pathfinder with CTRE", "Test Pathfinder with Jaci"
     };
 
     OI(){
@@ -38,6 +38,8 @@ public class OI {
         SmartDashboard.putNumber("NavX Gyro", Sensors.getAngle());
         SmartDashboard.putBoolean("Top Touch Sensor", Sensors.isLinearSlideFullyExtended());
         SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.isLinearSlideAtGround());
+        SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeft().getEncoderCount());
+        SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRight().getEncoderCount());
     }
 
     /**
