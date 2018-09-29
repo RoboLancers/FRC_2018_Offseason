@@ -2,7 +2,9 @@ package frc.team321.robot.commands.autonomous.subroutine;
 
 import static frc.team321.robot.Constants.*;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.Constants;
 import frc.team321.robot.Robot;
 import frc.team321.robot.subsystems.misc.Sensors;
@@ -33,6 +35,8 @@ public class PathFollower extends Command{
 
         leftEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);
         rightEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);
+
+        Robot.drivetrain.setMode(NeutralMode.Brake);
     }
 
     @Override
@@ -46,6 +50,10 @@ public class PathFollower extends Command{
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
         turn = -DRIVETRAIN_ROTATE_P * angleDifference;
 
+        SmartDashboard.putNumber("Turn error", turn);
+        SmartDashboard.putNumber("Desired Heading", desiredHeading);
+        SmartDashboard.putNumber("Left Power", leftPower);
+
         Robot.drivetrain.setLeft(leftPower + turn);
         Robot.drivetrain.setRight(rightPower - turn);
     }
@@ -53,5 +61,15 @@ public class PathFollower extends Command{
     @Override
     protected boolean isFinished() {
         return leftEncoderFollower.isFinished() && rightEncoderFollower.isFinished();
+    }
+
+    @Override
+    protected void end(){
+        Robot.drivetrain.stop();
+    }
+
+    @Override
+    protected void interrupted(){
+        end();
     }
 }
