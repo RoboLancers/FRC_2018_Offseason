@@ -11,6 +11,7 @@ import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.manipulator.Manipulator;
 import frc.team321.robot.subsystems.misc.GripPipeline;
 import frc.team321.robot.subsystems.misc.Pneumatic;
+import frc.team321.robot.subsystems.misc.Sensors;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
