@@ -104,5 +104,4 @@ public class RobotUtil {
     public static double inchesToCentimeters(double val) {
         return val * 0.393700787;
     }
-
 }

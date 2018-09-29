@@ -49,6 +49,11 @@ public class Sensors {
         return navX.getFusedHeading();
     }
 
+    public static void resetNavX(){
+        navX.reset();
+        navX.zeroYaw();
+    }
+
     public static double getAngle(){
         return navX.getAngle();
     }
