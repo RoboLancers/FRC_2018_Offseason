@@ -75,6 +75,7 @@ public class UseIntake extends Command {
 
     @Override
     protected void end() {
+        Robot.manipulator.getIntake().stop(false);
         Robot.oi.xBoxController.setRumble(false);
     }
 
