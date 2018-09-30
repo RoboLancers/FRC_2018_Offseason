@@ -12,9 +12,11 @@ public class UseIntakePivot extends Command {
     @Override
     protected void execute() {
         if(Robot.oi.flightController.farBottom.get()){
-            Robot.manipulator.getIntakePivot().setUp();
-        }else{
-            Robot.manipulator.getIntakePivot().setDown();
+            if(Robot.manipulator.getIntakePivot().isIntakeUp()){
+                Robot.manipulator.getIntakePivot().setDown();
+            }else{
+                Robot.manipulator.getIntakePivot().setUp();
+            }
         }
     }
 
