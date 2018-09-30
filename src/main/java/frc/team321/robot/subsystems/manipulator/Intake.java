@@ -8,7 +8,6 @@ import frc.team321.robot.utilities.RobotUtil;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,27 +21,25 @@ public class Intake extends Subsystem {
 
         intakeLeft.setNeutralMode(NeutralMode.Brake);
         intakeRight.setNeutralMode(NeutralMode.Brake);
+
+        intakeLeft.setInverted(true);
     }
 
-    public void setLeft(double power) {
+    private void setLeft(double power) {
         intakeLeft.set(ControlMode.PercentOutput, RobotUtil.range(power, 1));
     }
 
-    public void setRight(double power) {
+    private void setRight(double power) {
         intakeRight.set(ControlMode.PercentOutput, RobotUtil.range(power, 1));
     }
 
     public void setAll(double power) {
-        setLeft(-power);
+        setLeft(power);
         setRight(power);
     }
 
-    public void stop(boolean isIntaking) {
-        if (isIntaking) {
-            setAll(0.2);
-        } else {
-            setAll(0);
-        }
+    public void stop() {
+        setAll(0);
     }
 
     @Override

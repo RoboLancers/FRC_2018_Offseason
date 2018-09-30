@@ -9,7 +9,6 @@ public class UseIntake extends Command {
 
     private double power;
     private boolean useJoystick;
-    private boolean wasIntaking = false;
 
     public UseIntake(){
         requires(Robot.manipulator.getIntake());
@@ -28,7 +27,7 @@ public class UseIntake extends Command {
 
     @Override
     protected void initialize() {
-        Robot.manipulator.getIntake().stop(false);
+        Robot.manipulator.getIntake().stop();
     }
 
     @Override
@@ -47,25 +46,10 @@ public class UseIntake extends Command {
                 power = 0;
             }
 
-            //Allows passive intake.
-            if (power > 0) {
-                wasIntaking = true;
-            } else if (power < 0) {
-                wasIntaking = false;
-            }
-
-            //If we were intaking but driver lets go of control then we passive intake
-            if (wasIntaking && power == 0) {
-                power = 0.2;
-            }
-
-            Robot.manipulator.getIntake().setAll(power);
-
-            //Only want to rumble if the robot is intaking and it wasn't already intaking
-            Robot.oi.xBoxController.setRumble(power > 0 && !wasIntaking);
-        }else {
-            Robot.manipulator.getIntake().setAll(power);
+            Robot.oi.xBoxController.setRumble(power > 0);
         }
+
+        Robot.manipulator.getIntake().setAll(power);
     }
 
     @Override
@@ -75,7 +59,7 @@ public class UseIntake extends Command {
 
     @Override
     protected void end() {
-        Robot.manipulator.getIntake().stop(false);
+        Robot.manipulator.getIntake().stop();
         Robot.oi.xBoxController.setRumble(false);
     }
 
