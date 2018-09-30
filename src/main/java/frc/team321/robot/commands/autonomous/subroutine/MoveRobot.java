@@ -31,7 +31,7 @@ public class MoveRobot extends Command {
     protected void execute(){
         error = Sensors.getAngle() - angle;
         leftPower = RobotUtil.range(power + (error * DRIVETRAIN_PID_P), 1);
-        rightPower = RobotUtil.range(power + (error * DRIVETRAIN_PID_P), 1);
+        rightPower = RobotUtil.range(power - (error * DRIVETRAIN_PID_P), 1);
 
         Robot.drivetrain.setLeft(leftPower);
         Robot.drivetrain.setRight(rightPower);
