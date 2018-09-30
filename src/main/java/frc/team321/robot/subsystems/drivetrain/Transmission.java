@@ -1,6 +1,7 @@
 package frc.team321.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.team321.robot.Constants;
 import frc.team321.robot.utilities.RobotUtil;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -41,6 +42,22 @@ public class Transmission {
         } else {
             slave2.setInverted(true);
         }
+
+        master.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
+        slave1.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
+        slave2.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
+
+        master.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
+        slave1.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
+        slave2.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
+
+        master.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
+        slave1.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
+        slave2.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
+
+        master.enableCurrentLimit(true);
+        slave1.enableCurrentLimit(true);
+        slave2.enableCurrentLimit(true);
     }
 
     /**

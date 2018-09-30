@@ -54,4 +54,8 @@ public class Constants {
     public static final double DRIVETRAIN_ROTATE_P = 0.01;
 
     public static final double DRIVETRAIN_PID_P = 0.025;
+
+    public static final int DRIVETRAIN_PEAK_CURRENT_LIMIT = 80;
+    public static final int DRIVETRAIN_SUSTAINED_CURRENT_LIMIT = 36;
+    public static final int DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT = 10; //ms
 }

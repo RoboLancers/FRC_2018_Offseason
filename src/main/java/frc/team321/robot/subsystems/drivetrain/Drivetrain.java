@@ -4,7 +4,6 @@ import static frc.team321.robot.Constants.*;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
 
