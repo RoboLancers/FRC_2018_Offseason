@@ -35,8 +35,12 @@ public class PathFollower extends Command{
 
         leftEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);
         rightEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);
+    }
 
-        Robot.drivetrain.setMode(NeutralMode.Brake);
+    @Override
+    protected void initialize(){
+        Robot.drivetrain.stop();
+        Sensors.resetNavX();
     }
 
     @Override
@@ -44,11 +48,11 @@ public class PathFollower extends Command{
         leftPower = leftEncoderFollower.calculate(Robot.drivetrain.getLeft().getEncoderCount());
         rightPower = rightEncoderFollower.calculate(Robot.drivetrain.getRight().getEncoderCount());
 
-        gyroHeading = -Sensors.getAngle();
+        gyroHeading = Sensors.getAngle();
         desiredHeading = Pathfinder.r2d(leftEncoderFollower.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
-        turn = -DRIVETRAIN_ROTATE_P * angleDifference;
+        turn = DRIVETRAIN_ROTATE_P * -angleDifference;
 
         SmartDashboard.putNumber("Turn error", turn);
         SmartDashboard.putNumber("Desired Heading", desiredHeading);
