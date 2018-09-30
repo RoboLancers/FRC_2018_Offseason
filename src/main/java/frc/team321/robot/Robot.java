@@ -32,33 +32,6 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
         oi.putAutoModes();
-
-        new Thread(() -> {
-            UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-            camera.setResolution(320, 240);
-            camera.setExposureManual(50);
-
-            CvSink cvSink = CameraServer.getInstance().getVideo();
-            CvSource cvSource = CameraServer.getInstance().putVideo("Cube", 320, 240);
-
-            Mat source = new Mat();
-            Mat output = new Mat();
-
-            GripPipeline gripPipeline = new GripPipeline();
-
-            while(!Thread.interrupted()){
-                cvSink.grabFrame(source);
-
-                if(!source.empty()){
-                    gripPipeline.process(source);
-                    for(int i = 0; i < gripPipeline.findContoursOutput().size(); i++){
-                        Imgproc.drawContours(source, gripPipeline.findContoursOutput(), i, new Scalar(0,0,0));
-                    }
-                }
-
-                cvSource.putFrame(source);
-            }
-        }).start();
     }
 
     @Override
