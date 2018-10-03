@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
-import frc.team321.robot.commands.autonomous.subroutine.MoveOnPath;
 import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.controllers.FlightController;
@@ -68,8 +67,6 @@ public class OI {
      */
     Command getAutoCommand(String mode){
         switch(mode){
-            case "Test Pathfinder with CTRE":
-                return new MoveOnPath("Test", MotionProfileDirection.FORWARD);
             case "Test Pathfinder with Jaci":
                 return new PathFollower("Test");
             default:
