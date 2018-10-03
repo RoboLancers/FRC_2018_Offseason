@@ -80,23 +80,6 @@ public class RobotUtil {
         return ticks / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
     }
 
-    public static double ticksPerTenthToRevsPerMinute(double ticksPerTenthSecond) {
-        return ticksPerTenthSecond / DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION * 600;
-    }
-
-
-    public static double revsPerMinuteToTicksPerTenth(double revsPerMinute) {
-        return revsPerMinute * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION / 600;
-    }
-
-    public static double revsPerMinuteToMetersPerSecond(double revsPerMinute) {
-        return revsPerMinute * feetToMeters(DRIVETRAIN_WHEEL_DIAMETER_INCHES * Math.PI / 12) / 60;
-    }
-
-    public static double ticksPerTenthToMetersPerSecond(double ticksPerTenth) {
-        return revsPerMinuteToMetersPerSecond(ticksPerTenthToRevsPerMinute(ticksPerTenth));
-    }
-
     public static double feetToMeters(double val) {
         return 100 * inchesToCentimeters(val / 12);
     }
