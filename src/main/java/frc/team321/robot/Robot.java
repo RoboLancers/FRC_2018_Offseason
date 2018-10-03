@@ -1,20 +1,12 @@
 package frc.team321.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.manipulator.Manipulator;
-import frc.team321.robot.subsystems.misc.GripPipeline;
 import frc.team321.robot.subsystems.misc.Pneumatic;
-import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 
 public class Robot extends TimedRobot {
 
@@ -54,6 +46,8 @@ public class Robot extends TimedRobot {
             autonomousCommand.cancel();
         }
 
+        drivetrain.setMode(NeutralMode.Coast);
+        drivetrain.getGearShifter().setLowGear();
         drivetrain.enableRamping(true);
     }
 
