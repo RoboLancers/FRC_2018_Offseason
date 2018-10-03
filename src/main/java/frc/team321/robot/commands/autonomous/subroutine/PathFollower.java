@@ -39,6 +39,7 @@ public class PathFollower extends Command{
 
     @Override
     protected void initialize(){
+        Robot.drivetrain.setMode(NeutralMode.Coast);
         Robot.drivetrain.stop();
         Sensors.resetNavX();
     }
