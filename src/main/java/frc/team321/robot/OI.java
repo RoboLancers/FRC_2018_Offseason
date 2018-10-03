@@ -40,6 +40,8 @@ public class OI {
         SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.isLinearSlideAtGround());
         SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeft().getEncoderCount());
         SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRight().getEncoderCount());
+        SmartDashboard.putNumber("Left Encoder Speed", Robot.drivetrain.getLeft().getMaster().getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("Right Encoder Speed", Robot.drivetrain.getRight().getMaster().getSelectedSensorVelocity(0));
     }
 
     /**
