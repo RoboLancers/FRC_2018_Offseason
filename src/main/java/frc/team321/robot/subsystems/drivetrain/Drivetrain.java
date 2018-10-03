@@ -43,7 +43,7 @@ public class Drivetrain extends Subsystem{
      * @param power The power to set the left transmissions
      */
     public void setLeft(double power) {
-        leftTransmission.setPower(power * 0.95);
+        leftTransmission.setPower(power);
     }
 
     /**
@@ -94,8 +94,8 @@ public class Drivetrain extends Subsystem{
      */
     public void enableRamping(boolean ramp) {
         if (ramp) {
-            leftTransmission.setRampRate(0.20);
-            rightTransmission.setRampRate(0.20);
+            leftTransmission.setRampRate(0.30);
+            rightTransmission.setRampRate(0.30);
         } else {
             leftTransmission.setRampRate(0);
             rightTransmission.setRampRate(0);
