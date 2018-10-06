@@ -8,7 +8,6 @@ import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.controllers.FlightController;
 import frc.team321.robot.utilities.controllers.XBoxController;
-import frc.team321.robot.utilities.enums.MotionProfileDirection;
 
 import java.util.Arrays;
 

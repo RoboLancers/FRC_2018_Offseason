@@ -80,6 +80,10 @@ public class RobotUtil {
         return ticks / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
     }
 
+    public static double encoderTicksToFeets(double ticks){
+        return encoderTicksToInches(ticks) * 12;
+    }
+
     public static double feetToMeters(double val) {
         return 100 * inchesToCentimeters(val / 12);
     }
