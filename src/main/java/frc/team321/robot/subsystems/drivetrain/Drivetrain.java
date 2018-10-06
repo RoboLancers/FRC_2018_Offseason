@@ -2,15 +2,22 @@ package frc.team321.robot.subsystems.drivetrain;
 
 import static frc.team321.robot.Constants.*;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
+import frc.team321.robot.subsystems.misc.Sensors;
+import frc.team321.robot.utilities.Odometry;
+import frc.team321.robot.utilities.RobotUtil;
+import jaci.pathfinder.Pathfinder;
 
 public class Drivetrain extends Subsystem{
 
     private Transmission leftTransmission, rightTransmission;
     private GearShifter gearShifter;
+    private Odometry odometry;
 
     public Drivetrain() {
         leftTransmission = new Transmission(false, LEFT_MASTER_MOTOR, LEFT_SLAVE_1, LEFT_SLAVE_2);
@@ -20,6 +27,21 @@ public class Drivetrain extends Subsystem{
 
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
+
+        odometry = Odometry.INSTANCE;
+
+        Notifier odometryNotifier = new Notifier(() -> {
+            odometry.setCurrentEncoderPosition(leftTransmission.getEncoderCount() + rightTransmission.getEncoderCount() / 2.0);
+            odometry.setDeltaPosition(RobotUtil.encoderTicksToFeets(odometry.getCurrentEncoderPosition() - odometry.getLastPosition()));
+            odometry.setTheta(Math.toRadians(Pathfinder.boundHalfDegrees(Sensors.getAngle())));
+
+            odometry.addX(Math.cos(odometry.getTheta()) * odometry.getDeltaPosition());
+            odometry.addY(Math.sin(odometry.getTheta()) * odometry.getDeltaPosition());
+
+            odometry.setLastPosition(odometry.getCurrentEncoderPosition());
+        });
+
+        odometryNotifier.startPeriodic(0.01);
     }
 
     /**
@@ -131,5 +153,10 @@ public class Drivetrain extends Subsystem{
         final double MAX_MOTOR_OUTPUT = 1023;
         final double NATIVE_UNITS_PER_100 = DRIVETRAIN_MAX_RPM / 600 * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
         return MAX_MOTOR_OUTPUT/NATIVE_UNITS_PER_100;
+    }
+
+    public void setVelocity(double left, double right){
+        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
+        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
     }
 }
