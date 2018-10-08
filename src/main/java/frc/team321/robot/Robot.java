@@ -21,8 +21,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        drivetrain = new Drivetrain();
-        manipulator = new Manipulator();
         camera = new Camera();
 
         oi = new OI();

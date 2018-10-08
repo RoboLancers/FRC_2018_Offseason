@@ -9,8 +9,9 @@ import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 public class IntakePivot extends Subsystem{
 
     private DoubleSolenoid intakePivot;
+    private static IntakePivot instance;
 
-    IntakePivot(){
+    private IntakePivot(){
         intakePivot = new DoubleSolenoid(INTAKE_PIVOT_FORWARD, INTAKE_PIVOT_REVERSE);
         intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
@@ -35,6 +36,14 @@ public class IntakePivot extends Subsystem{
      */
     public boolean isIntakeUp() {
         return intakePivot.get() == DoubleSolenoid.Value.kReverse;
+    }
+
+    public synchronized static IntakePivot getInstance(){
+        if (instance == null) {
+            instance = new IntakePivot();
+        }
+
+        return instance;
     }
 
     @Override

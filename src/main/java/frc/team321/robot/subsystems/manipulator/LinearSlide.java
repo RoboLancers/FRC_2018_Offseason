@@ -1,6 +1,6 @@
 package frc.team321.robot.subsystems.manipulator;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team321.robot.Constants;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlide;
 
@@ -13,12 +13,13 @@ import frc.team321.robot.subsystems.misc.Sensors;
 
 public class LinearSlide extends Subsystem {
 
-    private WPI_TalonSRX master;
+    private TalonSRX master;
+    private static LinearSlide instance;
 
-    LinearSlide() {
-        master = new WPI_TalonSRX(Constants.LINEAR_MASTER);
+    private LinearSlide() {
+        master = new TalonSRX(Constants.LINEAR_MASTER);
 
-        WPI_TalonSRX slave = new WPI_TalonSRX(Constants.LINEAR_SLAVE);
+        TalonSRX slave = new TalonSRX(Constants.LINEAR_SLAVE);
 
         master.setNeutralMode(NeutralMode.Brake);
         slave.setNeutralMode(NeutralMode.Brake);
@@ -85,6 +86,14 @@ public class LinearSlide extends Subsystem {
     public boolean isSafeToMove(double power) {
         return (Sensors.isLinearSlideFullyExtended() && power > 0)
                 || (Sensors.isLinearSlideAtGround() && power < 0);
+    }
+
+    public synchronized static LinearSlide getInstance(){
+        if (instance == null) {
+            instance = new LinearSlide();
+        }
+
+        return instance;
     }
 
     @Override

@@ -7,11 +7,10 @@ import frc.team321.robot.Robot;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.RobotUtil;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MoveRobot extends Command {
 
-    double leftPower, rightPower;
-
-    boolean useAngle;
+    private double leftPower, rightPower;
     private double angle, power, error;
 
     public MoveRobot(double power, double angle){

@@ -16,19 +16,20 @@ import jaci.pathfinder.Pathfinder;
 public class Drivetrain extends Subsystem{
 
     private Transmission leftTransmission, rightTransmission;
-    private GearShifter gearShifter;
     private Odometry odometry;
+    private GearShifter gearShifter;
 
-    public Drivetrain() {
+    private static Drivetrain instance;
+
+    private Drivetrain() {
         leftTransmission = new Transmission(false, LEFT_MASTER_MOTOR, LEFT_SLAVE_1, LEFT_SLAVE_2);
         rightTransmission = new Transmission(true, RIGHT_MASTER_MOTOR, RIGHT_SLAVE_1, RIGHT_SLAVE_2);
-
-        gearShifter = new GearShifter();
 
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
 
         odometry = Odometry.INSTANCE;
+        gearShifter = GearShifter.getInstance();
 
         Notifier odometryNotifier = new Notifier(() -> {
             odometry.setCurrentEncoderPosition(leftTransmission.getEncoderCount() + rightTransmission.getEncoderCount() / 2.0);
@@ -132,11 +133,7 @@ public class Drivetrain extends Subsystem{
         rightTransmission.resetEncoder();
     }
 
-    /**
-     * Gets te gearshifter
-     * @return the gearshifter
-     */
-    public GearShifter getGearShifter() {
+    public GearShifter getGearShifter(){
         return gearShifter;
     }
 
@@ -158,5 +155,13 @@ public class Drivetrain extends Subsystem{
     public void setVelocity(double left, double right){
         leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
         rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
+    }
+
+    public synchronized static Drivetrain getInstance() {
+        if (instance == null) {
+            instance = new Drivetrain();
+        }
+
+        return instance;
     }
 }

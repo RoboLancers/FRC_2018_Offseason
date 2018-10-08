@@ -4,9 +4,8 @@ import edu.wpi.first.wpilibj.CameraServer;
 
 public class Camera {
 
-    private CameraServer cameraServer = CameraServer.getInstance();
-
     public Camera(){
+        CameraServer cameraServer = CameraServer.getInstance();
         cameraServer.startAutomaticCapture(0);
         cameraServer.startAutomaticCapture(1);
     }

@@ -2,7 +2,7 @@ package frc.team321.robot.subsystems.manipulator;
 
 import static frc.team321.robot.Constants.*;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
 import frc.team321.robot.utilities.RobotUtil;
 
@@ -13,11 +13,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
 
-    private WPI_TalonSRX intakeLeft, intakeRight;
+    private TalonSRX intakeLeft, intakeRight;
+    private static Intake instance;
 
-    Intake() {
-        intakeLeft = new WPI_TalonSRX(INTAKE_LEFT);
-        intakeRight = new WPI_TalonSRX(INTAKE_RIGHT);
+    private Intake() {
+        intakeLeft = new TalonSRX(INTAKE_LEFT);
+        intakeRight = new TalonSRX(INTAKE_RIGHT);
 
         intakeLeft.setNeutralMode(NeutralMode.Brake);
         intakeRight.setNeutralMode(NeutralMode.Brake);
@@ -40,6 +41,14 @@ public class Intake extends Subsystem {
 
     public void stop() {
         setAll(0);
+    }
+
+    public synchronized static Intake getInstance(){
+        if (instance == null) {
+            instance = new Intake();
+        }
+
+        return instance;
     }
 
     @Override

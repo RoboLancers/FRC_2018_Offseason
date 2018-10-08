@@ -8,9 +8,10 @@ import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifter;
 
 public class GearShifter extends Subsystem {
 
-    private static DoubleSolenoid gearShifter;
+    private DoubleSolenoid gearShifter;
+    private static GearShifter instance;
 
-    GearShifter(){
+    private GearShifter(){
         gearShifter = new DoubleSolenoid(GEARSHIFTER_FORWARD, GEARSHIFTER_REVERSE);
         gearShifter.set(DoubleSolenoid.Value.kForward);
     }
@@ -27,6 +28,14 @@ public class GearShifter extends Subsystem {
      */
     public void setLowGear() {
         gearShifter.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public synchronized static GearShifter getInstance(){
+        if (instance == null) {
+            instance = new GearShifter();
+        }
+
+        return instance;
     }
 
     @Override
