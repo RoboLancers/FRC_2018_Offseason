@@ -13,7 +13,7 @@ public class Constants {
     public static final int LINEAR_MASTER = 11;
     public static final int LINEAR_SLAVE = 2;
 
-    public static final int INTAKE_LEFT = 3;
+    public static final int INTAKE_LEFT = 6;
     public static final int INTAKE_RIGHT = 7;
 
     // Compressor

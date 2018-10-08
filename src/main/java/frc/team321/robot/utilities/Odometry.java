@@ -1,21 +1,27 @@
 package frc.team321.robot.utilities;
 
-import frc.team321.robot.Robot;
-
-public enum Odometry {
-    INSTANCE;
-
+public class Odometry {
     private volatile double x, y, theta;
     private volatile double currentEncoderPosition, lastPosition, deltaPosition;
 
-    Odometry(){
+    private static Odometry instance;
+
+    private Odometry(){
         this.x = 0;
         this.y = 0;
         this.theta = 0;
 
         this.currentEncoderPosition = 0;
-        this.lastPosition = (Robot.drivetrain.getLeft().getEncoderCount() + Robot.drivetrain.getRight().getEncoderCount()) / 2.0;
+        this.lastPosition = 0;
         this.deltaPosition = 0;
+    }
+
+    public synchronized static Odometry getInstance(){
+        if(instance == null){
+            instance = new Odometry();
+        }
+
+        return instance;
     }
 
     public double getX() {

@@ -17,7 +17,6 @@ import jaci.pathfinder.Pathfinder;
 public class Drivetrain extends Subsystem{
 
     private Transmission leftTransmission, rightTransmission;
-    private Odometry odometry;
     private GearShifter gearShifter;
 
     private static Drivetrain instance;
@@ -29,25 +28,7 @@ public class Drivetrain extends Subsystem{
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
 
-        odometry = Odometry.INSTANCE;
         gearShifter = GearShifter.getInstance();
-
-        Notifier odometryNotifier = new Notifier(() -> {
-            odometry.setCurrentEncoderPosition(leftTransmission.getEncoderCount() + rightTransmission.getEncoderCount() / 2.0);
-            odometry.setDeltaPosition(RobotUtil.encoderTicksToFeets(odometry.getCurrentEncoderPosition() - odometry.getLastPosition()));
-            odometry.setTheta(Math.toRadians(Pathfinder.boundHalfDegrees(Sensors.getAngle())));
-
-            odometry.addX(Math.cos(odometry.getTheta()) * odometry.getDeltaPosition());
-            odometry.addY(Math.sin(odometry.getTheta()) * odometry.getDeltaPosition());
-
-            odometry.setLastPosition(odometry.getCurrentEncoderPosition());
-
-            OI.liveDashboardTable.getEntry("Robot X").setNumber(odometry.getX());
-            OI.liveDashboardTable.getEntry("Robot Y").setNumber(odometry.getY());
-            OI.liveDashboardTable.getEntry("Robot Heading").setNumber(odometry.getTheta());
-        });
-
-        odometryNotifier.startPeriodic(0.01);
     }
 
     /**

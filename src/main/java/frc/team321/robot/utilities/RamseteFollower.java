@@ -49,7 +49,7 @@ public class RamseteFollower {
     public RamseteFollower(String trajectoryName){
         trajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + trajectoryName + "_source_detailed.traj"));
         segmentIndex = 0;
-        odometry = Odometry.INSTANCE;
+        odometry = Odometry.getInstance();
 
         driveSignal = new DriveSignal();
     }

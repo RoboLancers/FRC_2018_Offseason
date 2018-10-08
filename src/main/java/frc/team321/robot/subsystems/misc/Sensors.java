@@ -77,7 +77,7 @@ public class Sensors {
      * Gets angle from NavX with CounterClockwise being positive and Clockwise being negative
      * @return the angle from NavX
      */
-    public static double getAngle(){
+    public synchronized static double getAngle(){
         return -navX.getAngle();
     }
 
