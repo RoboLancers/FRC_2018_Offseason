@@ -1,6 +1,9 @@
 package frc.team321.robot.utilities;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.team321.robot.Constants;
+import frc.team321.robot.OI;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Trajectory.Segment;
@@ -28,7 +31,6 @@ public class RamseteFollower {
 
     //The robot's x and y position and angle
     private Odometry odometry;
-
 
     //Variable used to calculate linear and angular velocity
     private double lastTheta, nextTheta;
@@ -64,6 +66,9 @@ public class RamseteFollower {
         right = 0;
 
         current = trajectory.get(segmentIndex);
+
+        OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
+        OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
 
         desiredAngularVelocity = calculateDesiredAngular();
 

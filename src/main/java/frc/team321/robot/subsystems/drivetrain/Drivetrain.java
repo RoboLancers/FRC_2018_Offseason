@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team321.robot.OI;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.Odometry;
@@ -40,6 +41,10 @@ public class Drivetrain extends Subsystem{
             odometry.addY(Math.sin(odometry.getTheta()) * odometry.getDeltaPosition());
 
             odometry.setLastPosition(odometry.getCurrentEncoderPosition());
+
+            OI.liveDashboardTable.getEntry("Robot X").setNumber(odometry.getX());
+            OI.liveDashboardTable.getEntry("Robot Y").setNumber(odometry.getY());
+            OI.liveDashboardTable.getEntry("Robot Heading").setNumber(odometry.getTheta());
         });
 
         odometryNotifier.startPeriodic(0.01);
