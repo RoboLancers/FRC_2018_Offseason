@@ -1,20 +1,19 @@
 package frc.team321.robot.commands.subsystems.drivetrain;
 
-import frc.team321.robot.Robot;
+import frc.team321.robot.OI;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 
 public class UseGearShifter extends Command {
 
     public UseGearShifter() {
-        requires(Robot.drivetrain.getGearShifter());
+        requires(Drivetrain.getInstance().getGearShifter());
     }
 
     @Override
     protected void execute() {
-        if(Robot.oi.xBoxController.rightLancerTrigger.get()){
-            Robot.drivetrain.getGearShifter().setHighGear();
-        }else{
-            Robot.drivetrain.getGearShifter().setLowGear();
+        if(OI.getInstance().xBoxController.rightLancerTrigger.get()){
+            Drivetrain.getInstance().getGearShifter().setLowGear();
         }
     }
 

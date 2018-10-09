@@ -4,6 +4,7 @@ import static frc.team321.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.Robot;
+import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.RobotUtil;
 
@@ -14,7 +15,7 @@ public class MoveRobot extends Command {
     private double angle, power, error;
 
     public MoveRobot(double power, double angle){
-        requires(Robot.drivetrain);
+        requires(Drivetrain.getInstance());
 
         this.angle = angle;
         this.power = power;
@@ -22,7 +23,7 @@ public class MoveRobot extends Command {
 
     @Override
     protected void initialize(){
-        Robot.drivetrain.stop();
+        Drivetrain.getInstance().stop();
         Sensors.resetNavX();
     }
 
@@ -32,8 +33,8 @@ public class MoveRobot extends Command {
         leftPower = RobotUtil.range(power + (error * DRIVETRAIN_PID_P), 1);
         rightPower = RobotUtil.range(power - (error * DRIVETRAIN_PID_P), 1);
 
-        Robot.drivetrain.setLeft(leftPower);
-        Robot.drivetrain.setRight(rightPower);
+        Drivetrain.getInstance().setLeft(leftPower);
+        Drivetrain.getInstance().setRight(rightPower);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MoveRobot extends Command {
 
     @Override
     protected void end(){
-        Robot.drivetrain.stop();
+        Drivetrain.getInstance().stop();
     }
 
     @Override

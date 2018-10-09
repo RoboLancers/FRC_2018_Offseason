@@ -1,5 +1,7 @@
 package frc.team321.robot.utilities;
 
+import frc.team321.robot.subsystems.drivetrain.Drivetrain;
+
 public class Odometry {
     private volatile double x, y, theta;
     private volatile double currentEncoderPosition, lastPosition, deltaPosition;
@@ -12,7 +14,7 @@ public class Odometry {
         this.theta = 0;
 
         this.currentEncoderPosition = 0;
-        this.lastPosition = 0;
+        this.lastPosition = (Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0;
         this.deltaPosition = 0;
     }
 

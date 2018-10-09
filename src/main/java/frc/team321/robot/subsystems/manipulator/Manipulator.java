@@ -6,6 +6,8 @@ public class Manipulator {
     private IntakePivot intakePivot;
     private LinearSlide linearSlide;
 
+    private static Manipulator instance;
+
     public Manipulator(){
         intake = Intake.getInstance();
         intakePivot = IntakePivot.getInstance();
@@ -22,5 +24,13 @@ public class Manipulator {
 
     public LinearSlide getLinearSlide() {
         return linearSlide;
+    }
+
+    public synchronized static Manipulator getInstance() {
+        if (instance == null) {
+            instance = new Manipulator();
+        }
+
+        return instance;
     }
 }

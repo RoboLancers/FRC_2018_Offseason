@@ -10,7 +10,9 @@ public class Pneumatic extends Subsystem {
 
     private Compressor compressor;
 
-    public Pneumatic(){
+    private static Pneumatic instance;
+
+    private Pneumatic(){
         compressor = new Compressor(Constants.COMPRESSOR);
     }
 
@@ -40,5 +42,13 @@ public class Pneumatic extends Subsystem {
         return !((compressor.getCompressorCurrentTooHighFault() && !compressor.getCompressorCurrentTooHighStickyFault()) ||
                 (compressor.getCompressorNotConnectedFault() && !compressor.getCompressorNotConnectedStickyFault()) ||
                 (compressor.getCompressorShortedFault() && !compressor.getCompressorShortedStickyFault()));
+    }
+
+    public synchronized static Pneumatic getInstance(){
+        if(instance == null){
+            instance = new Pneumatic();
+        }
+
+        return instance;
     }
 }

@@ -1,8 +1,10 @@
 package frc.team321.robot.commands.subsystems.manipulator;
 
+import frc.team321.robot.OI;
 import frc.team321.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team321.robot.subsystems.manipulator.Manipulator;
 import frc.team321.robot.utilities.enums.IntakePower;
 
 public class UseIntake extends Command {
@@ -11,12 +13,12 @@ public class UseIntake extends Command {
     private boolean useJoystick;
 
     public UseIntake(){
-        requires(Robot.manipulator.getIntake());
+        requires(Manipulator.getInstance().getIntake());
         useJoystick = true;
     }
 
     public UseIntake(double power) {
-        requires(Robot.manipulator.getIntake());
+        requires(Manipulator.getInstance().getIntake());
         this.power = power;
         useJoystick = false;
     }
@@ -27,7 +29,7 @@ public class UseIntake extends Command {
 
     @Override
     protected void initialize() {
-        Robot.manipulator.getIntake().stop();
+        Manipulator.getInstance().getIntake().stop();
     }
 
     @Override
@@ -35,21 +37,21 @@ public class UseIntake extends Command {
         if(useJoystick){
             //Structured like this since we want the driver controller to have priority over the intake
             //Shows the priority of controls
-            if (Robot.oi.xBoxController.leftBumper.get()) {
+            if (OI.getInstance().xBoxController.leftBumper.get()) {
                 power = IntakePower.INTAKE.power;
-            } else if (Robot.oi.xBoxController.rightBumper.get()){
+            } else if (OI.getInstance().xBoxController.rightBumper.get()){
                 power = IntakePower.OUTAKE.power;
-            } else if (Math.abs(Robot.oi.flightController.getRotateAxisValue()) > 0.5){
+            } else if (Math.abs(OI.getInstance().flightController.getRotateAxisValue()) > 0.5){
                 //We only want the flight controller to outtake slowly hence the negative and the 0.25
-                power = -Math.abs(Robot.oi.flightController.getRotateAxisValue()) * 0.25;
+                power = -Math.abs(OI.getInstance().flightController.getRotateAxisValue()) * 0.25;
             } else {
                 power = 0;
             }
 
-            Robot.oi.xBoxController.setRumble(power > 0);
+            OI.getInstance().xBoxController.setRumble(power > 0);
         }
 
-        Robot.manipulator.getIntake().setAll(power);
+        Manipulator.getInstance().getIntake().setAll(power);
     }
 
     @Override
@@ -59,8 +61,8 @@ public class UseIntake extends Command {
 
     @Override
     protected void end() {
-        Robot.manipulator.getIntake().stop();
-        Robot.oi.xBoxController.setRumble(false);
+        Manipulator.getInstance().getIntake().stop();
+        OI.getInstance().xBoxController.setRumble(false);
     }
 
     @Override

@@ -2,6 +2,7 @@ package frc.team321.robot.commands.autonomous.subroutine;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.Robot;
+import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.utilities.DriveSignal;
 import frc.team321.robot.utilities.RamseteFollower;
 
@@ -12,7 +13,7 @@ public class RamsetePathFollower extends Command{
     private DriveSignal driveSignal;
 
     public RamsetePathFollower(String trajectoryName){
-        requires(Robot.drivetrain);
+        requires(Drivetrain.getInstance());
         ramseteFollower = new RamseteFollower(trajectoryName);
     }
 
@@ -24,7 +25,7 @@ public class RamsetePathFollower extends Command{
     @Override
     protected void execute(){
         driveSignal = ramseteFollower.getNextDriveSignal();
-        Robot.drivetrain.setVelocity(driveSignal.getLeft(), driveSignal.getRight());
+        Drivetrain.getInstance().setVelocity(driveSignal.getLeft(), driveSignal.getRight());
     }
 
     @Override
@@ -34,7 +35,7 @@ public class RamsetePathFollower extends Command{
 
     @Override
     protected void end(){
-        Robot.drivetrain.stop();
+        Drivetrain.getInstance().stop();
     }
 
     @Override
