@@ -102,7 +102,7 @@ public class OI {
     }
 
     public synchronized static OI getInstance() {
-        if(instance != null){
+        if(instance == null){
             instance = new OI();
         }
 
