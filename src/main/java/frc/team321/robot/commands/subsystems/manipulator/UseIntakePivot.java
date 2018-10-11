@@ -14,9 +14,9 @@ public class UseIntakePivot extends Command {
     @Override
     protected void execute() {
         if(OI.getInstance().flightController.farBottom.get()){
-            if(Manipulator.getInstance().getIntakePivot().isIntakeUp()){
-                Manipulator.getInstance().getIntakePivot().setUp();
-            }
+            Manipulator.getInstance().getIntakePivot().setUp();
+        }else{
+            Manipulator.getInstance().getIntakePivot().setDown();
         }
     }
 

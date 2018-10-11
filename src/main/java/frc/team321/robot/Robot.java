@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
+import frc.team321.robot.subsystems.manipulator.Manipulator;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
@@ -12,11 +13,12 @@ import jaci.pathfinder.Pathfinder;
 
 public class Robot extends TimedRobot {
     private static Odometry odometry;
-
     private Command autonomousCommand;
 
     @Override
     public void robotInit() {
+        Manipulator.getInstance();
+        Drivetrain.getInstance();
         odometry = Odometry.getInstance();
     }
 

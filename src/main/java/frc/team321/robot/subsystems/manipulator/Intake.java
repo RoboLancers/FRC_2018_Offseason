@@ -22,8 +22,6 @@ public class Intake extends Subsystem {
 
         intakeLeft.setNeutralMode(NeutralMode.Brake);
         intakeRight.setNeutralMode(NeutralMode.Brake);
-
-        intakeLeft.setInverted(true);
     }
 
     private void setLeft(double power) {

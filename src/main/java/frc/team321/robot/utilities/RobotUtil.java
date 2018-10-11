@@ -69,7 +69,7 @@ public class RobotUtil {
     }
 
     public static double feetsToEncoderTicks(double feet){
-        return inchesToEncoderTicks(feet * 12);
+        return (feet * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION) / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_FEETS);
     }
 
     public static double inchesToEncoderTicks(double inches){
@@ -81,7 +81,7 @@ public class RobotUtil {
     }
 
     public static double encoderTicksToFeets(double ticks){
-        return encoderTicksToInches(ticks) * 12;
+        return (ticks / DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION) * (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_FEETS);
     }
 
     public static double feetToMeters(double val) {

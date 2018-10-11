@@ -46,7 +46,9 @@ public class Constants {
     public static final double DRIVETRAIN_MOTION_PROFILE_D = 0;
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER_INCHES = 6;
-    public static final double DRIVETRAIN_WHEELBASE = 2.9;
+    public static final double DRIVETRAIN_WHEEL_DIAMETER_FEETS = 0.5;
+
+    public static final double DRIVETRAIN_WHEELBASE = 2.25;
 
     public static final double DRIVETRAIN_MAX_VELOCITY = 12; //12 feet per second
 

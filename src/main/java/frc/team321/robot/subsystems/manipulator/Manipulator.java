@@ -8,7 +8,7 @@ public class Manipulator {
 
     private static Manipulator instance;
 
-    public Manipulator(){
+    private Manipulator(){
         intake = Intake.getInstance();
         intakePivot = IntakePivot.getInstance();
         linearSlide = LinearSlide.getInstance();
