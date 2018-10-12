@@ -72,14 +72,6 @@ public class RobotUtil {
         return (feet * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION) / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_FEETS);
     }
 
-    public static double inchesToEncoderTicks(double inches){
-        return inches / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
-    }
-
-    public static double encoderTicksToInches(double ticks){
-        return ticks / (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_INCHES) * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
-    }
-
     public static double encoderTicksToFeets(double ticks){
         return (ticks / DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION) * (Math.PI * DRIVETRAIN_WHEEL_DIAMETER_FEETS);
     }
