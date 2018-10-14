@@ -1,23 +1,27 @@
 package frc.team321.robot.commands.subsystems.manipulator;
 
 import frc.team321.robot.OI;
-import frc.team321.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team321.robot.subsystems.manipulator.Manipulator;
+import frc.team321.robot.subsystems.manipulator.IntakePivot;
 
 public class UseIntakePivot extends Command {
 
     public UseIntakePivot() {
-        requires(Manipulator.getInstance().getIntakePivot());
+        requires(IntakePivot.getInstance());
     }
 
     @Override
     protected void execute() {
-        if(OI.getInstance().flightController.farBottom.get()){
-            Manipulator.getInstance().getIntakePivot().setUp();
+        if(OI.getInstance().flightController.farBottom.get() && !IntakePivot.getInstance().isIntakeUp()){
+            IntakePivot.getInstance().setUp();
         }else{
-            Manipulator.getInstance().getIntakePivot().setDown();
+            IntakePivot.getInstance().setDown();
         }
+    }
+
+    @Override
+    protected void end(){
+        IntakePivot.getInstance().setDown();
     }
 
     @Override

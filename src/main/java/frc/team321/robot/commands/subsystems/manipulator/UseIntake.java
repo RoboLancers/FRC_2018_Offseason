@@ -1,10 +1,9 @@
 package frc.team321.robot.commands.subsystems.manipulator;
 
 import frc.team321.robot.OI;
-import frc.team321.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team321.robot.subsystems.manipulator.Manipulator;
+import frc.team321.robot.subsystems.manipulator.Intake;
 import frc.team321.robot.utilities.enums.IntakePower;
 
 public class UseIntake extends Command {
@@ -13,12 +12,12 @@ public class UseIntake extends Command {
     private boolean useJoystick;
 
     public UseIntake(){
-        requires(Manipulator.getInstance().getIntake());
+        requires(Intake.getInstance());
         useJoystick = true;
     }
 
     public UseIntake(double power) {
-        requires(Manipulator.getInstance().getIntake());
+        requires(Intake.getInstance());
         this.power = power;
         useJoystick = false;
     }
@@ -29,7 +28,7 @@ public class UseIntake extends Command {
 
     @Override
     protected void initialize() {
-        Manipulator.getInstance().getIntake().stop();
+        Intake.getInstance().stop();
     }
 
     @Override
@@ -51,17 +50,12 @@ public class UseIntake extends Command {
             OI.getInstance().xBoxController.setRumble(power > 0);
         }
 
-        Manipulator.getInstance().getIntake().setAll(power);
-    }
-
-    @Override
-    protected void interrupted() {
-        end();
+        Intake.getInstance().setAll(power);
     }
 
     @Override
     protected void end() {
-        Manipulator.getInstance().getIntake().stop();
+        Intake.getInstance().stop();
         OI.getInstance().xBoxController.setRumble(false);
     }
 

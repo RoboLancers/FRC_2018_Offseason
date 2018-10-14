@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
-import frc.team321.robot.subsystems.manipulator.Manipulator;
+import frc.team321.robot.subsystems.drivetrain.GearShifter;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
@@ -17,15 +17,16 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        Manipulator.getInstance();
         Drivetrain.getInstance();
+        OI.getInstance();
+
         odometry = Odometry.getInstance();
     }
 
     @Override
     public void autonomousInit() {
         Drivetrain.getInstance().enableRamping(false);
-        Drivetrain.getInstance().getGearShifter().setLowGear();
+        GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().setMode(NeutralMode.Brake);
 
         autonomousCommand = OI.getInstance().getAutoCommand(OI.getInstance().getAutoMode());
@@ -42,7 +43,7 @@ public class Robot extends TimedRobot {
         }
 
         Drivetrain.getInstance().setMode(NeutralMode.Coast);
-        Drivetrain.getInstance().getGearShifter().setLowGear();
+        GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().enableRamping(true);
     }
 
