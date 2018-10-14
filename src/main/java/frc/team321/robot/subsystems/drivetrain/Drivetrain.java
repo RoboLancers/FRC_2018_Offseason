@@ -17,7 +17,6 @@ import jaci.pathfinder.Pathfinder;
 public class Drivetrain extends Subsystem{
 
     private Transmission leftTransmission, rightTransmission;
-    private GearShifter gearShifter;
 
     private static Drivetrain instance;
 
@@ -28,7 +27,7 @@ public class Drivetrain extends Subsystem{
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
 
-        gearShifter = GearShifter.getInstance();
+        GearShifter.getInstance();
     }
 
     /**
@@ -117,10 +116,6 @@ public class Drivetrain extends Subsystem{
     public void resetEncoders() {
         leftTransmission.resetEncoder();
         rightTransmission.resetEncoder();
-    }
-
-    public GearShifter getGearShifter(){
-        return gearShifter;
     }
 
     @Override
