@@ -39,9 +39,4 @@ public class RamsetePathFollower extends Command{
     protected void end(){
         Drivetrain.getInstance().stop();
     }
-
-    @Override
-    protected void interrupted(){
-        end();
-    }
 }

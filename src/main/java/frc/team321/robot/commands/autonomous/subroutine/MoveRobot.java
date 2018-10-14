@@ -46,9 +46,4 @@ public class MoveRobot extends Command {
     protected void end(){
         Drivetrain.getInstance().stop();
     }
-
-    @Override
-    protected void interrupted(){
-        end();
-    }
 }

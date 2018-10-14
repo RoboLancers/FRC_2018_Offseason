@@ -33,11 +33,6 @@ public class UseArcadeDrive extends Command {
     }
 
     @Override
-    protected void interrupted() {
-        Drivetrain.getInstance().stop();
-    }
-
-    @Override
     protected boolean isFinished() {
         return false;
     }

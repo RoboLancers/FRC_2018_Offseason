@@ -44,6 +44,10 @@ public class Pneumatic extends Subsystem {
                 (compressor.getCompressorShortedFault() && !compressor.getCompressorShortedStickyFault()));
     }
 
+    public void stopCompressor(){
+        compressor.stop();
+    }
+
     public synchronized static Pneumatic getInstance(){
         if(instance == null){
             instance = new Pneumatic();

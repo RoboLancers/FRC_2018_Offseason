@@ -87,11 +87,6 @@ public class PathFollower extends Command{
         Drivetrain.getInstance().stop();
     }
 
-    @Override
-    protected void interrupted(){
-        end();
-    }
-
     private void setInitialOdometry(){
         odometry.setX((leftTrajectory.get(0).x + rightTrajectory.get(0).x) / 2);
         odometry.setY((leftTrajectory.get(0).y + rightTrajectory.get(0).y) / 2);
