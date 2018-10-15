@@ -4,6 +4,7 @@ import static frc.team321.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifter;
 
 public class GearShifter extends Subsystem {
@@ -12,7 +13,7 @@ public class GearShifter extends Subsystem {
     private static GearShifter instance;
 
     private GearShifter(){
-        gearShifter = new DoubleSolenoid(GEARSHIFTER_FORWARD, GEARSHIFTER_REVERSE);
+        gearShifter = new DoubleSolenoid(RobotMap.GEARSHIFTER_FORWARD, RobotMap.GEARSHIFTER_REVERSE);
         gearShifter.set(DoubleSolenoid.Value.kForward);
     }
 

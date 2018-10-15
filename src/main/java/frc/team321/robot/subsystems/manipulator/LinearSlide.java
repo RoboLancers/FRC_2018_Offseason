@@ -1,7 +1,7 @@
 package frc.team321.robot.subsystems.manipulator;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import frc.team321.robot.Constants;
+import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlide;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -17,9 +17,9 @@ public class LinearSlide extends Subsystem {
     private static LinearSlide instance;
 
     private LinearSlide() {
-        master = new TalonSRX(Constants.LINEAR_MASTER);
+        master = new TalonSRX(RobotMap.LINEAR_MASTER);
 
-        TalonSRX slave = new TalonSRX(Constants.LINEAR_SLAVE);
+        TalonSRX slave = new TalonSRX(RobotMap.LINEAR_SLAVE);
 
         master.setNeutralMode(NeutralMode.Brake);
         slave.setNeutralMode(NeutralMode.Brake);

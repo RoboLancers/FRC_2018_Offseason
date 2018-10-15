@@ -7,6 +7,7 @@ public class RegulateCompressor extends Command {
 
     public RegulateCompressor() {
         requires(Pneumatic.getInstance());
+        setInterruptible(false);
     }
 
     @Override

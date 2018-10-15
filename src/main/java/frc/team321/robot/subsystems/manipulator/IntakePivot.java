@@ -1,9 +1,8 @@
 package frc.team321.robot.subsystems.manipulator;
 
-import static frc.team321.robot.Constants.*;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 
 public class IntakePivot extends Subsystem{
@@ -12,7 +11,7 @@ public class IntakePivot extends Subsystem{
     private static IntakePivot instance;
 
     private IntakePivot(){
-        intakePivot = new DoubleSolenoid(INTAKE_PIVOT_FORWARD, INTAKE_PIVOT_REVERSE);
+        intakePivot = new DoubleSolenoid(RobotMap.INTAKE_PIVOT_FORWARD, RobotMap.INTAKE_PIVOT_REVERSE);
         intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
 

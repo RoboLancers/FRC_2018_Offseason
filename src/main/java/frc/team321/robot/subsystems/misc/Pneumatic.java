@@ -1,6 +1,6 @@
 package frc.team321.robot.subsystems.misc;
 
-import frc.team321.robot.Constants;
+import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.misc.RegulateCompressor;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -13,7 +13,7 @@ public class Pneumatic extends Subsystem {
     private static Pneumatic instance;
 
     private Pneumatic(){
-        compressor = new Compressor(Constants.COMPRESSOR);
+        compressor = new Compressor(RobotMap.COMPRESSOR);
     }
 
     @Override

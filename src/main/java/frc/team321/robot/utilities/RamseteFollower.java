@@ -1,7 +1,5 @@
 package frc.team321.robot.utilities;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.team321.robot.Constants;
 import frc.team321.robot.OI;
 import jaci.pathfinder.Pathfinder;

@@ -1,18 +1,12 @@
 package frc.team321.robot.subsystems.drivetrain;
 
-import static frc.team321.robot.Constants.*;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-
-import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.team321.robot.OI;
+import frc.team321.robot.Constants;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
-import frc.team321.robot.subsystems.misc.Sensors;
-import frc.team321.robot.utilities.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
-import jaci.pathfinder.Pathfinder;
+import frc.team321.robot.RobotMap;
 
 public class Drivetrain extends Subsystem{
 
@@ -21,8 +15,8 @@ public class Drivetrain extends Subsystem{
     private static Drivetrain instance;
 
     private Drivetrain() {
-        leftTransmission = new Transmission(false, LEFT_MASTER_MOTOR, LEFT_SLAVE_1, LEFT_SLAVE_2);
-        rightTransmission = new Transmission(true, RIGHT_MASTER_MOTOR, RIGHT_SLAVE_1, RIGHT_SLAVE_2);
+        leftTransmission = new Transmission(false, RobotMap.LEFT_MASTER_MOTOR, RobotMap.LEFT_SLAVE_1, RobotMap.LEFT_SLAVE_2);
+        rightTransmission = new Transmission(true, RobotMap.RIGHT_MASTER_MOTOR, RobotMap.RIGHT_SLAVE_1, RobotMap.RIGHT_SLAVE_2);
 
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
@@ -123,19 +117,16 @@ public class Drivetrain extends Subsystem{
         setDefaultCommand(new UseArcadeDrive());
     }
 
-    /**
-     * Theoretically calculates and returns the FeedForward
-     * @return the FeedForward of our robot
-     */
+
     public double getFeedForward(){
         final double MAX_MOTOR_OUTPUT = 1023;
-        final double NATIVE_UNITS_PER_100 = DRIVETRAIN_MAX_RPM / 600 * DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
+        final double NATIVE_UNITS_PER_100 = Constants.DRIVETRAIN_MAX_RPM / 600 * Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
         return MAX_MOTOR_OUTPUT/NATIVE_UNITS_PER_100;
     }
 
     public void setVelocity(double left, double right){
         leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
-        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
+        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10);
     }
 
     public synchronized static Drivetrain getInstance() {

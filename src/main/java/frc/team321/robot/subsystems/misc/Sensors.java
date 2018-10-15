@@ -1,14 +1,11 @@
 package frc.team321.robot.subsystems.misc;
 
 import java.util.Arrays;
-
-import static frc.team321.robot.Constants.*;
-
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import frc.team321.robot.RobotMap;
 
 public class Sensors {
 
@@ -21,9 +18,9 @@ public class Sensors {
 
     static {
         navX = new AHRS(SerialPort.Port.kMXP);
-        ultrasonic = new Ultrasonic(ULTRASONIC_TRIG, ULTRASONIC_ECHO);
-        topTouchSensor = new DigitalInput(TOP_TOUCH_SENSOR);
-        bottomTouchSensor = new DigitalInput(BOTTOM_TOUCH_SENSOR);
+        ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_TRIG, RobotMap.ULTRASONIC_ECHO);
+        topTouchSensor = new DigitalInput(RobotMap.TOP_TOUCH_SENSOR);
+        bottomTouchSensor = new DigitalInput(RobotMap.BOTTOM_TOUCH_SENSOR);
 
         navX.reset();
         navX.resetDisplacement();
