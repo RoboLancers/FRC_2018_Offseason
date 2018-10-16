@@ -2,8 +2,8 @@ package frc.team321.robot.commands.autonomous.subroutine;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.OI;
-import frc.team321.robot.Robot;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
+import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.DriveSignal;
 import frc.team321.robot.utilities.RamseteFollower;
 
@@ -20,6 +20,7 @@ public class RamsetePathFollower extends Command{
 
     @Override
     protected void initialize(){
+        Sensors.resetNavX();
         ramseteFollower.setInitialOdometry();
         OI.liveDashboardTable.getEntry("Reset").setBoolean(true);
     }

@@ -95,7 +95,7 @@ public class OI {
             case "Test Pathfinder with Jaci":
                 return new PathFollower("SideSwitchLeftAuto");
             case "Ramsete Follower":
-                return new RamsetePathFollower("Test");
+                return new RamsetePathFollower("SideSwitchLeftAuto");
             default:
                 return new DoNothingAndReset();
         }

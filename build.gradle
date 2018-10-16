@@ -5,6 +5,11 @@ plugins {
     id "jaci.openrio.gradle.GradleRIO" version "2018.03.06"
 }
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 def TEAM = 321
 def ROBOT_CLASS = "frc.team321.robot.Robot"
 
@@ -31,6 +36,14 @@ dependencies {
     compile navx()
     compile openrio.powerup.matchData()
     compile pathfinder()
+
+    compile "org.knowm.xchart:xchart:3.5.2"
+    compile "org.apache.commons:commons-math3:3.6"
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    implementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
@@ -40,6 +53,7 @@ jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     manifest jaci.openrio.gradle.GradleRIOPlugin.javaManifest(ROBOT_CLASS)
 }
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.4'

@@ -14,7 +14,7 @@ public class Odometry {
         this.theta = 0;
 
         this.currentEncoderPosition = 0;
-        this.lastPosition = (Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0;
+        //this.lastPosition = (Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0;
         this.deltaPosition = 0;
     }
 

@@ -52,6 +52,38 @@ public class RamseteFollower {
         driveSignal = new DriveSignal();
     }
 
+    public RamseteFollower(Trajectory trajectory){
+        this.trajectory = trajectory;
+
+        segmentIndex = 0;
+        odometry = Odometry.getInstance();
+
+        driveSignal = new DriveSignal();
+    }
+
+    public Twist2D getTwist(){
+        if(isFinished()){
+            return new Twist2D(0, 0,0);
+        }
+
+        left = 0;
+        right = 0;
+
+        current = trajectory.get(segmentIndex);
+
+        //OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
+        //OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
+
+        desiredAngularVelocity = calculateDesiredAngular();
+
+        linearVelocity = calculateLinearVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
+        angularVelocity = calculateAngularVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
+
+        segmentIndex++;
+
+        return new Twist2D(linearVelocity, 0, angularVelocity);
+    }
+
     public DriveSignal getNextDriveSignal(){
         if(isFinished()){
             driveSignal.setLeft(0);
@@ -112,7 +144,7 @@ public class RamseteFollower {
             sinThetaErrorOverThetaError = Math.sin(thetaError)/thetaError;
         }
 
-        odometryError = calculateOdometryError(odometry.getTheta(), desiredX, odometry.getX(), desiredY, odometry.getY());
+        odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) - (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
 
         return desiredAngularVelocity + (b * desiredLinearVelocity * sinThetaErrorOverThetaError * odometryError) + (k * thetaError);
     }
@@ -135,6 +167,10 @@ public class RamseteFollower {
         odometry.setX(trajectory.get(0).x);
         odometry.setY(trajectory.get(0).y);
         odometry.setTheta(trajectory.get(0).heading);
+    }
+
+    public Segment currentSegment(){
+        return current;
     }
 
     public boolean isFinished(){

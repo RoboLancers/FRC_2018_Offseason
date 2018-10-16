@@ -35,8 +35,8 @@ public class PathFollower extends Command{
         leftEncoderFollower = new EncoderFollower(leftTrajectory);
         rightEncoderFollower = new EncoderFollower(rightTrajectory);
 
-        leftEncoderFollower.configureEncoder(Drivetrain.getInstance().getLeft().getEncoderCount(), Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, Constants.DRIVETRAIN_WHEEL_DIAMETER_INCHES/12);
-        rightEncoderFollower.configureEncoder(Drivetrain.getInstance().getRight().getEncoderCount(), Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, Constants.DRIVETRAIN_WHEEL_DIAMETER_INCHES/12);
+        leftEncoderFollower.configureEncoder(Drivetrain.getInstance().getLeft().getEncoderCount(), Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, Constants.DRIVETRAIN_WHEEL_DIAMETER_FEETS);
+        rightEncoderFollower.configureEncoder(Drivetrain.getInstance().getRight().getEncoderCount(), Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, Constants.DRIVETRAIN_WHEEL_DIAMETER_FEETS);
 
         leftEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);
         rightEncoderFollower.configurePIDVA(DRIVETRAIN_MOTION_PROFILE_P, DRIVETRAIN_MOTION_PROFILE_I, DRIVETRAIN_MOTION_PROFILE_D, DRIVETRAIN_KV, DRIVETRAIN_KA);

@@ -1,6 +1,7 @@
 package frc.team321.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import frc.team321.robot.Constants;
 import frc.team321.robot.utilities.RobotUtil;
 
@@ -32,7 +33,7 @@ public class Transmission {
         slave1.follow(master);
         slave2.follow(master);
 
-        master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_TIMEOUT_MS);
 
         if (isRight) {
             master.setSensorPhase(false);
@@ -43,17 +44,25 @@ public class Transmission {
             slave2.setInverted(true);
         }
 
-        master.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
-        slave1.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
-        slave2.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, 0);
+        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
 
-        master.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
-        slave1.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
-        slave2.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, 0);
+        master.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
 
-        master.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
-        slave1.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
-        slave2.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, 0);
+        master.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+
+        master.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+
+        master.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
 
         master.enableCurrentLimit(true);
         slave1.enableCurrentLimit(true);
