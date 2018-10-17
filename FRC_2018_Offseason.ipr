@@ -305,58 +305,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-math3/3.6/9a5078b5165713c2ac463def01701b13cfba1b5e/commons-math3-3.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.apiguardian:apiguardian-api:1.0.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.0.0/3ef5276905e36f4d8055fe3cb0bdcc7503ffc85d/apiguardian-api-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.0.0/777508fa9f3e03cafb3c1fb2eba3dca317f4b1ee/apiguardian-api-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-api:">
-      <CLASSES>
-        <root url="file://$PROJECT_DIR$/Could not find org.junit.jupiter:junit-jupiter-api:." />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-api:5.2.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.2.0/9cd901df48d88d8e605a6ccb2c3f140c92db6bf2/junit-jupiter-api-5.2.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.2.0/cde9c7381febf2edf35949808b084c982045bafa/junit-jupiter-api-5.2.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.2.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.2.0/de87318ccd3dfa1a98ebfef792d362776f1914de/junit-jupiter-engine-5.2.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.2.0/ad0d47eb12682e65b371f1f7eb6a284ff2716d40/junit-jupiter-engine-5.2.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.platform:junit-platform-commons:1.2.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.2.0/dbce1d822d3dc6c61703b340cd79018518685451/junit-platform-commons-1.2.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.2.0/bf6544529adb99bb5b81454f44ab69f5935be4af/junit-platform-commons-1.2.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.junit.platform:junit-platform-engine:1.2.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.2.0/35fa3529ce843ada1a10b0909ccb4a8148ee638d/junit-platform-engine-1.2.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.2.0/1bfa9b12b39daca1113cf24c7dfa3ced520e08cd/junit-platform-engine-1.2.0-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.knowm.xchart:xchart:3.5.2">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.knowm.xchart/xchart/3.5.2/86afe335a28a992aba42f80b6b46d88eaf30b504/xchart-3.5.2.jar!/" />
@@ -373,15 +321,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opencv/opencv-java/3.2.0/da5215ba2c023701a644802a1fcd93749061f90d/opencv-java-3.2.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.opentest4j:opentest4j:1.1.0">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.1.0/c8e2a3e3bc7f3e4bb5075306452db5290f9b117a/opentest4j-1.1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.1.0/80aaf67bc5cc5e749baf41b9b523f8939aaaca28/opentest4j-1.1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="pathfinderjava">
