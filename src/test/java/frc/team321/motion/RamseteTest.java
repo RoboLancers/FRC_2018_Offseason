@@ -22,7 +22,7 @@ public class RamseteTest {
         double dt = 1/freq;
         double time = 0.0;
 
-        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto", 0.18, 0.9);
+        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto", 0.18, 0.7);
         ramseteFollower.setInitialOdometry();
 
         while(!ramseteFollower.isFinished()){

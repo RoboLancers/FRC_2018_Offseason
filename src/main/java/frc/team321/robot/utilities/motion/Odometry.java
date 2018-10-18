@@ -34,7 +34,7 @@ public class Odometry {
     }
 
     public double getTheta() {
-        return theta;
+        return theta % (2 * Math.PI);
     }
 
     public synchronized void setX(double x){

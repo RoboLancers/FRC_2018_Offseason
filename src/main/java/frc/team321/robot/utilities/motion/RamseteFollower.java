@@ -27,9 +27,6 @@ public class RamseteFollower {
     //The trajectory to follow
     private Trajectory trajectory;
 
-    //The robot's x and y position and angle
-    private Odometry odometry;
-
     //Variable used to calculate linear and angular velocity
     private double lastTheta, nextTheta;
     private double k, thetaError, sinThetaErrorOverThetaError;
@@ -63,7 +60,6 @@ public class RamseteFollower {
         }
 
         segmentIndex = 0;
-        odometry = Odometry.getInstance();
 
         driveSignal = new DriveSignal();
     }
@@ -123,7 +119,7 @@ public class RamseteFollower {
         if(segmentIndex < trajectory.length() - 1){
             lastTheta = trajectory.get(segmentIndex).heading;
             nextTheta = trajectory.get(segmentIndex + 1).heading;
-            return (nextTheta - lastTheta) / current.dt;
+            return boundHalfRadians(nextTheta - lastTheta) / current.dt;
         }else{
             return 0;
         }
@@ -131,14 +127,14 @@ public class RamseteFollower {
 
     private double calculateLinearVelocity(double desiredX, double desiredY, double desiredTheta, double desiredLinearVelocity, double desiredAngularVelocity){
         k = calculateK(desiredLinearVelocity, desiredAngularVelocity);
-        thetaError = boundHalfRadians(desiredTheta - odometry.getTheta());
-        odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) + (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
+        thetaError = boundHalfRadians(desiredTheta - Odometry.getInstance().getTheta());
+        odometryError = (Math.cos(Odometry.getInstance().getTheta()) * (desiredX - Odometry.getInstance().getX())) + (Math.sin(Odometry.getInstance().getTheta()) * (desiredY - Odometry.getInstance().getY()));
         return (desiredLinearVelocity * Math.cos(thetaError)) + (k * odometryError);
     }
 
     private double calculateAngularVelocity(double desiredX, double desiredY, double desiredTheta, double desiredLinearVelocity, double desiredAngularVelocity){
         k = calculateK(desiredLinearVelocity, desiredAngularVelocity);
-        thetaError = boundHalfRadians(desiredTheta - odometry.getTheta());
+        thetaError = boundHalfRadians(desiredTheta - Odometry.getInstance().getTheta());
 
         if(Math.abs(thetaError) < EPSILON){
             //This is for the limit as sin(x)/x approaches zero
@@ -147,7 +143,7 @@ public class RamseteFollower {
             sinThetaErrorOverThetaError = Math.sin(thetaError)/thetaError;
         }
 
-        odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) - (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
+        odometryError = (Math.cos(Odometry.getInstance().getTheta()) * (desiredY - Odometry.getInstance().getY())) - (Math.sin(Odometry.getInstance().getTheta()) * (desiredX - Odometry.getInstance().getX()));
 
         return desiredAngularVelocity + (b * desiredLinearVelocity * sinThetaErrorOverThetaError * odometryError) + (k * thetaError);
     }
@@ -163,9 +159,9 @@ public class RamseteFollower {
     }
 
     public void setInitialOdometry(){
-        odometry.setX(trajectory.get(0).x);
-        odometry.setY(trajectory.get(0).y);
-        odometry.setTheta(trajectory.get(0).heading);
+        Odometry.getInstance().setX(trajectory.get(0).x);
+        Odometry.getInstance().setY(trajectory.get(0).y);
+        Odometry.getInstance().setTheta(trajectory.get(0).heading);
     }
 
     public Segment currentSegment(){
