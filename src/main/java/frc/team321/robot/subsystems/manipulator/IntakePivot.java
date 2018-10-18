@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
+import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivotJoystick;
 
 public class IntakePivot extends Subsystem{
 
@@ -12,21 +13,20 @@ public class IntakePivot extends Subsystem{
 
     private IntakePivot(){
         intakePivot = new DoubleSolenoid(RobotMap.INTAKE_PIVOT_FORWARD, RobotMap.INTAKE_PIVOT_REVERSE);
-        intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
      * Sets intake up
      */
     public void setUp() {
-        intakePivot.set(DoubleSolenoid.Value.kReverse);
+        intakePivot.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
      * Sets intake down
      */
     public void setDown() {
-        intakePivot.set(DoubleSolenoid.Value.kForward);
+        intakePivot.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -34,7 +34,7 @@ public class IntakePivot extends Subsystem{
      * @return if the intake is up
      */
     public boolean isIntakeUp() {
-        return intakePivot.get() == DoubleSolenoid.Value.kReverse;
+        return intakePivot.get() == DoubleSolenoid.Value.kForward;
     }
 
     public synchronized static IntakePivot getInstance(){
@@ -47,6 +47,6 @@ public class IntakePivot extends Subsystem{
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new UseIntakePivot());
+        setDefaultCommand(new UseIntakePivotJoystick());
     }
 }

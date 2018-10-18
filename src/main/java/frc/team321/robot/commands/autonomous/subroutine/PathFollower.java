@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.Constants;
 import frc.team321.robot.OI;
-import frc.team321.robot.Robot;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.misc.Sensors;
-import frc.team321.robot.utilities.Odometry;
+import frc.team321.robot.utilities.motion.Odometry;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
@@ -29,8 +28,8 @@ public class PathFollower extends Command{
     public PathFollower(String name){
         requires(Drivetrain.getInstance());
 
-        leftTrajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + name + "_left_detailed.traj"));
-        rightTrajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + name + "_right_detailed.traj"));
+        leftTrajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + name + "/" + name + "_left_detailed.traj"));
+        rightTrajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + name + "/" + name + "_right_detailed.traj"));
 
         leftEncoderFollower = new EncoderFollower(leftTrajectory);
         rightEncoderFollower = new EncoderFollower(rightTrajectory);
@@ -47,7 +46,7 @@ public class PathFollower extends Command{
     protected void initialize(){
         Drivetrain.getInstance().setMode(NeutralMode.Coast);
         Drivetrain.getInstance().stop();
-        Sensors.resetNavX();
+        Sensors.getInstance().resetNavX();
 
         OI.liveDashboardTable.getEntry("Reset").setBoolean(true);
         setInitialOdometry();
@@ -63,7 +62,7 @@ public class PathFollower extends Command{
             OI.liveDashboardTable.getEntry("Path Y").setNumber((leftEncoderFollower.getSegment().y + rightEncoderFollower.getSegment().y) / 2);
         }
 
-        gyroHeading = Sensors.getAngle();
+        gyroHeading = Sensors.getInstance().getAngle();
         desiredHeading = Pathfinder.r2d(leftEncoderFollower.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);

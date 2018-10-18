@@ -3,6 +3,7 @@ package frc.team321.robot.subsystems.manipulator;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
+import frc.team321.robot.commands.subsystems.manipulator.UseIntakeJoystick;
 import frc.team321.robot.utilities.RobotUtil;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -48,6 +49,6 @@ public class Intake extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new UseIntake());
+        setDefaultCommand(new UseIntakeJoystick());
     }
 }

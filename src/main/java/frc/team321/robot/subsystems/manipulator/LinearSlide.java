@@ -2,7 +2,7 @@ package frc.team321.robot.subsystems.manipulator;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team321.robot.RobotMap;
-import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlide;
+import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlideJoystick;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -65,7 +65,7 @@ public class LinearSlide extends Subsystem {
      * @return The linear slide encoder count
      */
     public double getEncoder() {
-        if (Sensors.isLinearSlideAtGround()) {
+        if (Sensors.getInstance().isLinearSlideAtGround()) {
             this.resetEncoder();
         }
         return master.getSelectedSensorPosition(0);
@@ -84,8 +84,8 @@ public class LinearSlide extends Subsystem {
      * @return whether or not it's safe to move
      */
     public boolean isSafeToMove(double power) {
-        return (Sensors.isLinearSlideFullyExtended() && power > 0)
-                || (Sensors.isLinearSlideAtGround() && power < 0);
+        return (Sensors.getInstance().isLinearSlideFullyExtended() && power > 0)
+                || (Sensors.getInstance().isLinearSlideAtGround() && power < 0);
     }
 
     public synchronized static LinearSlide getInstance(){
@@ -98,6 +98,6 @@ public class LinearSlide extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new UseLinearSlide());
+        setDefaultCommand(new UseLinearSlideJoystick());
     }
 }

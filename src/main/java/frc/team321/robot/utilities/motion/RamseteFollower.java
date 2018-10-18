@@ -1,4 +1,4 @@
-package frc.team321.robot.utilities;
+package frc.team321.robot.utilities.motion;
 
 import frc.team321.robot.Constants;
 import frc.team321.robot.OI;
@@ -15,10 +15,10 @@ import java.io.File;
 public class RamseteFollower {
 
     //Should be greater than zero and this increases correction
-    private static final double b = 0.18;
+    private double b = 0.18;
 
     //Should be between zero and one and this increases dampening
-    private static final double zeta = 0.7;
+    private double zeta = 0.7;
 
     //Holds what segment we are on
     private int segmentIndex;
@@ -37,42 +37,50 @@ public class RamseteFollower {
     private double odometryError;
 
     //Constants
-    private static final double EPSILON = 0.00001;
+    private static final double EPSILON = 0.00000001;
     private static final double TWO_PI = 2 * Math.PI;
 
     //Variable for holding velocity for robot to drive on
+    private Velocity velocity;
     private DriveSignal driveSignal;
     private double left, right;
 
+    //Trajectory file to open
+    private File trajectoryFile;
+
     public RamseteFollower(String trajectoryName){
-        trajectory = Pathfinder.readFromFile(new File("/home/lvuser/trajectories/" + trajectoryName + "_source_detailed.traj"));
-        segmentIndex = 0;
-        odometry = Odometry.getInstance();
+        trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "/" + trajectoryName + "_left_detailed.traj");
 
-        driveSignal = new DriveSignal();
-    }
+        trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile) : null;
 
-    public RamseteFollower(Trajectory trajectory){
-        this.trajectory = trajectory;
-
-        segmentIndex = 0;
-        odometry = Odometry.getInstance();
-
-        driveSignal = new DriveSignal();
-    }
-
-    public Twist2D getTwist(){
-        if(isFinished()){
-            return new Twist2D(0, 0,0);
+        if(trajectory == null){
+            trajectoryFile = new File("C:\\Users\\brian\\OneDrive\\Projects\\FRC_2018_Offseason\\PathPlanner\\Trajectories\\" + trajectoryName + "\\" + trajectoryName + "_source_detailed.traj");
+            trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile): null;
         }
 
-        left = 0;
-        right = 0;
+        if(trajectory == null){
+            return;
+        }
+
+        segmentIndex = 0;
+        odometry = Odometry.getInstance();
+
+        driveSignal = new DriveSignal();
+    }
+
+    public RamseteFollower(String trajectoryName, double b, double zeta){
+        this(trajectoryName);
+
+        this.b = b;
+        this.zeta = zeta;
+    }
+
+    public Velocity getVelocity(){
+        if(isFinished()){
+            return new Velocity(0, 0);
+        }
 
         current = trajectory.get(segmentIndex);
-
-        //OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
-        //OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
 
         desiredAngularVelocity = calculateDesiredAngular();
 
@@ -81,7 +89,7 @@ public class RamseteFollower {
 
         segmentIndex++;
 
-        return new Twist2D(linearVelocity, 0, angularVelocity);
+        return new Velocity(linearVelocity, angularVelocity);
     }
 
     public DriveSignal getNextDriveSignal(){
@@ -95,21 +103,16 @@ public class RamseteFollower {
         left = 0;
         right = 0;
 
-        current = trajectory.get(segmentIndex);
+        velocity = getVelocity();
 
-        OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
-        OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
-
-        desiredAngularVelocity = calculateDesiredAngular();
-
-        linearVelocity = calculateLinearVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
-        angularVelocity = calculateAngularVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
-
-        left = (-(angularVelocity * Constants.DRIVETRAIN_WHEELBASE) + (2 * linearVelocity)) / 2;
-        right = ((angularVelocity * Constants.DRIVETRAIN_WHEELBASE) + (2 * linearVelocity)) / 2;
+        left = (-(velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
+        right = ((velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
 
         driveSignal.setLeft(left);
         driveSignal.setRight(right);
+
+        OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
+        OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
 
         segmentIndex++;
 
@@ -120,7 +123,7 @@ public class RamseteFollower {
         if(segmentIndex < trajectory.length() - 1){
             lastTheta = trajectory.get(segmentIndex).heading;
             nextTheta = trajectory.get(segmentIndex + 1).heading;
-            return (nextTheta - lastTheta) / trajectory.get(segmentIndex).dt;
+            return (nextTheta - lastTheta) / current.dt;
         }else{
             return 0;
         }
@@ -129,7 +132,7 @@ public class RamseteFollower {
     private double calculateLinearVelocity(double desiredX, double desiredY, double desiredTheta, double desiredLinearVelocity, double desiredAngularVelocity){
         k = calculateK(desiredLinearVelocity, desiredAngularVelocity);
         thetaError = boundHalfRadians(desiredTheta - odometry.getTheta());
-        odometryError = calculateOdometryError(odometry.getTheta(), desiredX, odometry.getX(), desiredY, odometry.getY());
+        odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) + (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
         return (desiredLinearVelocity * Math.cos(thetaError)) + (k * odometryError);
     }
 
@@ -147,10 +150,6 @@ public class RamseteFollower {
         odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) - (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
 
         return desiredAngularVelocity + (b * desiredLinearVelocity * sinThetaErrorOverThetaError * odometryError) + (k * thetaError);
-    }
-
-    private double calculateOdometryError(double theta, double desiredX, double x, double desiredY, double y){
-        return (Math.cos(theta) * (desiredX - x)) + (Math.sin(theta) * (desiredY - y));
     }
 
     private double calculateK(double desiredLinearVelocity, double desiredAngularVelocity){

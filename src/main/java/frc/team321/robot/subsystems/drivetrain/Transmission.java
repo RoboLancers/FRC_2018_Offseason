@@ -1,7 +1,6 @@
 package frc.team321.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import frc.team321.robot.Constants;
 import frc.team321.robot.utilities.RobotUtil;
 
@@ -67,6 +66,18 @@ public class Transmission {
         master.enableCurrentLimit(true);
         slave1.enableCurrentLimit(true);
         slave2.enableCurrentLimit(true);
+
+        master.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
+
+        master.enableVoltageCompensation(true);
+        slave1.enableVoltageCompensation(true);
+        slave2.enableVoltageCompensation(true);
+
+        master.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
     }
 
     /**
@@ -74,7 +85,7 @@ public class Transmission {
      *
      * @param mode Mode to set the motors to
      */
-    public void setMode(NeutralMode mode) {
+    void setMode(NeutralMode mode) {
         master.setNeutralMode(mode);
         slave1.setNeutralMode(mode);
         slave2.setNeutralMode(mode);
@@ -86,7 +97,7 @@ public class Transmission {
      * @param power The power to set it to. Will be checked to make sure it is between
      *              -1 and 1
      */
-    public void setPower(double power) {
+    void setPower(double power) {
         master.set(ControlMode.PercentOutput, RobotUtil.range(power, 1));
     }
 
@@ -102,7 +113,7 @@ public class Transmission {
     /**
      * Zero out the encoder
      */
-    public void resetEncoder() {
+    void resetEncoder() {
         master.setSelectedSensorPosition(0, 0, 0);
     }
 
@@ -111,7 +122,7 @@ public class Transmission {
      *
      * @param rampRate Amount of time in seconds to go from 0 to full power
      */
-    public void setRampRate(double rampRate) {
+    void setRampRate(double rampRate) {
         master.configOpenloopRamp(rampRate, 0);
         slave1.configOpenloopRamp(rampRate, 0);
         slave2.configOpenloopRamp(rampRate, 0);

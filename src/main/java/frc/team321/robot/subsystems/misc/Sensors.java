@@ -9,14 +9,16 @@ import frc.team321.robot.RobotMap;
 
 public class Sensors {
 
-    private static AHRS navX;
-    private static Ultrasonic ultrasonic;
-    private static DigitalInput topTouchSensor;
-    private static DigitalInput bottomTouchSensor;
+    private AHRS navX;
+    private Ultrasonic ultrasonic;
+    private DigitalInput topTouchSensor;
+    private DigitalInput bottomTouchSensor;
 
-    private static double[] ultrasonicBuffer = {0, 0, 0};
+    private double[] ultrasonicBuffer = {0, 0, 0};
 
-    static {
+    private static Sensors instance;
+
+    private Sensors(){
         navX = new AHRS(SerialPort.Port.kMXP);
         ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_TRIG, RobotMap.ULTRASONIC_ECHO);
         topTouchSensor = new DigitalInput(RobotMap.TOP_TOUCH_SENSOR);
@@ -34,7 +36,7 @@ public class Sensors {
      * Checks if the linear slide is at top
      * @return if the linear slide is at top
      */
-    public static boolean isLinearSlideFullyExtended() {
+    public boolean isLinearSlideFullyExtended() {
         return !topTouchSensor.get();
     }
 
@@ -42,7 +44,7 @@ public class Sensors {
      * Checks if the linear slide is at bottom
      * @return if the linear slide is at bottom
      */
-    public static boolean isLinearSlideAtGround() {
+    public boolean isLinearSlideAtGround() {
         return !bottomTouchSensor.get();
     }
 
@@ -50,7 +52,7 @@ public class Sensors {
      * Gets the distance from ultrasonic sensor in meters
      * @return the meter from ultrasonic sensor
      */
-    public static double getDistanceInMeters() {
+    public double getDistanceInMeters() {
         return ultrasonic.getRangeMM() / 1000;
     }
 
@@ -58,14 +60,14 @@ public class Sensors {
      * Gets the heading from NavX
      * @return the heading from NavX
      */
-    public static double getHeading(){
+    public double getHeading(){
         return navX.getFusedHeading();
     }
 
     /**
      * Resets the NavX
      */
-    public static void resetNavX(){
+    public void resetNavX(){
         navX.reset();
         navX.zeroYaw();
     }
@@ -74,7 +76,7 @@ public class Sensors {
      * Gets angle from NavX with CounterClockwise being positive and Clockwise being negative
      * @return the angle from NavX
      */
-    public static double getAngle(){
+    public double getAngle(){
         return -navX.getAngle();
     }
 
@@ -82,7 +84,7 @@ public class Sensors {
      * Gets the average distance from ultrasonic
      * @return the average distance
      */
-    public static double getAverageDistanceInMeters() {
+    public double getAverageDistanceInMeters() {
         for(int i = 0; i < ultrasonicBuffer.length; i++) {
             ultrasonicBuffer[i] = getDistanceInMeters();
         }
@@ -90,5 +92,13 @@ public class Sensors {
         return Arrays.stream(ultrasonicBuffer)
                 .average()
                 .getAsDouble();
+    }
+
+    public synchronized static Sensors getInstance(){
+        if(instance == null){
+            instance = new Sensors();
+        }
+
+        return instance;
     }
 }

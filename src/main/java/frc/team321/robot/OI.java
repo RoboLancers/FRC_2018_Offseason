@@ -5,13 +5,18 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team321.robot.commands.autonomous.modes.CenterSwitchAuto;
 import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
+import frc.team321.robot.commands.autonomous.modes.SameSideScaleAuto;
+import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
 import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.commands.autonomous.subroutine.RamsetePathFollower;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
+import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Camera;
 import frc.team321.robot.subsystems.misc.Sensors;
-import frc.team321.robot.utilities.Odometry;
+import frc.team321.robot.utilities.motion.Odometry;
+import frc.team321.robot.utilities.RobotUtil;
 import frc.team321.robot.utilities.controllers.FlightController;
 import frc.team321.robot.utilities.controllers.XBoxController;
 
@@ -27,7 +32,13 @@ public class OI {
     private SendableChooser<String> chooser;
 
     private static final String[] autonomousModes = {
-        "Test Pathfinder with Jaci", "Ramsete Follower"
+            "Test Pathfinder with Jaci",
+            "Ramsete Follower",
+            "Side Switch Left",
+            "Side Switch Right",
+            "Center Switch Auto",
+            "Same Side Scale Left Auto",
+            "Same Side Scale Right Auto"
     };
 
     private static OI instance;
@@ -47,11 +58,14 @@ public class OI {
      * Updates the SmartDashboard
      */
     void updateDashboardValues(){
-        SmartDashboard.putNumber("NavX Gyro", Sensors.getAngle());
-        SmartDashboard.putBoolean("Top Touch Sensor", Sensors.isLinearSlideFullyExtended());
-        SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.isLinearSlideAtGround());
+        SmartDashboard.putNumber("NavX Gyro", Sensors.getInstance().getAngle());
+        SmartDashboard.putBoolean("Top Touch Sensor", Sensors.getInstance().isLinearSlideFullyExtended());
+        SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.getInstance().isLinearSlideAtGround());
+        SmartDashboard.putNumber("Linear Slide Encoder", LinearSlide.getInstance().getEncoder());
         SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getLeft().getEncoderCount());
         SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getRight().getEncoderCount());
+        SmartDashboard.putNumber("Left Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getLeft().getEncoderCount()));
+        SmartDashboard.putNumber("Right Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getRight().getEncoderCount()));
         SmartDashboard.putNumber("Left Encoder Speed", Drivetrain.getInstance().getLeft().getMaster().getSelectedSensorVelocity(0));
         SmartDashboard.putNumber("Right Encoder Speed", Drivetrain.getInstance().getRight().getMaster().getSelectedSensorVelocity(0));
 
@@ -95,7 +109,17 @@ public class OI {
             case "Test Pathfinder with Jaci":
                 return new PathFollower("SideSwitchLeftAuto");
             case "Ramsete Follower":
-                return new RamsetePathFollower("SideSwitchLeftAuto");
+                return new RamsetePathFollower("SideSwitchLeftAuto", 0.18, 0.9);
+            case "Side Switch Left":
+                return new SideSwitchAuto(true);
+            case "Side Switch Right":
+                return new SideSwitchAuto(false);
+            case "Center Switch Auto":
+                return new CenterSwitchAuto();
+            case "Same Side Scale Left Auto":
+                return new SameSideScaleAuto(true);
+            case "Same Side Scale Right Auto":
+                return new SameSideScaleAuto(false);
             default:
                 return new DoNothingAndReset();
         }

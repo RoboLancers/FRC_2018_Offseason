@@ -1,32 +1,24 @@
 package frc.team321.robot.commands.subsystems.manipulator;
 
-import frc.team321.robot.OI;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.team321.robot.subsystems.manipulator.IntakePivot;
+import frc.team321.robot.utilities.enums.IntakePivotState;
 
-public class UseIntakePivot extends Command {
+public class UseIntakePivot extends InstantCommand {
 
-    public UseIntakePivot() {
+    private IntakePivotState intakePivotState;
+
+    public UseIntakePivot(IntakePivotState intakePivotState) {
         requires(IntakePivot.getInstance());
+        this.intakePivotState = intakePivotState;
     }
 
     @Override
-    protected void execute() {
-        if(OI.getInstance().flightController.farBottom.get() && !IntakePivot.getInstance().isIntakeUp()){
+    protected void initialize() {
+        if(intakePivotState == IntakePivotState.UP){
             IntakePivot.getInstance().setUp();
         }else{
             IntakePivot.getInstance().setDown();
         }
     }
-
-    @Override
-    protected void end(){
-        IntakePivot.getInstance().setDown();
-    }
-
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
-
 }

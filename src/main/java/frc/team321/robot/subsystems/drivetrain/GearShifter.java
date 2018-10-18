@@ -1,11 +1,9 @@
 package frc.team321.robot.subsystems.drivetrain;
 
-import static frc.team321.robot.Constants.*;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.RobotMap;
-import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifter;
+import frc.team321.robot.commands.subsystems.drivetrain.UseGearShifterJoystick;
 
 public class GearShifter extends Subsystem {
 
@@ -41,6 +39,6 @@ public class GearShifter extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new UseGearShifter());
+        setDefaultCommand(new UseGearShifterJoystick());
     }
 }

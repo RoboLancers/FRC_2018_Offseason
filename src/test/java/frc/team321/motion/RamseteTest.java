@@ -1,12 +1,9 @@
 package frc.team321.motion;
 
 import frc.team321.robot.Constants;
-import frc.team321.robot.utilities.Odometry;
-import frc.team321.robot.utilities.RamseteFollower;
-import frc.team321.robot.utilities.Twist2D;
-import jaci.pathfinder.Pathfinder;
-import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Waypoint;
+import frc.team321.robot.utilities.motion.Odometry;
+import frc.team321.robot.utilities.motion.RamseteFollower;
+import frc.team321.robot.utilities.motion.Velocity;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
@@ -21,49 +18,41 @@ public class RamseteTest {
         ArrayList<Double> xDataPath = new ArrayList<>();
         ArrayList<Double> yDataPath = new ArrayList<>();
 
-        Waypoint[] waypointArray = {
-                new Waypoint(-1.0, -1.0, 0.0),
-                new Waypoint(10.0, -1.0, 0.0)
-        };
-
-        Odometry odometry = Odometry.getInstance();
         double freq = 50.0;
         double dt = 1/freq;
         double time = 0.0;
 
-        Trajectory trajectory = Pathfinder.generate(waypointArray,
-                new Trajectory.Config(
-                        Trajectory.FitMethod.HERMITE_CUBIC,
-                        Trajectory.Config.SAMPLES_HIGH,
-                        dt,
-                        Constants.DRIVETRAIN_MAX_VELOCITY,
-                        12,
-                        60
-                ));
-
-        RamseteFollower ramseteFollower = new RamseteFollower(trajectory);
+        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto", 0.18, 0.9);
         ramseteFollower.setInitialOdometry();
 
         while(!ramseteFollower.isFinished()){
-            Twist2D twist2D = ramseteFollower.getTwist();
-            double heading = twist2D.dtheta * dt;
-            double pos = twist2D.dx * dt;
-            double dx = pos * Math.cos(odometry.getTheta() + heading);
-            double dy = pos * Math.sin(odometry.getTheta() + heading);
+            Velocity velocity = ramseteFollower.getVelocity();
+            double heading = velocity.getAngular() * dt;
+            double pos = velocity.getLinear() * dt;
 
-            odometry.addX(dx);
-            odometry.addY(dy);
-            odometry.setTheta(odometry.getTheta() + heading);
+            Odometry.getInstance().addTheta(heading);
 
-            xDataFollower.add(odometry.getX());
-            yDataFollower.add(odometry.getY());
+            double dx = pos * Math.cos(Odometry.getInstance().getTheta());
+            double dy = pos * Math.sin(Odometry.getInstance().getTheta());
+
+            Odometry.getInstance().addX(dx);
+            Odometry.getInstance().addY(dy);
+
+            xDataFollower.add(Odometry.getInstance().getX());
+            yDataFollower.add(Odometry.getInstance().getY());
             xDataPath.add(ramseteFollower.currentSegment().x);
             yDataPath.add(ramseteFollower.currentSegment().y);
 
             time += dt;
 
+            double left = (-(velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
+            double right = ((velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
             System.out.println("Generating: " + time);
-            System.out.println("Odometry: " + odometry);
+            System.out.println("Odometry: " + Odometry.getInstance());
+            System.out.println("dx: " + dx);
+            System.out.println("dy: " + dy);
+            System.out.println("Left Velocity: " + left);
+            System.out.println("Right Velocity: " + right);
         }
 
         System.out.println("Finish generating path and follower");
@@ -82,11 +71,5 @@ public class RamseteTest {
         System.out.println("Created Chart");
 
         new SwingWrapper<>(chart).displayChart();
-
-//        try {
-//            Thread.sleep(1000000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 }

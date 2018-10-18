@@ -10,7 +10,7 @@ import frc.team321.robot.subsystems.manipulator.Intake;
 import frc.team321.robot.subsystems.manipulator.IntakePivot;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Sensors;
-import frc.team321.robot.utilities.Odometry;
+import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
 import jaci.pathfinder.Pathfinder;
 
@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
         IntakePivot.getInstance();
         LinearSlide.getInstance();
         OI.getInstance();
+        Sensors.getInstance();
 
         odometry = Odometry.getInstance();
     }
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
         Drivetrain.getInstance().enableRamping(false);
         GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().setMode(NeutralMode.Brake);
+        IntakePivot.getInstance().setUp();
 
         autonomousCommand = OI.getInstance().getAutoCommand(OI.getInstance().getAutoMode());
 
@@ -52,13 +54,14 @@ public class Robot extends TimedRobot {
         Drivetrain.getInstance().setMode(NeutralMode.Coast);
         GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().enableRamping(true);
+        IntakePivot.getInstance().setDown();
     }
 
     @Override
     public void robotPeriodic(){
         odometry.setCurrentEncoderPosition((Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0);
         odometry.setDeltaPosition(RobotUtil.encoderTicksToFeets(odometry.getCurrentEncoderPosition() - odometry.getLastPosition()));
-        odometry.setTheta(Math.toRadians(Pathfinder.boundHalfDegrees(Sensors.getAngle())));
+        odometry.setTheta(Math.toRadians(Pathfinder.boundHalfDegrees(Sensors.getInstance().getAngle())));
 
         odometry.addX(Math.cos(odometry.getTheta()) * odometry.getDeltaPosition());
         odometry.addY(Math.sin(odometry.getTheta()) * odometry.getDeltaPosition());

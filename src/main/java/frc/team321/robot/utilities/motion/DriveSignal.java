@@ -1,4 +1,4 @@
-package frc.team321.robot.utilities;
+package frc.team321.robot.utilities.motion;
 
 public class DriveSignal {
 
