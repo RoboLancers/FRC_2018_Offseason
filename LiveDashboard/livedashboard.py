@@ -101,7 +101,7 @@ class Dashboard(tk.Frame):
 
         # Title Display
         field_plot.text(
-            0, 27.7, 'FRC 5190 Live Dashboard', fontproperties=kanit_italic, size=20, color='#690a0f')
+            0, 27.7, 'FRC 321 Live Dashboard', fontproperties=kanit_italic, size=20, color='#690a0f')
 
         # IP Display
         field_plot.text(17, 27.7, ip, fontproperties=kanit_italic, size=10, color="#303030", alpha=0.5)
