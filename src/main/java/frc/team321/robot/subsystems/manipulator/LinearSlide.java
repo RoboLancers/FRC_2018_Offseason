@@ -1,14 +1,10 @@
 package frc.team321.robot.subsystems.manipulator;
 
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team321.robot.Constants;
 import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlideJoystick;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.subsystems.misc.Sensors;
@@ -38,7 +34,7 @@ public class LinearSlide extends Subsystem {
         master.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
         slave.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
 
-        master.selectProfileSlot(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_PID_SLOT_INDEX);
+        master.selectProfileSlot(Constants.SLIDE_PROFILE_SLOT_INDEX, Constants.SLIDE_PID_SLOT_INDEX);
 
         master.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.SLIDE_TIMEOUT_MS);
         slave.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.SLIDE_TIMEOUT_MS);
@@ -54,6 +50,9 @@ public class LinearSlide extends Subsystem {
         master.configReverseSoftLimitThreshold(Constants.SLIDE_REVERSE_SOFT_LIMIT, Constants.SLIDE_TIMEOUT_MS);
         master.configForwardSoftLimitEnable(true, Constants.SLIDE_TIMEOUT_MS);
         master.configReverseSoftLimitEnable(true, Constants.SLIDE_TIMEOUT_MS);
+
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.SLIDE_TIMEOUT_MS);
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.SLIDE_TIMEOUT_MS);
     }
 
     /**

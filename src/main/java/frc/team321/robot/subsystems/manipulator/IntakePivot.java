@@ -3,8 +3,6 @@ package frc.team321.robot.subsystems.manipulator;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.RobotMap;
-import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
-import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivotJoystick;
 
 public class IntakePivot extends Subsystem{
 
@@ -47,6 +45,6 @@ public class IntakePivot extends Subsystem{
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new UseIntakePivotJoystick());
+
     }
 }

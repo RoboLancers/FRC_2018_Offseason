@@ -11,11 +11,13 @@ import frc.team321.robot.commands.autonomous.modes.SameSideScaleAuto;
 import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
 import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.commands.autonomous.subroutine.RamsetePathFollower;
+import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Camera;
 import frc.team321.robot.subsystems.misc.Sensors;
+import frc.team321.robot.utilities.enums.IntakePivotState;
 import frc.team321.robot.utilities.enums.LinearSlidePosition;
 import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
@@ -49,6 +51,8 @@ public class OI {
     private OI(){
         xBoxController = new XBoxController(0);
         flightController = new FlightController(1);
+
+        flightController.farBottom.whileHeld(new UseIntakePivot(IntakePivotState.UP));
 
         chooser = new SendableChooser<>();
         putAutoModes();

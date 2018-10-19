@@ -76,13 +76,13 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic(){
-        Scheduler.getInstance().run();
         OI.getInstance().updateDashboardValues();
+        Scheduler.getInstance().run();
     }
 
     @Override
     public void teleopPeriodic(){
-        Scheduler.getInstance().run();
         OI.getInstance().updateDashboardValues();
+        Scheduler.getInstance().run();
     }
 }

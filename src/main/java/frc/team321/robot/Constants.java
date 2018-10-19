@@ -37,6 +37,7 @@ public class Constants {
     // Linear Slide Constants
     public static final int SLIDE_TIMEOUT_MS = 0;
     public static final int SLIDE_PID_SLOT_INDEX = 0;
+    public static final int SLIDE_PROFILE_SLOT_INDEX = 0;
 
     public static final double SLIDE_NOMINAL_OUTPUT = 0.05;
     public static final double SLIDE_PEAK_OUTPUT = 0.8;
