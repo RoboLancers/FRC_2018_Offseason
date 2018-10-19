@@ -1118,7 +1118,7 @@
     <property name="SearchEverywhereHistoryKey" value="UseIntakePivot&#9;PSI&#9;JAVA://frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539913524773" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539913540611" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/native" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />

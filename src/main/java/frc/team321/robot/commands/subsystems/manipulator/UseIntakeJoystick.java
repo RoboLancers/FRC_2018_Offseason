@@ -26,9 +26,8 @@ public class UseIntakeJoystick extends Command {
             power = IntakePower.INTAKE.power;
         } else if (OI.getInstance().xBoxController.rightBumper.get()){
             power = IntakePower.OUTAKE.power;
-        } else if (Math.abs(OI.getInstance().flightController.getRotateAxisValue()) > 0.5){
-            //We only want the flight controller to outtake slowly hence the negative and the 0.25
-            power = -Math.abs(OI.getInstance().flightController.getRotateAxisValue()) * 0.25;
+        } else if (OI.getInstance().flightController.trigger.get()){
+            power = -0.25;
         } else {
             power = 0;
         }
