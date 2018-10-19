@@ -44,7 +44,6 @@ public class LinearSlide extends Subsystem {
 
         master.configMotionCruiseVelocity(Constants.SLIDE_MAX_VELOCITY, Constants.SLIDE_TIMEOUT_MS);
         master.configMotionAcceleration(Constants.SLIDE_MAX_ACCELERATION, Constants.SLIDE_TIMEOUT_MS);
-        master.configAllowableClosedloopError(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR, Constants.SLIDE_TIMEOUT_MS);
 
         master.configForwardSoftLimitThreshold(Constants.SLIDE_FORWARD_SOFT_LIMIT, Constants.SLIDE_TIMEOUT_MS);
         master.configReverseSoftLimitThreshold(Constants.SLIDE_REVERSE_SOFT_LIMIT, Constants.SLIDE_TIMEOUT_MS);
@@ -119,6 +118,10 @@ public class LinearSlide extends Subsystem {
 
     public int getError(){
         return master.getClosedLoopError(Constants.SLIDE_PID_SLOT_INDEX);
+    }
+
+    public int getTrajectoryPosition(){
+        return master.getActiveTrajectoryPosition();
     }
 
     public int getEncoderVelocity(){

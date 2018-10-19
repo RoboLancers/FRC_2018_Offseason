@@ -53,6 +53,9 @@ public class OI {
         flightController = new FlightController(1);
 
         flightController.farBottom.whileHeld(new UseIntakePivot(IntakePivotState.UP));
+        flightController.innerTop.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.SCALE));
+        flightController.innerMiddle.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.SWITCH));
+        flightController.innerBottom.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.BOTTOM));
 
         chooser = new SendableChooser<>();
         putAutoModes();
