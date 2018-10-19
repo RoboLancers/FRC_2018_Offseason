@@ -27,6 +27,9 @@ public class RamseteFollower {
     //The trajectory to follow
     private Trajectory trajectory;
 
+    //The robot's x and y position and angle
+    private Odometry odometry;
+
     //Variable used to calculate linear and angular velocity
     private double lastTheta, nextTheta;
     private double k, thetaError, sinThetaErrorOverThetaError;
@@ -60,6 +63,7 @@ public class RamseteFollower {
         }
 
         segmentIndex = 0;
+        odometry = Odometry.getInstance();
 
         driveSignal = new DriveSignal();
     }
@@ -83,22 +87,10 @@ public class RamseteFollower {
         linearVelocity = calculateLinearVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
         angularVelocity = calculateAngularVelocity(current.x, current.y, current.heading, current.velocity, desiredAngularVelocity);
 
-        segmentIndex++;
-
         return new Velocity(linearVelocity, angularVelocity);
     }
 
     public DriveSignal getNextDriveSignal(){
-        if(isFinished()){
-            driveSignal.setLeft(0);
-            driveSignal.setRight(0);
-
-            return driveSignal;
-        }
-
-        left = 0;
-        right = 0;
-
         velocity = getVelocity();
 
         left = (-(velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
@@ -127,14 +119,14 @@ public class RamseteFollower {
 
     private double calculateLinearVelocity(double desiredX, double desiredY, double desiredTheta, double desiredLinearVelocity, double desiredAngularVelocity){
         k = calculateK(desiredLinearVelocity, desiredAngularVelocity);
-        thetaError = boundHalfRadians(desiredTheta - Odometry.getInstance().getTheta());
-        odometryError = (Math.cos(Odometry.getInstance().getTheta()) * (desiredX - Odometry.getInstance().getX())) + (Math.sin(Odometry.getInstance().getTheta()) * (desiredY - Odometry.getInstance().getY()));
+        thetaError = boundHalfRadians(desiredTheta - odometry.getTheta());
+        odometryError = (Math.cos(odometry.getTheta()) * (desiredX - odometry.getX())) + (Math.sin(odometry.getTheta()) * (desiredY - odometry.getY()));
         return (desiredLinearVelocity * Math.cos(thetaError)) + (k * odometryError);
     }
 
     private double calculateAngularVelocity(double desiredX, double desiredY, double desiredTheta, double desiredLinearVelocity, double desiredAngularVelocity){
         k = calculateK(desiredLinearVelocity, desiredAngularVelocity);
-        thetaError = boundHalfRadians(desiredTheta - Odometry.getInstance().getTheta());
+        thetaError = boundHalfRadians(desiredTheta - odometry.getTheta());
 
         if(Math.abs(thetaError) < EPSILON){
             //This is for the limit as sin(x)/x approaches zero
@@ -143,7 +135,7 @@ public class RamseteFollower {
             sinThetaErrorOverThetaError = Math.sin(thetaError)/thetaError;
         }
 
-        odometryError = (Math.cos(Odometry.getInstance().getTheta()) * (desiredY - Odometry.getInstance().getY())) - (Math.sin(Odometry.getInstance().getTheta()) * (desiredX - Odometry.getInstance().getX()));
+        odometryError = (Math.cos(odometry.getTheta()) * (desiredY - odometry.getY())) - (Math.sin(odometry.getTheta()) * (desiredX - odometry.getX()));
 
         return desiredAngularVelocity + (b * desiredLinearVelocity * sinThetaErrorOverThetaError * odometryError) + (k * thetaError);
     }
@@ -159,9 +151,9 @@ public class RamseteFollower {
     }
 
     public void setInitialOdometry(){
-        Odometry.getInstance().setX(trajectory.get(0).x);
-        Odometry.getInstance().setY(trajectory.get(0).y);
-        Odometry.getInstance().setTheta(trajectory.get(0).heading);
+        odometry.setX(trajectory.get(0).x);
+        odometry.setY(trajectory.get(0).y);
+        odometry.setTheta(trajectory.get(0).heading);
     }
 
     public Segment currentSegment(){
@@ -169,6 +161,6 @@ public class RamseteFollower {
     }
 
     public boolean isFinished(){
-        return segmentIndex == trajectory.length();
+        return segmentIndex >= trajectory.length();
     }
 }

@@ -58,6 +58,11 @@ public class Robot extends TimedRobot {
     }
 
     @Override
+    public void testInit(){
+        IntakePivot.getInstance().setUp();
+    }
+
+    @Override
     public void robotPeriodic(){
         odometry.setCurrentEncoderPosition((Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0);
         odometry.setDeltaPosition(RobotUtil.encoderTicksToFeets(odometry.getCurrentEncoderPosition() - odometry.getLastPosition()));

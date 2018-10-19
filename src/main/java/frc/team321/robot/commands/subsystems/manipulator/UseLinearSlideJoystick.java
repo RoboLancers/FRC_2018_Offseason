@@ -23,25 +23,23 @@ public class UseLinearSlideJoystick extends Command {
                 || (-OI.getInstance().flightController.getYAxisValue() < 0 && Sensors.getInstance().isLinearSlideAtGround())) {
             LinearSlide.getInstance().stop();
         } else {
-            //Negative is up
-            //Positive is down
             joystickValue = OI.getInstance().flightController.getYAxisValue();
-            encoderValue = LinearSlide.getInstance().getEncoder();
+            encoderValue = LinearSlide.getInstance().getEncoderCount();
 
             if (joystickValue < 0) {
-                if (LinearSlide.getInstance().getEncoder() < 80000) {
+                if (LinearSlide.getInstance().getEncoderCount() < 80000) {
                     ratio = 1;
-                } else if (LinearSlide.getInstance().getEncoder() >= 80000 &&
-                        LinearSlide.getInstance().getEncoder() <= 90000) {
+                } else if (LinearSlide.getInstance().getEncoderCount() >= 80000 &&
+                        LinearSlide.getInstance().getEncoderCount() <= 90000) {
                     ratio = 0.375 * Math.cos(Math.PI * (encoderValue - 70000.0 / 20000.0)) + 0.625;
                 } else {
                     ratio = 0.25;
                 }
             } else if (joystickValue > 0) {
-                if (LinearSlide.getInstance().getEncoder() > 20000) {
+                if (LinearSlide.getInstance().getEncoderCount() > 20000) {
                     ratio = 1;
-                } else if (LinearSlide.getInstance().getEncoder() >= 10000 &&
-                        LinearSlide.getInstance().getEncoder() <= 30000) {
+                } else if (LinearSlide.getInstance().getEncoderCount() >= 10000 &&
+                        LinearSlide.getInstance().getEncoderCount() <= 30000) {
                     ratio = -0.375 * Math.sin(Math.PI * (encoderValue / 20000.0)) + 0.625;
                 } else {
                     ratio = 0.25;
@@ -50,7 +48,7 @@ public class UseLinearSlideJoystick extends Command {
                 ratio = 0;
             }
 
-            LinearSlide.getInstance().move(ratio * joystickValue);
+            LinearSlide.getInstance().setPower(-ratio * joystickValue);
         }
     }
 

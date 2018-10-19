@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a56e9fc-50e0-4e45-9b5e-e6ab5accdd90" name="Default Changelist" comment="">
+    <list default="true" id="0a56e9fc-50e0-4e45-9b5e-e6ab5accdd90" name="Default Changelist" comment="Fix wrong equation for Ramsete">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/enums/LinearSlidePosition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FRC_2018_Offseason.iws" beforeDir="false" afterPath="$PROJECT_DIR$/FRC_2018_Offseason.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_left_detailed.traj" beforeDir="false" afterPath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_left_detailed.traj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_right_detailed.traj" beforeDir="false" afterPath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_right_detailed.traj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_source_detailed.traj" beforeDir="false" afterPath="$PROJECT_DIR$/PathPlanner/Trajectories/SameSideScaleLeftAuto/SameSideScaleLeftAuto_source_detailed.traj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/frc/team321/motion/RamseteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/frc/team321/motion/RamseteTest.java" afterDir="false" />
     </list>
@@ -110,7 +121,7 @@
     <session id="-1463523240">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="39" />
+          <entry key="project.closed" value="40" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
@@ -122,6 +133,7 @@
           <entry key="project.open.time.21" value="2" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="2" />
@@ -131,19 +143,19 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="42" />
+          <entry key="project.opened" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="6" />
           <entry key="csv" value="4" />
-          <entry key="gitignore" value="5" />
+          <entry key="gitignore" value="6" />
           <entry key="gradle" value="9" />
           <entry key="iml" value="1" />
           <entry key="ipr" value="1" />
           <entry key="iws" value="1" />
-          <entry key="java" value="591" />
+          <entry key="java" value="626" />
           <entry key="jpg" value="1" />
           <entry key="md" value="5" />
           <entry key="png" value="1" />
@@ -159,30 +171,30 @@
           <entry key="IDEA_PROJECT" value="1" />
           <entry key="IDEA_WORKSPACE" value="1" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="591" />
+          <entry key="JAVA" value="626" />
           <entry key="Markdown" value="5" />
-          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="PLAIN_TEXT" value="11" />
           <entry key="Python" value="1" />
           <entry key="XML" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="63" />
+          <entry key="dummy" value="68" />
           <entry key="gitignore" value="11" />
           <entry key="gradle" value="42" />
-          <entry key="java" value="32570" />
+          <entry key="java" value="36992" />
           <entry key="md" value="212" />
           <entry key="py" value="9" />
-          <entry key="txt" value="2535" />
+          <entry key="txt" value="2576" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="42" />
-          <entry key="JAVA" value="32570" />
+          <entry key="JAVA" value="36992" />
           <entry key="Markdown" value="212" />
-          <entry key="PLAIN_TEXT" value="2609" />
+          <entry key="PLAIN_TEXT" value="2655" />
           <entry key="Python" value="9" />
         </counts>
       </usages-collector>
@@ -232,69 +244,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-182">
-              <caret line="141" column="14" lean-forward="true" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+            <state relative-caret-position="365">
+              <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6234#6235#0" expanded="true" />
+                <element signature="e#6292#6293#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/frc/team321/motion/RamseteTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
-              <folding>
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#907#908#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PathPlanner/Trajectories/SideSwitchLeftAuto.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" selection-start-line="1" selection-end-line="19" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/drivetrain/Drivetrain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+            <state relative-caret-position="155">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -305,8 +273,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/RamsetePathFollower.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="443">
+              <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -320,8 +288,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -334,6 +302,7 @@
       <find>Manipulator.getInstance().getLinearSlide()</find>
       <find>Manipulator.getInstance().getIntake()</find>
       <find>Manipulator.getInstance().getIntakePivot()</find>
+      <find>Odometry.getInstance()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -844,9 +813,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/LancerPID.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/DriveSignal.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/misc/GripPipeline.java" />
         <option value="$PROJECT_DIR$/LiveDashboard/livedashboard.py" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/Manipulator.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/RobotUtil.java" />
@@ -865,23 +831,17 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/misc/Sensors.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/MoveRobot.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/drivetrain/UseGearShifter.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/RobotMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/UseIntakePivot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/RamseteFollower.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/RamsetePathFollower.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Velocity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/drivetrain/Transmission.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/drivetrain/UseGearShifterJoystick.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakeJoystick.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntake.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivotJoystick.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/enums/IntakePivotState.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlide.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/Intake.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/IntakePivot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/misc/Camera.java" />
@@ -890,11 +850,20 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SideSwitchAuto.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/CenterSwitchAuto.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleLeftAuto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlide.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivotJoystick.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePower.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/enums/LinearSlidePosition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePosition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java" />
         <option value="$PROJECT_DIR$/src/test/java/frc/team321/motion/RamseteTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java" />
       </list>
     </option>
   </component>
@@ -931,7 +900,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -943,12 +911,6 @@
               <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
               <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="PathPlanner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="PathPlanner" type="462c0819:PsiDirectoryNode" />
-              <item name="Trajectories" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
@@ -1125,54 +1087,27 @@
               <item name="team321" type="462c0819:PsiDirectoryNode" />
               <item name="robot" type="462c0819:PsiDirectoryNode" />
               <item name="utilities" type="462c0819:PsiDirectoryNode" />
-              <item name="motion" type="462c0819:PsiDirectoryNode" />
+              <item name="enums" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
               <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="frc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="frc" type="462c0819:PsiDirectoryNode" />
               <item name="team321" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FRC_2018_Offseason" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FRC_2018_Offseason" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="frc" type="462c0819:PsiDirectoryNode" />
-              <item name="team321" type="462c0819:PsiDirectoryNode" />
+              <item name="robot" type="462c0819:PsiDirectoryNode" />
+              <item name="utilities" type="462c0819:PsiDirectoryNode" />
               <item name="motion" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1185,7 +1120,7 @@
     <property name="SearchEverywhereHistoryKey" value="UseIntakePivot&#9;PSI&#9;JAVA://frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539831947298" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539909445897" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/native" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1427,14 +1362,8 @@
       <workItem from="1539692442791" duration="14070000" />
       <workItem from="1539737314138" duration="6979000" />
       <workItem from="1539779229842" duration="10595000" />
-      <workItem from="1539824474935" duration="5059000" />
-    </task>
-    <task id="LOCAL-00017" summary="Add some test Trajectories">
-      <created>1536527559955</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1536527559955</updated>
+      <workItem from="1539824474935" duration="7410000" />
+      <workItem from="1539874647760" duration="14362000" />
     </task>
     <task id="LOCAL-00018" summary="Add UseGearShifter and UseIntakePivot to make those subsystems controllable by controller">
       <created>1537447402527</created>
@@ -1772,7 +1701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539825394574</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Fix wrong equation for Ramsete">
+      <created>1539831983814</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1539831983814</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1784,13 +1720,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201268000" />
+    <option name="totallyTimeSpent" value="217981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.216971" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22019334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1799,7 +1734,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32992035" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946293" weight="0.40546697" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946293" visible="true" weight="0.4050057" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1866,7 +1801,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add current limiting to drivetrain" />
     <MESSAGE value="Add cameras" />
     <MESSAGE value="Remove MoveOnPath" />
     <MESSAGE value="Remove MoveOnPath in OI" />
@@ -1891,30 +1825,11 @@
     <MESSAGE value="Testing Ramsete" />
     <MESSAGE value="Remove junit" />
     <MESSAGE value="Working auto for Duel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working auto for Duel" />
+    <MESSAGE value="Fix wrong equation for Ramsete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix wrong equation for Ramsete" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.mirror.third.ctre/CTRE-phoenix-java/5.2.2.0/6ef53967acb57f11e0be1e3d825d8a013945bc27/CTRE-phoenix-java-5.2.2.0-sources.jar!/com/ctre/phoenix/motorcontrol/can/BaseMotorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="928" column="21" selection-start-line="928" selection-start-column="21" selection-end-line="928" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/RobotUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="74" column="25" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/RamseteTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/Rotation2D.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/Translation2D.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jaci.pathfinder/Pathfinder-Java/1.8/f99c341d8a52f2445060989aef1af8ab7bb458ed/Pathfinder-Java-1.8-sources.jar!/jaci/pathfinder/Waypoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
@@ -1982,34 +1897,6 @@
           <folding>
             <element signature="e#329#330#0" expanded="true" />
             <element signature="e#380#381#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntake.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#812#813#0" expanded="true" />
-            <element signature="e#862#863#0" expanded="true" />
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakeJoystick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#181#182#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#1612#1613#0" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2083,16 +1970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.powerup/MatchData/2018.01.07/5621fbfada81352fb32981607a0ae4310163e9e9/MatchData-2018.01.07-sources.jar!/openrio/powerup/MatchData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="588">
@@ -2100,27 +1977,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivotJoystick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="46" lean-forward="true" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/RobotMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="681">
           <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -2151,16 +2011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/PathFollower.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/CenterSwitchAuto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -2178,26 +2028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1141">
-          <caret line="76" column="10" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SideSwitchAuto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -2208,59 +2038,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        <state relative-caret-position="882">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="63" column="97" selection-start-line="63" selection-start-column="97" selection-end-line="63" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/drivetrain/Drivetrain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/RamsetePathFollower.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#879#880#0" expanded="true" />
+            <element signature="e#923#924#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2272,21 +2056,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/Odometry.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/drivetrain/Drivetrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="1638">
+          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
           <folding>
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-182">
-          <caret line="141" column="14" lean-forward="true" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+        <state relative-caret-position="363">
+          <caret line="71" column="66" selection-start-line="71" selection-start-column="66" selection-end-line="71" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1969#1970#0" expanded="true" />
+            <element signature="e#2018#2019#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/enums/IntakePower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivotJoystick.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#659#660#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakePivot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.mirror.third.ctre/CTRE-phoenix-java/5.2.2.0/6ef53967acb57f11e0be1e3d825d8a013945bc27/CTRE-phoenix-java-5.2.2.0-sources.jar!/com/ctre/phoenix/motorcontrol/can/BaseMotorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="265" column="21" selection-start-line="265" selection-start-column="21" selection-end-line="265" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlideJoystick.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseIntakeJoystick.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/PathFollower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/DoNothingAndReset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/enums/LinearSlidePosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/OI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="115" column="67" selection-start-line="115" selection-start-column="67" selection-end-line="115" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/subsystems/manipulator/LinearSlide.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4186#4187#0" expanded="true" />
+            <element signature="e#4244#4245#0" expanded="true" />
+            <element signature="e#4870#4871#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/subsystems/manipulator/UseLinearSlidePosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#651#652#0" expanded="true" />
+            <element signature="e#701#702#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="e#1138#1139#0" expanded="true" />
+            <element signature="e#1067#1068#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/modes/SameSideScaleAuto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="26" column="78" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/commands/autonomous/subroutine/RamsetePathFollower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2295,10 +2246,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/frc/team321/motion/RamseteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+        <state relative-caret-position="155">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team321/robot/utilities/motion/RamseteFollower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6234#6235#0" expanded="true" />
+            <element signature="e#6292#6293#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,6 +1,7 @@
 package frc.team321.motion;
 
 import frc.team321.robot.Constants;
+import frc.team321.robot.utilities.motion.DriveSignal;
 import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.motion.RamseteFollower;
 import frc.team321.robot.utilities.motion.Velocity;
@@ -10,6 +11,7 @@ import org.knowm.xchart.XYChartBuilder;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class RamseteTest {
     public static void main(String[] args){
         System.loadLibrary("pathfinderjava");
@@ -18,11 +20,18 @@ public class RamseteTest {
         ArrayList<Double> xDataPath = new ArrayList<>();
         ArrayList<Double> yDataPath = new ArrayList<>();
 
+        ArrayList<Double> graphTime = new ArrayList<>();
+        ArrayList<Double> linearVelocity = new ArrayList<>();
+        ArrayList<Double> angularVelocity = new ArrayList<>();
+
+        ArrayList<Double> leftPower = new ArrayList<>();
+        ArrayList<Double> rightPower = new ArrayList<>();
+
         double freq = 50.0;
         double dt = 1/freq;
         double time = 0.0;
 
-        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto", 0.18, 0.7);
+        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto");
         ramseteFollower.setInitialOdometry();
 
         while(!ramseteFollower.isFinished()){
@@ -43,16 +52,23 @@ public class RamseteTest {
             xDataPath.add(ramseteFollower.currentSegment().x);
             yDataPath.add(ramseteFollower.currentSegment().y);
 
+            graphTime.add(time);
+            linearVelocity.add(velocity.getLinear());
+            angularVelocity.add(velocity.getAngular());
+
             time += dt;
 
-            double left = (-(velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
-            double right = ((velocity.getAngular() * Constants.DRIVETRAIN_WHEELBASE) + (2 * velocity.getLinear())) / 2;
+            DriveSignal driveSignal = ramseteFollower.getNextDriveSignal();
+
+            leftPower.add(driveSignal.getLeft());
+            rightPower.add(driveSignal.getRight());
+
             System.out.println("Generating: " + time);
             System.out.println("Odometry: " + Odometry.getInstance());
             System.out.println("dx: " + dx);
             System.out.println("dy: " + dy);
-            System.out.println("Left Velocity: " + left);
-            System.out.println("Right Velocity: " + right);
+            System.out.println("Left Velocity: " + driveSignal.getLeft());
+            System.out.println("Right Velocity: " + driveSignal.getRight());
         }
 
         System.out.println("Finish generating path and follower");
@@ -69,6 +85,32 @@ public class RamseteTest {
         chart.addSeries("Follower", xDataFollower, yDataFollower);
 
         System.out.println("Created Chart");
+
+        new SwingWrapper<>(chart).displayChart();
+
+        chart = new XYChartBuilder()
+                .width(800)
+                .height(600)
+                .title("Ramsete Test")
+                .xAxisTitle("Time")
+                .yAxisTitle("Velocity")
+                .build();
+
+        chart.addSeries("Linear Velocity", graphTime, linearVelocity);
+        chart.addSeries("Angular Velocity", graphTime, angularVelocity);
+
+        new SwingWrapper<>(chart).displayChart();
+
+        chart = new XYChartBuilder()
+                .width(800)
+                .height(600)
+                .title("Ramsete Test")
+                .xAxisTitle("Time (s)")
+                .yAxisTitle("Velocity (m/s)")
+                .build();
+
+        chart.addSeries("Left Velocity (m/s)", graphTime, leftPower);
+        chart.addSeries("Right Velocity (m/s)", graphTime, rightPower);
 
         new SwingWrapper<>(chart).displayChart();
     }

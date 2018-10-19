@@ -11,10 +11,12 @@ import frc.team321.robot.commands.autonomous.modes.SameSideScaleAuto;
 import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
 import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.commands.autonomous.subroutine.RamsetePathFollower;
+import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Camera;
 import frc.team321.robot.subsystems.misc.Sensors;
+import frc.team321.robot.utilities.enums.LinearSlidePosition;
 import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
 import frc.team321.robot.utilities.controllers.FlightController;
@@ -38,7 +40,8 @@ public class OI {
             "Side Switch Right",
             "Center Switch Auto",
             "Same Side Scale Left Auto",
-            "Same Side Scale Right Auto"
+            "Same Side Scale Right Auto",
+            "UseLinearSlidePositionScale"
     };
 
     private static OI instance;
@@ -61,7 +64,8 @@ public class OI {
         SmartDashboard.putNumber("NavX Gyro", Sensors.getInstance().getAngle());
         SmartDashboard.putBoolean("Top Touch Sensor", Sensors.getInstance().isLinearSlideFullyExtended());
         SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.getInstance().isLinearSlideAtGround());
-        SmartDashboard.putNumber("Linear Slide Encoder", LinearSlide.getInstance().getEncoder());
+        SmartDashboard.putNumber("Linear Slide Encoder Count", LinearSlide.getInstance().getEncoderCount());
+        SmartDashboard.putNumber("Linear Slide Encoder Speed", LinearSlide.getInstance().getEncoderVelocity());
         SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getLeft().getEncoderCount());
         SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getRight().getEncoderCount());
         SmartDashboard.putNumber("Left Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getLeft().getEncoderCount()));
@@ -109,7 +113,7 @@ public class OI {
             case "Test Pathfinder with Jaci":
                 return new PathFollower("SideSwitchLeftAuto");
             case "Ramsete Follower":
-                return new RamsetePathFollower("SideSwitchLeftAuto", 0.18, 0.9);
+                return new RamsetePathFollower("SideSwitchLeftAuto");
             case "Side Switch Left":
                 return new SideSwitchAuto(true);
             case "Side Switch Right":
@@ -120,6 +124,8 @@ public class OI {
                 return new SameSideScaleAuto(true);
             case "Same Side Scale Right Auto":
                 return new SameSideScaleAuto(false);
+            case "UseLinearSlidePositionScale":
+                return new UseLinearSlidePosition(LinearSlidePosition.SCALE);
             default:
                 return new DoNothingAndReset();
         }

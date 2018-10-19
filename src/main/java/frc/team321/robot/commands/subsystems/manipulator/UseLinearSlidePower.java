@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Sensors;
 
-public class UseLinearSlide extends Command{
+public class UseLinearSlidePower extends Command{
 
     private double power;
 
-    public UseLinearSlide(double power){
+    public UseLinearSlidePower(double power){
         requires(LinearSlide.getInstance());
         this.power = power;
     }
@@ -21,7 +21,7 @@ public class UseLinearSlide extends Command{
             return;
         }
 
-        LinearSlide.getInstance().move(power);
+        LinearSlide.getInstance().setPower(power);
     }
 
     protected void end() {

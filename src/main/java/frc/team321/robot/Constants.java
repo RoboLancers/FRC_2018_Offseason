@@ -24,8 +24,8 @@ public class Constants {
     public static final double DRIVETRAIN_KF = 1.05900621;
     //public static final double DRIVETRAIN_KF = 1.0333333;
 
-    public static final double DRIVETRAIN_ROTATE_P = 0.05;
-    public static final double DRIVETRAIN_KP = 2;
+    public static final double DRIVETRAIN_ROTATE_P = 0.1;
+    public static final double DRIVETRAIN_KP = 1.5;
 
     public static final int DRIVETRAIN_PEAK_CURRENT_LIMIT = 80;
     public static final int DRIVETRAIN_SUSTAINED_CURRENT_LIMIT = 36;
@@ -33,4 +33,23 @@ public class Constants {
 
     public static final int DRIVETRAIN_VOLTAGE_COMPENSATION = 12;
     public static final int DRIVETRAIN_FILTER_WINDOW_SAMPLE = 32;
+
+    // Linear Slide Constants
+    public static final int SLIDE_TIMEOUT_MS = 0;
+    public static final int SLIDE_PID_SLOT_INDEX = 0;
+
+    public static final double SLIDE_NOMINAL_OUTPUT = 0.05;
+    public static final double SLIDE_PEAK_OUTPUT = 0.8;
+
+    public static final double SLIDE_OPEN_LOOP_RAMP = 0.5;
+
+    public static final double SLIDE_KF = 0.21765957446;
+    public static final double SLIDE_KP = 1;
+
+    public static final int SLIDE_MAX_VELOCITY = 3525;
+    public static final int SLIDE_MAX_ACCELERATION = 3525;
+    public static final int SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR = 100;
+
+    public static final int SLIDE_FORWARD_SOFT_LIMIT = 100000;
+    public static final int SLIDE_REVERSE_SOFT_LIMIT = -1000;
 }
