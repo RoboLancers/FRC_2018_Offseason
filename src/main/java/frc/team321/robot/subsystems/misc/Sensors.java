@@ -24,9 +24,6 @@ public class Sensors {
         topTouchSensor = new DigitalInput(RobotMap.TOP_TOUCH_SENSOR);
         bottomTouchSensor = new DigitalInput(RobotMap.BOTTOM_TOUCH_SENSOR);
 
-        navX.reset();
-        navX.resetDisplacement();
-
         ultrasonic.setAutomaticMode(true);
         ultrasonic.setEnabled(true);
         ultrasonic.setDistanceUnits(Ultrasonic.Unit.kMillimeters);
@@ -69,7 +66,6 @@ public class Sensors {
      */
     public void resetNavX(){
         navX.reset();
-        navX.zeroYaw();
     }
 
     /**
