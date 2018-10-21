@@ -29,7 +29,6 @@ public class LinearSlide extends Subsystem {
         master.configPeakOutputForward(Constants.SLIDE_PEAK_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
 
         master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_TIMEOUT_MS);
-        master.setSelectedSensorPosition(0, Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_TIMEOUT_MS);
 
         master.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
         slave.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
@@ -52,6 +51,8 @@ public class LinearSlide extends Subsystem {
 
         master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.SLIDE_TIMEOUT_MS);
         master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.SLIDE_TIMEOUT_MS);
+
+        resetEncoder();
     }
 
     /**

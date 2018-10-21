@@ -7,12 +7,14 @@ import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.motion.DriveSignal;
 import frc.team321.robot.utilities.motion.RamseteFollower;
+import jaci.pathfinder.Trajectory;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class RamsetePathFollower extends Command{
 
     private RamseteFollower ramseteFollower;
     private DriveSignal driveSignal;
+    private Trajectory.Segment current;
 
     public RamsetePathFollower(String trajectoryName){
         requires(Drivetrain.getInstance());
@@ -26,7 +28,6 @@ public class RamsetePathFollower extends Command{
 
     @Override
     protected void initialize(){
-        Sensors.getInstance().resetNavX();
         ramseteFollower.setInitialOdometry();
         OI.liveDashboardTable.getEntry("Reset").setBoolean(true);
     }
@@ -37,6 +38,10 @@ public class RamsetePathFollower extends Command{
 
         Drivetrain.getInstance().setLeft(driveSignal.getLeft()/ Constants.DRIVETRAIN_MAX_VELOCITY);
         Drivetrain.getInstance().setRight(driveSignal.getRight()/Constants.DRIVETRAIN_MAX_VELOCITY);
+
+        current = ramseteFollower.currentSegment();
+        OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
+        OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
     }
 
     @Override

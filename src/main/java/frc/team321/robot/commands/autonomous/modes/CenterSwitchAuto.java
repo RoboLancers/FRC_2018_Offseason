@@ -12,8 +12,6 @@ public class CenterSwitchAuto extends CommandGroup {
     public CenterSwitchAuto(){
         MatchData.OwnedSide ownedSide = MatchData.getOwnedSide(MatchData.GameFeature.SWITCH_NEAR);
 
-        addSequential(new UseIntakePivot(IntakePivotState.UP));
-
         if(ownedSide == MatchData.OwnedSide.LEFT){
             addSequential(new PathFollower("CenterSwitchLeftAuto"));
             addSequential(new UseIntake(IntakePower.OUTAKE), 1);

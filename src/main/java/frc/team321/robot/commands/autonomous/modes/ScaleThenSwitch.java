@@ -5,7 +5,7 @@ import openrio.powerup.MatchData;
 
 public class ScaleThenSwitch extends CommandGroup {
     public ScaleThenSwitch(boolean isLeft) {
-        MatchData.OwnedSide switchOwnedSide = MatchData.getOwnedSide(MatchData.GameFeature.SCALE);
+        MatchData.OwnedSide switchOwnedSide = MatchData.getOwnedSide(MatchData.GameFeature.SWITCH_NEAR);
         MatchData.OwnedSide scaleOwnedSide = MatchData.getOwnedSide(MatchData.GameFeature.SCALE);
 
         if((scaleOwnedSide == MatchData.OwnedSide.LEFT && isLeft) || (scaleOwnedSide != MatchData.OwnedSide.RIGHT && !isLeft)){

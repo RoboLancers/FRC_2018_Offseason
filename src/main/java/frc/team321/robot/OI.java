@@ -6,11 +6,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.CenterSwitchAuto;
-import frc.team321.robot.commands.autonomous.modes.DoNothingAndReset;
+import frc.team321.robot.commands.autonomous.subroutine.DoNothingAndReset;
 import frc.team321.robot.commands.autonomous.modes.SameSideScaleAuto;
 import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
 import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
 import frc.team321.robot.commands.autonomous.subroutine.RamsetePathFollower;
+import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
@@ -53,6 +54,8 @@ public class OI {
         flightController = new FlightController(1);
 
         flightController.farBottom.whileHeld(new UseIntakePivot(IntakePivotState.UP));
+        flightController.farBottom.whenReleased(new UseIntakePivot(IntakePivotState.DOWN));
+
         flightController.innerTop.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.SCALE));
         flightController.innerMiddle.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.SWITCH));
         flightController.innerBottom.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.BOTTOM));

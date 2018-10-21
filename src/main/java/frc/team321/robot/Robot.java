@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
         GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().setMode(NeutralMode.Brake);
         IntakePivot.getInstance().setUp();
+        Sensors.getInstance().resetNavX();
 
         autonomousCommand = OI.getInstance().getAutoCommand(OI.getInstance().getAutoMode());
 
@@ -51,7 +52,7 @@ public class Robot extends TimedRobot {
             autonomousCommand.cancel();
         }
 
-        Drivetrain.getInstance().setMode(NeutralMode.Coast);
+        Drivetrain.getInstance().setMode(NeutralMode.Brake);
         GearShifter.getInstance().setLowGear();
         Drivetrain.getInstance().enableRamping(true);
         IntakePivot.getInstance().setDown();
@@ -72,16 +73,7 @@ public class Robot extends TimedRobot {
         odometry.addY(Math.sin(odometry.getTheta()) * odometry.getDeltaPosition());
 
         odometry.setLastPosition(odometry.getCurrentEncoderPosition());
-    }
 
-    @Override
-    public void autonomousPeriodic(){
-        OI.getInstance().updateDashboardValues();
-        Scheduler.getInstance().run();
-    }
-
-    @Override
-    public void teleopPeriodic(){
         OI.getInstance().updateDashboardValues();
         Scheduler.getInstance().run();
     }

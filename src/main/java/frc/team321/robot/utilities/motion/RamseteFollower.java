@@ -99,9 +99,6 @@ public class RamseteFollower {
         driveSignal.setLeft(left);
         driveSignal.setRight(right);
 
-        OI.liveDashboardTable.getEntry("Path X").setNumber(current.x);
-        OI.liveDashboardTable.getEntry("Path Y").setNumber(current.y);
-
         segmentIndex++;
 
         return driveSignal;

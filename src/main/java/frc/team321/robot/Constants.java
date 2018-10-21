@@ -49,7 +49,7 @@ public class Constants {
 
     public static final int SLIDE_MAX_VELOCITY = 3525;
     public static final int SLIDE_MAX_ACCELERATION = 3525;
-    public static final int SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR = 1000;
+    public static final int SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR = 2000;
 
     public static final int SLIDE_FORWARD_SOFT_LIMIT = 100000;
     public static final int SLIDE_REVERSE_SOFT_LIMIT = -1000;
