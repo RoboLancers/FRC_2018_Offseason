@@ -114,7 +114,7 @@ public class LinearSlide extends Subsystem {
     }
 
     public void setPosition(int position){
-        master.set(ControlMode.MotionMagic, position);
+        master.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, 0.05);
     }
 
     public int getError(){
