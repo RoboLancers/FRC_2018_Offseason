@@ -24,7 +24,7 @@ public class Constants {
     public static final double DRIVETRAIN_KF = 1.05900621;
     //public static final double DRIVETRAIN_KF = 1.0333333;
 
-    public static final double DRIVETRAIN_ROTATE_P = 0.1;
+    public static final double DRIVETRAIN_ROTATE_P = 0.05;
     public static final double DRIVETRAIN_KP = 1.5;
 
     public static final int DRIVETRAIN_PEAK_CURRENT_LIMIT = 80;

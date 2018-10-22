@@ -19,7 +19,7 @@ public class Sensors {
     private static Sensors instance;
 
     private Sensors(){
-        navX = new AHRS(SerialPort.Port.kMXP);
+        navX = new AHRS(SerialPort.Port.kUSB);
         ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_TRIG, RobotMap.ULTRASONIC_ECHO);
         topTouchSensor = new DigitalInput(RobotMap.TOP_TOUCH_SENSOR);
         bottomTouchSensor = new DigitalInput(RobotMap.BOTTOM_TOUCH_SENSOR);
