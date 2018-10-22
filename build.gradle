@@ -25,6 +25,12 @@ deploy {
         artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
             targets << "roborio"
         }
+
+        artifact('paths', FileCollectionArtifact) {
+            files = project.fileTree(dir: 'PathPlanner/Trajectories')
+            directory = '/home/lvuser/trajectories'
+            targets << "roborio"
+        }
     }
 }
 
