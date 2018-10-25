@@ -117,13 +117,6 @@ public class Drivetrain extends Subsystem{
         setDefaultCommand(new UseArcadeDrive());
     }
 
-
-    public double getFeedForward(){
-        final double MAX_MOTOR_OUTPUT = 1023;
-        final double NATIVE_UNITS_PER_100 = Constants.DRIVETRAIN_MAX_RPM / 600 * Constants.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION;
-        return MAX_MOTOR_OUTPUT/NATIVE_UNITS_PER_100;
-    }
-
     public void setVelocity(double left, double right){
         leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
         rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10);

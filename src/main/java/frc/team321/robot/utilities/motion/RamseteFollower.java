@@ -2,6 +2,7 @@ package frc.team321.robot.utilities.motion;
 
 import frc.team321.robot.Constants;
 import frc.team321.robot.OI;
+import frc.team321.robot.utilities.enums.MotionProfileDirection;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Trajectory.Segment;
@@ -48,7 +49,16 @@ public class RamseteFollower {
     //Trajectory file to open
     private File trajectoryFile;
 
-    public RamseteFollower(String trajectoryName){
+    public RamseteFollower(Trajectory trajectory, MotionProfileDirection direction){
+        this.trajectory = direction == MotionProfileDirection.FORWARD ? trajectory : TrajectoryUtil.reversePath(trajectory);
+
+        segmentIndex = 0;
+        odometry = Odometry.getInstance();
+
+        driveSignal = new DriveSignal();
+    }
+
+    public RamseteFollower(String trajectoryName, MotionProfileDirection direction){
         trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "/" + trajectoryName + "_left_detailed.traj");
 
         trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile) : null;
@@ -62,14 +72,16 @@ public class RamseteFollower {
             return;
         }
 
+        trajectory = direction == MotionProfileDirection.FORWARD ? trajectory : TrajectoryUtil.reversePath(trajectory);
+
         segmentIndex = 0;
         odometry = Odometry.getInstance();
 
         driveSignal = new DriveSignal();
     }
 
-    public RamseteFollower(String trajectoryName, double b, double zeta){
-        this(trajectoryName);
+    public RamseteFollower(String trajectoryName, double b, double zeta, MotionProfileDirection direction){
+        this(trajectoryName, direction);
 
         this.b = b;
         this.zeta = zeta;

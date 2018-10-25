@@ -15,17 +15,18 @@ public class Constants {
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER_FEETS = 0.51;
 
-    public static final double DRIVETRAIN_WHEELBASE = 2.25;
+    public static final double DRIVETRAIN_WHEELBASE = 6.5;
 
     public static final double DRIVETRAIN_MAX_VELOCITY = 12; //12 feet per second
 
     public static final double DRIVETRAIN_KV = 1/DRIVETRAIN_MAX_VELOCITY;
     public static final double DRIVETRAIN_KA = 0.0;
-    public static final double DRIVETRAIN_KF = 1.05900621;
-    //public static final double DRIVETRAIN_KF = 1.0333333;
+    public static final double DRIVETRAIN_RIGHT_KF = 1.05900621;
+    public static final double DRIVETRAIN_LEFT_KF = 1.0333333;
+    public static final double DRIVETRAIN_EMPERICAL_KF = 1.13667474969;
 
-    public static final double DRIVETRAIN_ROTATE_P = 0.05;
-    public static final double DRIVETRAIN_KP = 1.5;
+    public static final double DRIVETRAIN_ROTATE_P = 0.005;
+    public static final double DRIVETRAIN_KP = 3;
 
     public static final int DRIVETRAIN_PEAK_CURRENT_LIMIT = 80;
     public static final int DRIVETRAIN_SUSTAINED_CURRENT_LIMIT = 36;
@@ -49,8 +50,11 @@ public class Constants {
 
     public static final int SLIDE_MAX_VELOCITY = 3525;
     public static final int SLIDE_MAX_ACCELERATION = 3525;
-    public static final int SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR = 2000;
+    public static final int SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR = 1000;
 
     public static final int SLIDE_FORWARD_SOFT_LIMIT = 100000;
     public static final int SLIDE_REVERSE_SOFT_LIMIT = -1000;
+
+    public static final int SLIDE_VOLTAGE_COMPENSATION = 12;
+    public static final int SLIDE_FILTER_WINDOW_SAMPLE = 32;
 }

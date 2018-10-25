@@ -43,9 +43,9 @@ public class Transmission {
             slave2.setInverted(true);
         }
 
-        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
 
         master.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
         slave1.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
@@ -71,13 +71,13 @@ public class Transmission {
         slave1.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
         slave2.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
 
-        master.enableVoltageCompensation(true);
-        slave1.enableVoltageCompensation(true);
-        slave2.enableVoltageCompensation(true);
-
         master.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
         slave1.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
         slave2.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
+
+        master.enableVoltageCompensation(true);
+        slave1.enableVoltageCompensation(true);
+        slave2.enableVoltageCompensation(true);
     }
 
     /**
@@ -108,6 +108,10 @@ public class Transmission {
      */
     public int getEncoderCount() {
         return master.getSelectedSensorPosition(0);
+    }
+
+    public int getVelocity(){
+        return master.getSelectedSensorVelocity(0);
     }
 
     /**

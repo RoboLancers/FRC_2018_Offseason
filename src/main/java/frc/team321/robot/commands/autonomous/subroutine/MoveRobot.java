@@ -24,6 +24,7 @@ public class MoveRobot extends Command {
     @Override
     protected void initialize(){
         Drivetrain.getInstance().stop();
+        Sensors.getInstance().resetNavX();
     }
 
     @Override

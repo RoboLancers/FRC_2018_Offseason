@@ -6,12 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.CenterSwitchAuto;
-import frc.team321.robot.commands.autonomous.subroutine.DoNothingAndReset;
-import frc.team321.robot.commands.autonomous.modes.SameSideScaleAuto;
+import frc.team321.robot.commands.autonomous.subroutine.*;
+import frc.team321.robot.commands.autonomous.subroutine.SameSideScaleAuto;
 import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
-import frc.team321.robot.commands.autonomous.subroutine.PathFollower;
-import frc.team321.robot.commands.autonomous.subroutine.RamsetePathFollower;
-import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
@@ -43,8 +40,7 @@ public class OI {
             "Side Switch Right",
             "Center Switch Auto",
             "Same Side Scale Left Auto",
-            "Same Side Scale Right Auto",
-            "UseLinearSlidePositionScale"
+            "Same Side Scale Right Auto"
     };
 
     private static OI instance;
@@ -134,8 +130,6 @@ public class OI {
                 return new SameSideScaleAuto(true);
             case "Same Side Scale Right Auto":
                 return new SameSideScaleAuto(false);
-            case "UseLinearSlidePositionScale":
-                return new UseLinearSlidePosition(LinearSlidePosition.SCALE);
             default:
                 return new DoNothingAndReset();
         }

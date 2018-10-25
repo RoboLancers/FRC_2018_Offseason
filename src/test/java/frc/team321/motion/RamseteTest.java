@@ -1,13 +1,14 @@
 package frc.team321.motion;
 
-import frc.team321.robot.utilities.motion.DriveSignal;
-import frc.team321.robot.utilities.motion.Odometry;
-import frc.team321.robot.utilities.motion.RamseteFollower;
-import frc.team321.robot.utilities.motion.Velocity;
+import frc.team321.robot.utilities.enums.MotionProfileDirection;
+import frc.team321.robot.utilities.motion.*;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 
+import java.io.File;
 import java.util.ArrayList;
 
 @SuppressWarnings("SuspiciousNameCombination")
@@ -20,6 +21,7 @@ public class RamseteTest {
         ArrayList<Double> yDataPath = new ArrayList<>();
 
         ArrayList<Double> graphTime = new ArrayList<>();
+
         ArrayList<Double> linearVelocity = new ArrayList<>();
         ArrayList<Double> angularVelocity = new ArrayList<>();
 
@@ -30,7 +32,7 @@ public class RamseteTest {
         double dt = 1/freq;
         double time = 0.0;
 
-        RamseteFollower ramseteFollower = new RamseteFollower("SideSwitchLeftAuto");
+        RamseteFollower ramseteFollower = new RamseteFollower("SameSideScaleLeftAuto", MotionProfileDirection.BACKWARD);
         ramseteFollower.setInitialOdometry();
 
         while(!ramseteFollower.isFinished()){
@@ -66,8 +68,6 @@ public class RamseteTest {
             System.out.println("Odometry: " + Odometry.getInstance());
             System.out.println("dx: " + dx);
             System.out.println("dy: " + dy);
-            System.out.println("Left Velocity: " + driveSignal.getLeft());
-            System.out.println("Right Velocity: " + driveSignal.getRight());
         }
 
         System.out.println("Finish generating path and follower");

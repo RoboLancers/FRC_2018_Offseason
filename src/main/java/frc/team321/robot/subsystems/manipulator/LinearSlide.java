@@ -52,6 +52,10 @@ public class LinearSlide extends Subsystem {
         master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.SLIDE_TIMEOUT_MS);
         master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.SLIDE_TIMEOUT_MS);
 
+        master.configVoltageCompSaturation(Constants.SLIDE_VOLTAGE_COMPENSATION, Constants.SLIDE_TIMEOUT_MS);
+        master.configVoltageMeasurementFilter(Constants.SLIDE_FILTER_WINDOW_SAMPLE, Constants.SLIDE_TIMEOUT_MS);
+        master.enableVoltageCompensation(true);
+
         resetEncoder();
     }
 
