@@ -7,6 +7,8 @@ import frc.team321.robot.Robot;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.RobotUtil;
+import frc.team321.robot.utilities.motion.Odometry;
+import jaci.pathfinder.Pathfinder;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class MoveRobot extends Command {
@@ -29,7 +31,7 @@ public class MoveRobot extends Command {
 
     @Override
     protected void execute(){
-        error = Sensors.getInstance().getAngle() - angle;
+        error = Pathfinder.r2d(Odometry.getInstance().getTheta()) - angle;
         leftPower = RobotUtil.range(power + (error * DRIVETRAIN_ROTATE_P), 1);
         rightPower = RobotUtil.range(power - (error * DRIVETRAIN_ROTATE_P), 1);
 

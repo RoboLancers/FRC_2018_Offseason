@@ -1,5 +1,7 @@
 package frc.team321.robot.utilities.motion;
 
+import jaci.pathfinder.Trajectory;
+
 public class Odometry {
     private volatile double x, y, theta;
     private volatile double currentEncoderPosition, lastPosition, deltaPosition;
@@ -12,7 +14,6 @@ public class Odometry {
         this.theta = 0;
 
         this.currentEncoderPosition = 0;
-        //this.lastPosition = (Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0;
         this.lastPosition = 0;
         this.deltaPosition = 0;
     }
@@ -83,6 +84,12 @@ public class Odometry {
 
     public synchronized void setDeltaPosition(double deltaPosition) {
         this.deltaPosition = deltaPosition;
+    }
+
+    public void setInitialOdometry(Trajectory trajectory){
+        setX(trajectory.get(0).x);
+        setY(trajectory.get(0).y);
+        setTheta(trajectory.get(0).heading);
     }
 
     public String toString(){

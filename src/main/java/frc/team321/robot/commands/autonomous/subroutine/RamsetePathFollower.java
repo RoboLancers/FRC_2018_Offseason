@@ -3,10 +3,8 @@ package frc.team321.robot.commands.autonomous.subroutine;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team321.robot.Constants;
 import frc.team321.robot.OI;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
-import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.RobotUtil;
 import frc.team321.robot.utilities.enums.MotionProfileDirection;
 import frc.team321.robot.utilities.motion.DriveSignal;
@@ -20,29 +18,23 @@ public class RamsetePathFollower extends Command{
     private DriveSignal driveSignal;
     private Trajectory.Segment current;
 
-    public RamsetePathFollower(String trajectoryName){
-        this(trajectoryName, MotionProfileDirection.FORWARD);
+    public RamsetePathFollower(Trajectory trajectory){
+        this(trajectory, MotionProfileDirection.FORWARD);
     }
 
-    public RamsetePathFollower(String trajectoryName, MotionProfileDirection direction){
+    public RamsetePathFollower(Trajectory trajectory, MotionProfileDirection direction){
         requires(Drivetrain.getInstance());
-        ramseteFollower = new RamseteFollower(trajectoryName, direction);
+        ramseteFollower = new RamseteFollower(trajectory, direction);
     }
 
-    public RamsetePathFollower(String trajectoryName, double b, double zeta){
-        this(trajectoryName, b, zeta, MotionProfileDirection.FORWARD);
-    }
-
-    private RamsetePathFollower(String trajectoryName, double b, double zeta, MotionProfileDirection direction){
+    public RamsetePathFollower(Trajectory trajectory, double b, double zeta, MotionProfileDirection direction){
         requires(Drivetrain.getInstance());
-        ramseteFollower = new RamseteFollower(trajectoryName, b, zeta, direction);
+        ramseteFollower = new RamseteFollower(trajectory, b, zeta, direction);
     }
 
     @Override
     protected void initialize(){
-        ramseteFollower.setInitialOdometry();
         Drivetrain.getInstance().setMode(NeutralMode.Brake);
-        OI.liveDashboardTable.getEntry("Reset").setBoolean(true);
     }
 
     @Override
@@ -59,8 +51,8 @@ public class RamsetePathFollower extends Command{
         SmartDashboard.putNumber("Path Left Wheel Velocity", driveSignal.getLeft());
         SmartDashboard.putNumber("Path Right Wheel Velocity", driveSignal.getRight());
 
-        SmartDashboard.putNumber("Robot Left Velocity", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getLeft().getVelocity()) * 10);
-        SmartDashboard.putNumber("Robot Right Velocity", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getRight().getVelocity()) * 10);
+        SmartDashboard.putNumber("Robot Left Velocity", Drivetrain.getInstance().getLeft().getVelocity());
+        SmartDashboard.putNumber("Robot Right Velocity", Drivetrain.getInstance().getRight().getVelocity());
     }
 
     @Override

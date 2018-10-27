@@ -1,13 +1,11 @@
 package frc.team321.robot.utilities.motion;
 
-import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.Constants;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.misc.Sensors;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
-
 import java.io.File;
 
 import static frc.team321.robot.Constants.*;
@@ -43,7 +41,7 @@ public class PathfinderFollower{
         leftPower = leftEncoderFollower.calculate(Drivetrain.getInstance().getLeft().getEncoderCount());
         rightPower = rightEncoderFollower.calculate(Drivetrain.getInstance().getRight().getEncoderCount());
 
-        gyroHeading = Sensors.getInstance().getAngle();
+        gyroHeading = Pathfinder.r2d(Odometry.getInstance().getTheta());
         desiredHeading = Pathfinder.r2d(leftEncoderFollower.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);

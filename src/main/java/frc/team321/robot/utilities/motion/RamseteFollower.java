@@ -46,9 +46,6 @@ public class RamseteFollower {
     private DriveSignal driveSignal;
     private double left, right;
 
-    //Trajectory file to open
-    private File trajectoryFile;
-
     public RamseteFollower(Trajectory trajectory, MotionProfileDirection direction){
         this.trajectory = direction == MotionProfileDirection.FORWARD ? trajectory : TrajectoryUtil.reversePath(trajectory);
 
@@ -58,30 +55,8 @@ public class RamseteFollower {
         driveSignal = new DriveSignal();
     }
 
-    public RamseteFollower(String trajectoryName, MotionProfileDirection direction){
-        trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "/" + trajectoryName + "_left_detailed.traj");
-
-        trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile) : null;
-
-        if(trajectory == null){
-            trajectoryFile = new File("C:\\Users\\brian\\OneDrive\\Projects\\FRC_2018_Offseason\\PathPlanner\\Trajectories\\" + trajectoryName + "\\" + trajectoryName + "_source_detailed.traj");
-            trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile): null;
-        }
-
-        if(trajectory == null){
-            return;
-        }
-
-        trajectory = direction == MotionProfileDirection.FORWARD ? trajectory : TrajectoryUtil.reversePath(trajectory);
-
-        segmentIndex = 0;
-        odometry = Odometry.getInstance();
-
-        driveSignal = new DriveSignal();
-    }
-
-    public RamseteFollower(String trajectoryName, double b, double zeta, MotionProfileDirection direction){
-        this(trajectoryName, direction);
+    public RamseteFollower(Trajectory trajectory, double b, double zeta, MotionProfileDirection direction){
+        this(trajectory, direction);
 
         this.b = b;
         this.zeta = zeta;
@@ -157,12 +132,6 @@ public class RamseteFollower {
         while (radians >= Math.PI) radians -= TWO_PI;
         while (radians < -Math.PI) radians += TWO_PI;
         return radians;
-    }
-
-    public void setInitialOdometry(){
-        odometry.setX(trajectory.get(0).x);
-        odometry.setY(trajectory.get(0).y);
-        odometry.setTheta(trajectory.get(0).heading);
     }
 
     public Segment currentSegment(){

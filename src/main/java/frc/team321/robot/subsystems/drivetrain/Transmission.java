@@ -32,7 +32,7 @@ public class Transmission {
         slave1.follow(master);
         slave2.follow(master);
 
-        master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.TIMEOUT_MS);
 
         if (isRight) {
             master.setSensorPhase(false);
@@ -43,41 +43,42 @@ public class Transmission {
             slave2.setInverted(true);
         }
 
-        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
+        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
+        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
 
-        master.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.TIMEOUT_MS);
+        slave1.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.TIMEOUT_MS);
+        slave2.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.TIMEOUT_MS);
 
-        master.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.TIMEOUT_MS);
+        slave1.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.TIMEOUT_MS);
+        slave2.configPeakCurrentLimit(Constants.DRIVETRAIN_PEAK_CURRENT_LIMIT, Constants.TIMEOUT_MS);
 
-        master.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.TIMEOUT_MS);
+        slave1.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.TIMEOUT_MS);
+        slave2.configPeakCurrentDuration(Constants.DRIVETRAIN_PEAK_CURRENT_TIME_LIMIT, Constants.TIMEOUT_MS);
 
-        master.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.TIMEOUT_MS);
+        slave1.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.TIMEOUT_MS);
+        slave2.configContinuousCurrentLimit(Constants.DRIVETRAIN_SUSTAINED_CURRENT_LIMIT, Constants.TIMEOUT_MS);
 
         master.enableCurrentLimit(true);
         slave1.enableCurrentLimit(true);
         slave2.enableCurrentLimit(true);
 
-        master.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.DRIVETRAIN_TIMEOUT_MS);
+        //Disable voltage compensation for now to figure out the effect of it on motion profiling and kF
+        /*master.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        slave1.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        slave2.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
 
-        master.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave1.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
-        slave2.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.DRIVETRAIN_TIMEOUT_MS);
+        master.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
+        slave1.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
+        slave2.configVoltageMeasurementFilter(Constants.DRIVETRAIN_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
 
         master.enableVoltageCompensation(true);
         slave1.enableVoltageCompensation(true);
-        slave2.enableVoltageCompensation(true);
+        slave2.enableVoltageCompensation(true);*/
     }
 
     /**
@@ -110,8 +111,12 @@ public class Transmission {
         return master.getSelectedSensorPosition(0);
     }
 
-    public int getVelocity(){
+    public int getRawVelocity(){
         return master.getSelectedSensorVelocity(0);
+    }
+
+    public double getVelocity(){
+        return RobotUtil.encoderTicksToFeets(getRawVelocity()) * 10;
     }
 
     /**

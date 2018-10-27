@@ -5,6 +5,7 @@ import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.utilities.enums.IntakePower;
 import frc.team321.robot.utilities.enums.LinearSlidePosition;
+import frc.team321.robot.utilities.motion.TrajectoryUtil;
 import openrio.powerup.MatchData;
 
 public class SameSideScaleAuto extends CommandGroup {
@@ -12,9 +13,11 @@ public class SameSideScaleAuto extends CommandGroup {
         MatchData.OwnedSide ownedSide = MatchData.getOwnedSide(MatchData.GameFeature.SCALE);
 
         if(isLeft && ownedSide == MatchData.OwnedSide.LEFT) {
-            addSequential(new RamsetePathFollower("SameSideScaleLeftAuto"));
+            addSequential(new SetInitialOdometry(TrajectoryUtil.getTrajectoryFromName("SameSideScaleLeftAuto")));
+            addSequential(new RamsetePathFollower(TrajectoryUtil.getTrajectoryFromName("SameSideScaleLeftAuto")));
         }else if(!isLeft && ownedSide == MatchData.OwnedSide.RIGHT){
-            addSequential(new RamsetePathFollower("SameSideScaleRightAuto"));
+            addSequential(new SetInitialOdometry(TrajectoryUtil.getTrajectoryFromName("SameSideScaleRightAuto")));
+            addSequential(new RamsetePathFollower(TrajectoryUtil.getTrajectoryFromName("SameSideScaleRightAuto")));
         }
 
         addSequential(new UseLinearSlidePosition(LinearSlidePosition.SCALE));

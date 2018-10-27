@@ -32,8 +32,8 @@ public class RamseteTest {
         double dt = 1/freq;
         double time = 0.0;
 
-        RamseteFollower ramseteFollower = new RamseteFollower("SameSideScaleLeftAuto", MotionProfileDirection.BACKWARD);
-        ramseteFollower.setInitialOdometry();
+        RamseteFollower ramseteFollower = new RamseteFollower(TrajectoryUtil.getTrajectoryFromName("SameSideScaleLeftAuto"), MotionProfileDirection.BACKWARD);
+        Odometry.getInstance().setInitialOdometry(TrajectoryUtil.getTrajectoryFromName("SameSideScaleLeftAuto"));
 
         while(!ramseteFollower.isFinished()){
             Velocity velocity = ramseteFollower.getVelocity();

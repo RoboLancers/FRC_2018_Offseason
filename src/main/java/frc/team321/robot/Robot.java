@@ -4,11 +4,13 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.drivetrain.GearShifter;
 import frc.team321.robot.subsystems.manipulator.Intake;
 import frc.team321.robot.subsystems.manipulator.IntakePivot;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
+import frc.team321.robot.subsystems.misc.Pneumatic;
 import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
@@ -20,13 +22,19 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        LiveWindow.disableAllTelemetry();
+
         Drivetrain.getInstance();
         GearShifter.getInstance();
+
         Intake.getInstance();
         IntakePivot.getInstance();
         LinearSlide.getInstance();
-        OI.getInstance();
+
+        Pneumatic.getInstance();
         Sensors.getInstance();
+
+        OI.getInstance();
 
         odometry = Odometry.getInstance();
     }
@@ -38,6 +46,8 @@ public class Robot extends TimedRobot {
         Drivetrain.getInstance().setMode(NeutralMode.Brake);
         IntakePivot.getInstance().setUp();
         Sensors.getInstance().resetNavX();
+
+        OI.liveDashboardTable.getEntry("Reset").setBoolean(true);
 
         autonomousCommand = OI.getInstance().getAutoCommand(OI.getInstance().getAutoMode());
 
@@ -65,6 +75,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic(){
+        if(Sensors.getInstance().hallEffect.getAverageValue() >= 2086){
+            LinearSlide.getInstance().resetEncoder();
+        }
+
         odometry.setCurrentEncoderPosition((Drivetrain.getInstance().getLeft().getEncoderCount() + Drivetrain.getInstance().getRight().getEncoderCount()) / 2.0);
         odometry.setDeltaPosition(RobotUtil.encoderTicksToFeets(odometry.getCurrentEncoderPosition() - odometry.getLastPosition()));
         odometry.setTheta(Math.toRadians(Pathfinder.boundHalfDegrees(Sensors.getInstance().getAngle())));

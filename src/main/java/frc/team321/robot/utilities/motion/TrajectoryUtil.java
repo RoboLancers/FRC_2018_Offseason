@@ -1,8 +1,10 @@
 package frc.team321.robot.utilities.motion;
 
+import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Trajectory.Segment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,5 +20,18 @@ public class TrajectoryUtil {
         return new Trajectory(segments.stream()
                 .map(segment -> new Segment(segment.dt, segment.x, segment.y, distance - segment.position, -segment.velocity, -segment.acceleration, -segment.jerk, segment.heading))
                 .toArray(Segment[]::new));
+    }
+
+    public static Trajectory getTrajectoryFromName(String trajectoryName){
+        File trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "/" + trajectoryName + "_left_detailed.traj");
+
+        Trajectory trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile) : null;
+
+        if(trajectory == null){
+            trajectoryFile = new File("C:\\Users\\brian\\OneDrive\\Projects\\FRC_2018_Offseason\\PathPlanner\\Trajectories\\" + trajectoryName + "\\" + trajectoryName + "_source_detailed.traj");
+            trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile): null;
+        }
+
+        return trajectory;
     }
 }

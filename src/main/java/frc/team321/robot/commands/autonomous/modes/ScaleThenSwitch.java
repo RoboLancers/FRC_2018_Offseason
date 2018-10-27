@@ -2,6 +2,7 @@ package frc.team321.robot.commands.autonomous.modes;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team321.robot.commands.autonomous.subroutine.SameSideScaleAuto;
+import frc.team321.robot.commands.autonomous.subroutine.SideSwitchAuto;
 import openrio.powerup.MatchData;
 
 public class ScaleThenSwitch extends CommandGroup {

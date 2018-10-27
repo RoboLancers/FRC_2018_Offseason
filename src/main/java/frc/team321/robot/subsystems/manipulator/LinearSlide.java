@@ -23,40 +23,41 @@ public class LinearSlide extends Subsystem {
         slave.setNeutralMode(NeutralMode.Brake);
         slave.follow(master);
 
-        master.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.SLIDE_TIMEOUT_MS);
-        slave.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.SLIDE_TIMEOUT_MS);
+        master.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.TIMEOUT_MS);
+        slave.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.TIMEOUT_MS);
 
-        master.configPeakOutputForward(Constants.SLIDE_PEAK_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
+        master.configPeakOutputForward(Constants.SLIDE_PEAK_OUTPUT, Constants.TIMEOUT_MS);
 
-        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_TIMEOUT_MS);
+        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.SLIDE_PID_SLOT_INDEX, Constants.TIMEOUT_MS);
 
-        master.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
-        slave.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.SLIDE_TIMEOUT_MS);
+        master.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.TIMEOUT_MS);
+        slave.configNominalOutputForward(Constants.SLIDE_NOMINAL_OUTPUT, Constants.TIMEOUT_MS);
 
         master.selectProfileSlot(Constants.SLIDE_PROFILE_SLOT_INDEX, Constants.SLIDE_PID_SLOT_INDEX);
 
-        master.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.SLIDE_TIMEOUT_MS);
-        slave.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.SLIDE_TIMEOUT_MS);
+        master.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.TIMEOUT_MS);
+        slave.config_kF(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KF, Constants.TIMEOUT_MS);
 
-        master.config_kP(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KP, Constants.SLIDE_TIMEOUT_MS);
-        slave.config_kP(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KP, Constants.SLIDE_TIMEOUT_MS);
+        master.config_kP(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KP, Constants.TIMEOUT_MS);
+        slave.config_kP(Constants.SLIDE_PID_SLOT_INDEX, Constants.SLIDE_KP, Constants.TIMEOUT_MS);
 
-        master.configMotionCruiseVelocity(Constants.SLIDE_MAX_VELOCITY, Constants.SLIDE_TIMEOUT_MS);
-        master.configMotionAcceleration(Constants.SLIDE_MAX_ACCELERATION, Constants.SLIDE_TIMEOUT_MS);
+        master.configMotionCruiseVelocity(Constants.SLIDE_MAX_VELOCITY, Constants.TIMEOUT_MS);
+        master.configMotionAcceleration(Constants.SLIDE_MAX_ACCELERATION, Constants.TIMEOUT_MS);
 
-        master.configForwardSoftLimitThreshold(Constants.SLIDE_FORWARD_SOFT_LIMIT, Constants.SLIDE_TIMEOUT_MS);
-        master.configReverseSoftLimitThreshold(Constants.SLIDE_REVERSE_SOFT_LIMIT, Constants.SLIDE_TIMEOUT_MS);
-        master.configForwardSoftLimitEnable(true, Constants.SLIDE_TIMEOUT_MS);
-        master.configReverseSoftLimitEnable(true, Constants.SLIDE_TIMEOUT_MS);
+        master.configForwardSoftLimitThreshold(Constants.SLIDE_FORWARD_SOFT_LIMIT, Constants.TIMEOUT_MS);
+        master.configReverseSoftLimitThreshold(Constants.SLIDE_REVERSE_SOFT_LIMIT, Constants.TIMEOUT_MS);
+        master.configForwardSoftLimitEnable(true, Constants.TIMEOUT_MS);
+        master.configReverseSoftLimitEnable(true, Constants.TIMEOUT_MS);
 
-        master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.SLIDE_TIMEOUT_MS);
-        master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.SLIDE_TIMEOUT_MS);
-
-        master.configVoltageCompSaturation(Constants.SLIDE_VOLTAGE_COMPENSATION, Constants.SLIDE_TIMEOUT_MS);
-        master.configVoltageMeasurementFilter(Constants.SLIDE_FILTER_WINDOW_SAMPLE, Constants.SLIDE_TIMEOUT_MS);
-        master.enableVoltageCompensation(true);
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.TIMEOUT_MS);
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.TIMEOUT_MS);
 
         resetEncoder();
+
+        //Also disable voltage compensation to figure out effects
+        /*master.configVoltageCompSaturation(Constants.SLIDE_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        master.configVoltageMeasurementFilter(Constants.SLIDE_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
+        master.enableVoltageCompensation(true);*/
     }
 
     /**
@@ -109,11 +110,11 @@ public class LinearSlide extends Subsystem {
 
     public void setRamping(boolean ramp){
         if(ramp){
-            master.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.SLIDE_TIMEOUT_MS);
-            slave.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.SLIDE_TIMEOUT_MS);
+            master.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.TIMEOUT_MS);
+            slave.configOpenloopRamp(Constants.SLIDE_OPEN_LOOP_RAMP, Constants.TIMEOUT_MS);
         }else{
-            master.configOpenloopRamp(0, Constants.SLIDE_TIMEOUT_MS);
-            slave.configOpenloopRamp(0, Constants.SLIDE_TIMEOUT_MS);
+            master.configOpenloopRamp(0, Constants.TIMEOUT_MS);
+            slave.configOpenloopRamp(0, Constants.TIMEOUT_MS);
         }
     }
 

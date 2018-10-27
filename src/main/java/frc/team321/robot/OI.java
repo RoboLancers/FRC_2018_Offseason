@@ -6,9 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.CenterSwitchAuto;
+import frc.team321.robot.commands.autonomous.modes.ScaleThenSwitch;
 import frc.team321.robot.commands.autonomous.subroutine.*;
 import frc.team321.robot.commands.autonomous.subroutine.SameSideScaleAuto;
-import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
+import frc.team321.robot.commands.autonomous.subroutine.SideSwitchAuto;
+import frc.team321.robot.commands.subsystems.manipulator.ResetEncoders;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
@@ -34,13 +36,14 @@ public class OI {
     private SendableChooser<String> chooser;
 
     private static final String[] autonomousModes = {
-            "Test Pathfinder with Jaci",
-            "Ramsete Follower",
+            "Center Switch Auto",
+            "Scale Then Switch Left",
+            "Scale Then Switch Right",
             "Side Switch Left",
             "Side Switch Right",
-            "Center Switch Auto",
             "Same Side Scale Left Auto",
-            "Same Side Scale Right Auto"
+            "Same Side Scale Right Auto",
+            "Test Velocity"
     };
 
     private static OI instance;
@@ -56,28 +59,29 @@ public class OI {
         flightController.innerMiddle.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.SWITCH));
         flightController.innerBottom.whenPressed(new UseLinearSlidePosition(LinearSlidePosition.BOTTOM));
 
+        flightController.topLeft.whenPressed(new ResetEncoders());
+
         chooser = new SendableChooser<>();
         putAutoModes();
 
-        Camera camera = Camera.getInstance();
-        camera.start();
+        Camera.getInstance().start();
     }
 
     /**
      * Updates the SmartDashboard
      */
     void updateDashboardValues(){
-        SmartDashboard.putNumber("NavX Gyro", Sensors.getInstance().getAngle());
-        SmartDashboard.putBoolean("Top Touch Sensor", Sensors.getInstance().isLinearSlideFullyExtended());
-        SmartDashboard.putBoolean("Bottom Touch Sensor", Sensors.getInstance().isLinearSlideAtGround());
         SmartDashboard.putNumber("Linear Slide Encoder Count", LinearSlide.getInstance().getEncoderCount());
         SmartDashboard.putNumber("Linear Slide Encoder Speed", LinearSlide.getInstance().getEncoderVelocity());
         SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getLeft().getEncoderCount());
         SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getRight().getEncoderCount());
         SmartDashboard.putNumber("Left Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getLeft().getEncoderCount()));
         SmartDashboard.putNumber("Right Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getRight().getEncoderCount()));
-        SmartDashboard.putNumber("Left Encoder Speed", Drivetrain.getInstance().getLeft().getMaster().getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("Right Encoder Speed", Drivetrain.getInstance().getRight().getMaster().getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("Left Encoder Speed", Drivetrain.getInstance().getLeft().getVelocity());
+        SmartDashboard.putNumber("Right Encoder Speed", Drivetrain.getInstance().getRight().getVelocity());
+        SmartDashboard.putNumber("Hall Effect Sensor", Sensors.getInstance().hallEffect.getAverageValue());
+
+        SmartDashboard.putNumber("Joystick Forward", xBoxController.getLeftYAxisValue());
 
         SmartDashboard.putNumber("Odometry X", Odometry.getInstance().getX());
         SmartDashboard.putNumber("Odometry Y", Odometry.getInstance().getY());
@@ -116,20 +120,22 @@ public class OI {
         }
 
         switch(mode){
-            case "Test Pathfinder with Jaci":
-                return new PathFollower("SideSwitchLeftAuto");
-            case "Ramsete Follower":
-                return new RamsetePathFollower("SideSwitchLeftAuto");
+            case "Center Switch Auto":
+                return new CenterSwitchAuto();
+            case "ScaleThenSwitchLeft":
+                return new ScaleThenSwitch(true);
+            case "Scale Then Switch Right":
+                return new ScaleThenSwitch(false);
             case "Side Switch Left":
                 return new SideSwitchAuto(true);
             case "Side Switch Right":
                 return new SideSwitchAuto(false);
-            case "Center Switch Auto":
-                return new CenterSwitchAuto();
             case "Same Side Scale Left Auto":
                 return new SameSideScaleAuto(true);
             case "Same Side Scale Right Auto":
                 return new SameSideScaleAuto(false);
+            case "Test Velocity":
+                return new TestVelocity();
             default:
                 return new DoNothingAndReset();
         }

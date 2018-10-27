@@ -2,9 +2,7 @@ package frc.team321.robot.subsystems.misc;
 
 import java.util.Arrays;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.*;
 import frc.team321.robot.RobotMap;
 
 public class Sensors {
@@ -13,6 +11,7 @@ public class Sensors {
     private Ultrasonic ultrasonic;
     private DigitalInput topTouchSensor;
     private DigitalInput bottomTouchSensor;
+    public AnalogInput hallEffect;
 
     private double[] ultrasonicBuffer = {0, 0, 0};
 
@@ -23,6 +22,7 @@ public class Sensors {
         ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_TRIG, RobotMap.ULTRASONIC_ECHO);
         topTouchSensor = new DigitalInput(RobotMap.TOP_TOUCH_SENSOR);
         bottomTouchSensor = new DigitalInput(RobotMap.BOTTOM_TOUCH_SENSOR);
+        hallEffect = new AnalogInput(3);
 
         ultrasonic.setAutomaticMode(true);
         ultrasonic.setEnabled(true);

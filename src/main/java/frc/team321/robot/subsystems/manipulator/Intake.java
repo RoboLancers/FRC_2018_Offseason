@@ -1,6 +1,7 @@
 package frc.team321.robot.subsystems.manipulator;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.team321.robot.Constants;
 import frc.team321.robot.RobotMap;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntake;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakeJoystick;
@@ -20,6 +21,15 @@ public class Intake extends Subsystem {
 
         intakeLeft.setNeutralMode(NeutralMode.Brake);
         intakeRight.setNeutralMode(NeutralMode.Brake);
+
+        intakeLeft.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        intakeLeft.configVoltageMeasurementFilter(Constants.INTAKE_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
+
+        intakeRight.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        intakeRight.configVoltageMeasurementFilter(Constants.INTAKE_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
+
+        intakeLeft.enableVoltageCompensation(true);
+        intakeRight.enableVoltageCompensation(true);
     }
 
     private void setLeft(double power) {

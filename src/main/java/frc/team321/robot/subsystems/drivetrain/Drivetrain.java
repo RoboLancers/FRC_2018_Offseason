@@ -1,6 +1,7 @@
 package frc.team321.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team321.robot.Constants;
@@ -118,8 +119,8 @@ public class Drivetrain extends Subsystem{
     }
 
     public void setVelocity(double left, double right){
-        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10);
-        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10);
+        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10, DemandType.ArbitraryFeedForward, 0.05);
+        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10, DemandType.ArbitraryFeedForward, 0.05);
     }
 
     public synchronized static Drivetrain getInstance() {
