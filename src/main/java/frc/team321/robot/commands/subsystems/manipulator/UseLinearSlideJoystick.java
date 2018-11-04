@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
 import frc.team321.robot.subsystems.misc.Sensors;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class UseLinearSlideJoystick extends Command {
 
     private double joystickValue, encoderValue, ratio;

@@ -16,7 +16,7 @@ import java.io.File;
 public class RamseteFollower {
 
     //Should be greater than zero and this increases correction
-    private double b = 0.18;
+    private double b = 1.5;
 
     //Should be between zero and one and this increases dampening
     private double zeta = 0.7;

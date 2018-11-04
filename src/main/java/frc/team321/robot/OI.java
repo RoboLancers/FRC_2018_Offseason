@@ -6,19 +6,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team321.robot.commands.autonomous.modes.CenterSwitchAuto;
+import frc.team321.robot.commands.autonomous.modes.FullScale;
 import frc.team321.robot.commands.autonomous.modes.ScaleThenSwitch;
 import frc.team321.robot.commands.autonomous.subroutine.*;
 import frc.team321.robot.commands.autonomous.subroutine.SameSideScaleAuto;
-import frc.team321.robot.commands.autonomous.subroutine.SideSwitchAuto;
+import frc.team321.robot.commands.autonomous.modes.SideSwitchAuto;
 import frc.team321.robot.commands.subsystems.manipulator.ResetEncoders;
 import frc.team321.robot.commands.subsystems.manipulator.UseIntakePivot;
 import frc.team321.robot.commands.subsystems.manipulator.UseLinearSlidePosition;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
 import frc.team321.robot.subsystems.manipulator.LinearSlide;
-import frc.team321.robot.subsystems.misc.Camera;
-import frc.team321.robot.subsystems.misc.Sensors;
 import frc.team321.robot.utilities.enums.IntakePivotState;
 import frc.team321.robot.utilities.enums.LinearSlidePosition;
+import frc.team321.robot.utilities.enums.RobotStartingSide;
 import frc.team321.robot.utilities.motion.Odometry;
 import frc.team321.robot.utilities.RobotUtil;
 import frc.team321.robot.utilities.controllers.FlightController;
@@ -41,9 +41,11 @@ public class OI {
             "Scale Then Switch Right",
             "Side Switch Left",
             "Side Switch Right",
-            "Same Side Scale Left Auto",
-            "Same Side Scale Right Auto",
-            "Test Velocity"
+            "Same Side Scale Left",
+            "Same Side Scale Right",
+            "Full Scale Left",
+            "Full Scale Right",
+            "Baseline"
     };
 
     private static OI instance;
@@ -63,8 +65,6 @@ public class OI {
 
         chooser = new SendableChooser<>();
         putAutoModes();
-
-        Camera.getInstance().start();
     }
 
     /**
@@ -72,16 +72,10 @@ public class OI {
      */
     void updateDashboardValues(){
         SmartDashboard.putNumber("Linear Slide Encoder Count", LinearSlide.getInstance().getEncoderCount());
-        SmartDashboard.putNumber("Linear Slide Encoder Speed", LinearSlide.getInstance().getEncoderVelocity());
-        SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getLeft().getEncoderCount());
-        SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getRight().getEncoderCount());
         SmartDashboard.putNumber("Left Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getLeft().getEncoderCount()));
         SmartDashboard.putNumber("Right Encoder Feet", RobotUtil.encoderTicksToFeets(Drivetrain.getInstance().getRight().getEncoderCount()));
         SmartDashboard.putNumber("Left Encoder Speed", Drivetrain.getInstance().getLeft().getVelocity());
         SmartDashboard.putNumber("Right Encoder Speed", Drivetrain.getInstance().getRight().getVelocity());
-        SmartDashboard.putNumber("Hall Effect Sensor", Sensors.getInstance().hallEffect.getAverageValue());
-
-        SmartDashboard.putNumber("Joystick Forward", xBoxController.getLeftYAxisValue());
 
         SmartDashboard.putNumber("Odometry X", Odometry.getInstance().getX());
         SmartDashboard.putNumber("Odometry Y", Odometry.getInstance().getY());
@@ -122,20 +116,24 @@ public class OI {
         switch(mode){
             case "Center Switch Auto":
                 return new CenterSwitchAuto();
-            case "ScaleThenSwitchLeft":
-                return new ScaleThenSwitch(true);
+            case "Scale Then Switch Left":
+                return new ScaleThenSwitch(RobotStartingSide.LEFT);
             case "Scale Then Switch Right":
-                return new ScaleThenSwitch(false);
+                return new ScaleThenSwitch(RobotStartingSide.RIGHT);
             case "Side Switch Left":
-                return new SideSwitchAuto(true);
+                return new SideSwitchAuto(RobotStartingSide.LEFT);
             case "Side Switch Right":
-                return new SideSwitchAuto(false);
-            case "Same Side Scale Left Auto":
-                return new SameSideScaleAuto(true);
-            case "Same Side Scale Right Auto":
-                return new SameSideScaleAuto(false);
-            case "Test Velocity":
-                return new TestVelocity();
+                return new SideSwitchAuto(RobotStartingSide.RIGHT);
+            case "Same Side Scale Left":
+                return new SameSideScaleAuto(RobotStartingSide.LEFT);
+            case "Same Side Scale Right":
+                return new SameSideScaleAuto(RobotStartingSide.RIGHT);
+            case "Full Scale Left":
+                return new FullScale(RobotStartingSide.LEFT);
+            case "Full Scale Right":
+                return new FullScale(RobotStartingSide.RIGHT);
+            case "Baseline":
+                return new MoveRobot(1, 0);
             default:
                 return new DoNothingAndReset();
         }

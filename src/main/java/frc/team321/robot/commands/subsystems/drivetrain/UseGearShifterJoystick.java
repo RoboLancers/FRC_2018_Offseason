@@ -13,7 +13,7 @@ public class UseGearShifterJoystick extends Command {
 
     @Override
     protected void execute() {
-        if(OI.getInstance().xBoxController.rightLancerTrigger.get()){
+        if(OI.getInstance().xBoxController.leftLancerTrigger.get()){
             GearShifter.getInstance().setHighGear();
         }else{
             GearShifter.getInstance().setLowGear();

@@ -1,10 +1,11 @@
 package frc.team321.robot.commands.subsystems.drivetrain;
 
 import frc.team321.robot.OI;
-import frc.team321.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team321.robot.subsystems.drivetrain.Drivetrain;
+import frc.team321.robot.subsystems.manipulator.LinearSlide;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class UseArcadeDrive extends Command {
 
     private double throttle, rotate;
@@ -20,8 +21,23 @@ public class UseArcadeDrive extends Command {
 
     @Override
     protected void execute() {
-        throttle = OI.getInstance().xBoxController.getLeftYAxisValue();
-        rotate = OI.getInstance().xBoxController.getRightXAxisValue();
+        if(LinearSlide.getInstance().getEncoderCount() > 50000) {
+            if (!OI.getInstance().xBoxController.rightLancerTrigger.get()) {
+                throttle = OI.getInstance().xBoxController.getLeftYAxisValue() * 0.5;
+                rotate = OI.getInstance().xBoxController.getRightXAxisValue() * 0.5;
+            } else {
+                throttle = OI.getInstance().xBoxController.getLeftYAxisValue();
+                rotate = OI.getInstance().xBoxController.getRightXAxisValue();
+            }
+        }else{
+            if (!OI.getInstance().xBoxController.rightLancerTrigger.get()) {
+                throttle = OI.getInstance().xBoxController.getLeftYAxisValue() * 0.75;
+                rotate = OI.getInstance().xBoxController.getRightXAxisValue() * 0.75;
+            } else {
+                throttle = OI.getInstance().xBoxController.getLeftYAxisValue();
+                rotate = OI.getInstance().xBoxController.getRightXAxisValue();
+            }
+        }
 
         Drivetrain.getInstance().setLeft(throttle + rotate);
         Drivetrain.getInstance().setRight(throttle - rotate);

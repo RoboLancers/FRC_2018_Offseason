@@ -1,13 +1,12 @@
 package frc.team321.robot.subsystems.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.team321.robot.Constants;
 import frc.team321.robot.utilities.RobotUtil;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.team321.robot.utilities.enums.DrivetrainSide;
 
 /**
  * Transmission represents one side of the drivetrain
@@ -16,36 +15,40 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  */
 public class Transmission {
 
-    private WPI_TalonSRX master, slave1, slave2;
+    private TalonSRX master, slave1, slave2;
 
     /**
      * Initializes all the motors
      *
-     * @param isRight Is it the right side?
-     * @param ports   The ports of that side of the drivetrain
+     * @param side Drivetrain side
+     * @param ports The ports of that side of the drivetrain
      */
-    Transmission(boolean isRight, int... ports) {
-        master = new WPI_TalonSRX(ports[0]);
-        slave1 = new WPI_TalonSRX(ports[1]);
-        slave2 = new WPI_TalonSRX(ports[2]);
+    Transmission(DrivetrainSide side, int... ports) {
+        master = new TalonSRX(ports[0]);
+        slave1 = new TalonSRX(ports[1]);
+        slave2 = new TalonSRX(ports[2]);
 
         slave1.follow(master);
         slave2.follow(master);
 
         master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.TIMEOUT_MS);
 
-        if (isRight) {
+        if (side == DrivetrainSide.RIGHT) {
             master.setSensorPhase(false);
 
             master.setInverted(true);
             slave2.setInverted(true);
+
+            master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_RIGHT_KF, Constants.TIMEOUT_MS);
+            slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_RIGHT_KF, Constants.TIMEOUT_MS);
+            slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_RIGHT_KF, Constants.TIMEOUT_MS);
         } else {
             slave2.setInverted(true);
-        }
 
-        master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
-        slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
-        slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_EMPERICAL_KF, Constants.TIMEOUT_MS);
+            master.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_LEFT_KF, Constants.TIMEOUT_MS);
+            slave1.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_LEFT_KF, Constants.TIMEOUT_MS);
+            slave2.config_kF(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_LEFT_KF, Constants.TIMEOUT_MS);
+        }
 
         master.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.TIMEOUT_MS);
         slave1.config_kP(Constants.DRIVETRAIN_PID_SLOT_INDEX, Constants.DRIVETRAIN_KP, Constants.TIMEOUT_MS);
@@ -67,8 +70,7 @@ public class Transmission {
         slave1.enableCurrentLimit(true);
         slave2.enableCurrentLimit(true);
 
-        //Disable voltage compensation for now to figure out the effect of it on motion profiling and kF
-        /*master.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        master.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
         slave1.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
         slave2.configVoltageCompSaturation(Constants.DRIVETRAIN_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
 
@@ -78,7 +80,10 @@ public class Transmission {
 
         master.enableVoltageCompensation(true);
         slave1.enableVoltageCompensation(true);
-        slave2.enableVoltageCompensation(true);*/
+        slave2.enableVoltageCompensation(true);
+
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, Constants.TIMEOUT_MS);
+        master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.TIMEOUT_MS);
     }
 
     /**
@@ -99,7 +104,7 @@ public class Transmission {
      *              -1 and 1
      */
     void setPower(double power) {
-        master.set(ControlMode.PercentOutput, RobotUtil.range(power, 1));
+        master.set(ControlMode.PercentOutput, RobotUtil.range(power, 1), DemandType.ArbitraryFeedForward, 0.1);
     }
 
     /**

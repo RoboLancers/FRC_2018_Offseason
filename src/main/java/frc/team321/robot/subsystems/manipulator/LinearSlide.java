@@ -54,10 +54,9 @@ public class LinearSlide extends Subsystem {
 
         resetEncoder();
 
-        //Also disable voltage compensation to figure out effects
-        /*master.configVoltageCompSaturation(Constants.SLIDE_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
+        master.configVoltageCompSaturation(Constants.SLIDE_VOLTAGE_COMPENSATION, Constants.TIMEOUT_MS);
         master.configVoltageMeasurementFilter(Constants.SLIDE_FILTER_WINDOW_SAMPLE, Constants.TIMEOUT_MS);
-        master.enableVoltageCompensation(true);*/
+        master.enableVoltageCompensation(true);
     }
 
     /**
@@ -132,6 +131,10 @@ public class LinearSlide extends Subsystem {
 
     public int getEncoderVelocity(){
         return master.getSelectedSensorVelocity(Constants.SLIDE_PID_SLOT_INDEX);
+    }
+
+    public TalonSRX getMaster(){
+        return master;
     }
 
     public synchronized static LinearSlide getInstance(){

@@ -8,6 +8,7 @@ import frc.team321.robot.Constants;
 import frc.team321.robot.commands.subsystems.drivetrain.UseArcadeDrive;
 import frc.team321.robot.utilities.RobotUtil;
 import frc.team321.robot.RobotMap;
+import frc.team321.robot.utilities.enums.DrivetrainSide;
 
 public class Drivetrain extends Subsystem{
 
@@ -16,13 +17,11 @@ public class Drivetrain extends Subsystem{
     private static Drivetrain instance;
 
     private Drivetrain() {
-        leftTransmission = new Transmission(false, RobotMap.LEFT_MASTER_MOTOR, RobotMap.LEFT_SLAVE_1, RobotMap.LEFT_SLAVE_2);
-        rightTransmission = new Transmission(true, RobotMap.RIGHT_MASTER_MOTOR, RobotMap.RIGHT_SLAVE_1, RobotMap.RIGHT_SLAVE_2);
+        leftTransmission = new Transmission(DrivetrainSide.LEFT, RobotMap.LEFT_MASTER_MOTOR, RobotMap.LEFT_SLAVE_1, RobotMap.LEFT_SLAVE_2);
+        rightTransmission = new Transmission(DrivetrainSide.RIGHT, RobotMap.RIGHT_MASTER_MOTOR, RobotMap.RIGHT_SLAVE_1, RobotMap.RIGHT_SLAVE_2);
 
         this.setMode(NeutralMode.Brake);
         this.resetEncoders();
-
-        GearShifter.getInstance();
     }
 
     /**
@@ -62,7 +61,7 @@ public class Drivetrain extends Subsystem{
      * @param leftPower The power to set left transmission
      * @param rightPower The power to set right transmission
      */
-    public void setMotors(double leftPower, double rightPower) {
+    public void setPowers(double leftPower, double rightPower) {
         setLeft(leftPower);
         setRight(rightPower);
     }
@@ -72,7 +71,7 @@ public class Drivetrain extends Subsystem{
      * @param power The power to set both transmissions at
      */
     public void setAll(double power) {
-        setMotors(power, power);
+        setPowers(power, power);
     }
 
     /**
@@ -113,14 +112,32 @@ public class Drivetrain extends Subsystem{
         rightTransmission.resetEncoder();
     }
 
+    public double getAverageVelocity(){
+        return (leftTransmission.getVelocity() + rightTransmission.getVelocity()) / 2.0;
+    }
+
+    public double getAverageVoltage(){
+        return (leftTransmission.getMaster().getMotorOutputVoltage() + rightTransmission.getMaster().getMotorOutputVoltage()) / 2.0;
+    }
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new UseArcadeDrive());
     }
 
     public void setVelocity(double left, double right){
-        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10, DemandType.ArbitraryFeedForward, 0.05);
-        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10, DemandType.ArbitraryFeedForward, 0.05);
+        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10, DemandType.ArbitraryFeedForward, 0.1);
+        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10, DemandType.ArbitraryFeedForward, 0.1);
+    }
+
+    public void setVelocity(double left, double right, double acceleration){
+        leftTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(left)/10, DemandType.ArbitraryFeedForward, 0.1 + acceleration * Constants.DRIVETRAIN_KA);
+        rightTransmission.getMaster().set(ControlMode.Velocity, RobotUtil.feetsToEncoderTicks(right)/10, DemandType.ArbitraryFeedForward, 0.1 + acceleration * Constants.DRIVETRAIN_KA);
+    }
+
+    public void set(ControlMode mode, double left, double right){
+        leftTransmission.getMaster().set(mode, left);
+        rightTransmission.getMaster().set(mode, right);
     }
 
     public synchronized static Drivetrain getInstance() {

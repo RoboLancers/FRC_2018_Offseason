@@ -5,6 +5,7 @@ import frc.team321.robot.OI;
 import frc.team321.robot.subsystems.manipulator.Intake;
 import frc.team321.robot.utilities.enums.IntakePower;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class UseIntakeJoystick extends Command {
 
     private double power;

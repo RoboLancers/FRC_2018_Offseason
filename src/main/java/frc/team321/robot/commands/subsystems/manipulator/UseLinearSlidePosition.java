@@ -31,7 +31,8 @@ public class UseLinearSlidePosition extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(LinearSlide.getInstance().getError()) < Constants.SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR
-                && Math.abs(LinearSlide.getInstance().getTrajectoryPosition() - position) < Constants.SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR;
+        return (Math.abs(LinearSlide.getInstance().getError()) < Constants.SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR
+                && Math.abs(LinearSlide.getInstance().getTrajectoryPosition() - position) < Constants.SLIDE_ALLOWABLE_CLOSED_LOOP_ERROR)
+                || LinearSlide.getInstance().getMaster().getOutputCurrent() > Constants.SLIDE_MAX_CURRENT;
     }
 }

@@ -13,8 +13,7 @@ public class Camera {
     }
 
     public void start(){
-        cameraServer.startAutomaticCapture(0);
-        cameraServer.startAutomaticCapture(1);
+        cameraServer.startAutomaticCapture();
     }
 
     public synchronized static Camera getInstance() {
