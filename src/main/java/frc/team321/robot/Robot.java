@@ -53,9 +53,6 @@ public class Robot extends TimedRobot {
 
             odometry.setLastPosition(odometry.getCurrentEncoderPosition());
         }).startPeriodic(0.01);
-
-        SmartDashboard.putNumber("CenterSwitchB", 1.5);
-        SmartDashboard.putNumber("CenterSwitchZeta", 0.9);
     }
 
     @Override
