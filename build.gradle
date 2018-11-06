@@ -1,3 +1,6 @@
+import edu.wpi.first.gradlerio.GradleRIOPlugin
+import edu.wpi.first.gradlerio.frc.FRCJavaArtifact
+import edu.wpi.first.gradlerio.frc.RoboRIO
 import jaci.gradle.deploy.artifact.FileCollectionArtifact
 
 plugins {
@@ -23,12 +26,12 @@ def ROBOT_CLASS = "frc.team321.robot.Robot"
 // This is added by GradleRIO's backing project EmbeddedTools.
 deploy {
     targets {
-        target("roborio", edu.wpi.first.gradlerio.frc.RoboRIO) {
+        target("roborio", RoboRIO) {
             team = getTeamOrDefault(TEAM)
         }
     }
     artifacts {
-        artifact('frcJava', edu.wpi.first.gradlerio.frc.FRCJavaArtifact) {
+        artifact('frcJava', FRCJavaArtifact) {
             targets << "roborio"
         }
 
@@ -60,7 +63,7 @@ dependencies {
 // knows where to look for our Robot Class.
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_CLASS)
+    manifest GradleRIOPlugin.javaManifest(ROBOT_CLASS)
 }
 
 compileJava {
