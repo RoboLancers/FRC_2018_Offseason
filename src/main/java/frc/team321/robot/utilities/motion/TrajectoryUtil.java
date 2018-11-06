@@ -23,7 +23,7 @@ public class TrajectoryUtil {
     }
 
     public static Trajectory getTrajectoryFromName(String trajectoryName){
-        File trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "/" + trajectoryName + "_left_detailed.traj");
+        File trajectoryFile = new File("/home/lvuser/trajectories/" + trajectoryName + "_source_detailed.traj");
 
         Trajectory trajectory = trajectoryFile.exists() ? Pathfinder.readFromFile(trajectoryFile) : null;
 
