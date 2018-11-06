@@ -31,6 +31,12 @@ deploy {
         artifact('frcJava', edu.wpi.first.gradlerio.frc.FRCJavaArtifact) {
             targets << "roborio"
         }
+
+        artifact('paths', FileCollectionArtifact) {
+            files = project.fileTree(dir: 'PathPlanner/Trajectories')
+            directory = '/home/lvuser/trajectories'
+            targets << "roborio"
+        }
     }
 }
 
